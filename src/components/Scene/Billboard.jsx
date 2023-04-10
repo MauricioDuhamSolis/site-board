@@ -2,9 +2,9 @@
 import React from 'react'
 import {useFBX} from '@react-three/drei'
 import {RigidBody} from '@react-three/rapier'
-import {BILLBOARD_URL} from '../utils/constants'
+import {BILLBOARD_URL} from '../../utils/constants'
 import {useGesture} from '@use-gesture/react'
-import {useZustand} from '../store/useZustand'
+import {useZustand} from '../../store/useZustand'
 
 
 export const Billboard = () => {

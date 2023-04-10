@@ -2,7 +2,7 @@
 import React from 'react'
 import {Plane} from '@react-three/drei'
 import {RigidBody} from '@react-three/rapier'
-import {GROUND_SIZE} from '../utils/constants'
+import {GROUND_SIZE} from '../../utils/constants'
 
 
 export const Ground = () => {

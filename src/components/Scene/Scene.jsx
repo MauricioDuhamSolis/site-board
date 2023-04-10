@@ -6,7 +6,7 @@ import {Canvas} from '@react-three/fiber'
 import {Debug, Physics} from '@react-three/rapier'
 import {Perf} from 'r3f-perf'
 import {Character} from './Character'
-import {CHARACTER_URLS} from '../utils/constants'
+import {CHARACTER_URLS} from '../../utils/constants'
 import {Ground} from './Ground'
 import {Billboard} from './Billboard'
 
