@@ -1,3 +1,6 @@
+import {PLAUSIBLE_STEP_COUNT} from '../utils/constants'
+
+
 export const createUISlice = (set, get) => {
   return {
     showColorPicker: false,
@@ -12,5 +15,10 @@ export const createUISlice = (set, get) => {
 
     alertMsg: '',
     setAlertMsg: (newAlertMsg) => set(() => ({alertMsg: newAlertMsg})),
+
+    plausibleStep: 0,
+    nextPlausibleStep: () => set(() => ({plausibleStep: (get().plausibleStep + 1) % PLAUSIBLE_STEP_COUNT})),
+    prevPlausibleStep: () => set(() => ({plausibleStep: (get().plausibleStep + PLAUSIBLE_STEP_COUNT - 1) % PLAUSIBLE_STEP_COUNT})),
+    setPlausibleStep: (newPlausibleStep) => set(() => ({plausibleStep: newPlausibleStep})),
   }
 }

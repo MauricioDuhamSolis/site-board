@@ -15,3 +15,5 @@ export const TOLERANCE_DISTANCE = 0.1
 export const DEFAULT_LINEAR_DAMPING = 10
 
 export const DEFAULT_ANGULAR_DAMPING = 10
+
+export const PLAUSIBLE_STEP_COUNT = 4
