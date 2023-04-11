@@ -5,7 +5,7 @@ import {useZustand} from '../../store/useZustand'
 import {MenuItem} from './MenuItem'
 import {AddLink} from './AddLink'
 import {customDebug} from '../../utils/custom.debug'
-import {getAggregate} from '../../utils/plausible'
+import {createSite, getAggregate, getRealtimeVisitors, getSite, getTimeseries} from '../../utils/plausible'
 
 
 export const Menu = () => {
@@ -16,8 +16,16 @@ export const Menu = () => {
       }
       isLoading = true
       customDebug().log('Menu#useEffect')
-      const plausible = await getAggregate('bookingsite.me')
-      customDebug().log('Menu#useEffect: plausible: ', plausible)
+      const aggregate = await getAggregate('mboard.onrender.com')
+      customDebug().log('Menu#useEffect: aggregate: ', aggregate)
+      const realtimeVisitors = await getRealtimeVisitors('mboard.onrender.com')
+      customDebug().log('Menu#useEffect: realtimeVisitors: ', realtimeVisitors)
+      const timeseries = await getTimeseries('mboard.onrender.com')
+      customDebug().log('Menu#useEffect: timeseries: ', timeseries)
+      const createSiteRes = await createSite('bookingsite.mes', 'Europe/London')
+      customDebug().log('Menu#useEffect: createSiteRes: ', createSiteRes)
+      const site = await getSite('mboard.onrender.com')
+      customDebug().log('Menu#useEffect: site: ', site)
       isLoading = false
     })()
   }, [])
