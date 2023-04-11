@@ -5,7 +5,7 @@ import {useZustand} from '../../store/useZustand'
 import {MenuItem} from './MenuItem'
 import {AddLink} from './AddLink'
 import {customDebug} from '../../utils/custom.debug'
-import {getPlausible} from '../../utils/plausible'
+import {getAggregate} from '../../utils/plausible'
 
 
 export const Menu = () => {
@@ -16,7 +16,8 @@ export const Menu = () => {
       }
       isLoading = true
       customDebug().log('Menu#useEffect')
-      await getPlausible('bookingsite.me')
+      const plausible = await getAggregate('bookingsite.me')
+      customDebug().log('Menu#useEffect: plausible: ', plausible)
       isLoading = false
     })()
   }, [])

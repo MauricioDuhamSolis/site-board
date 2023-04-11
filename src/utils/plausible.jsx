@@ -1,25 +1,32 @@
-import Plausible from 'plausible-api'
+import axios from 'axios'
 import {customDebug} from './custom.debug'
 
 
-export const getPlausible = async (
-    siteId,
-    period = 'month', // "12mo" | "6mo" | "30d" | "7d" | "month" | "day"
-) => {
-  customDebug().log('plausible#getPlausible: siteId: ', siteId)
-  const plausible = await client.aggregate(
-      siteId,
-      period,
-      [
-        'visitors',
-        'pageviews',
-        'bounce_rate',
-        'visit_duration',
-      ],
-  )
-  customDebug().log('plausible#getPlausible: plausible: ', plausible)
+export const getAggregate = async (siteId, period = 'month') => {
+  const paramObj = {
+    site_id: siteId,
+    period,
+    metrics: 'visitors,pageviews,bounce_rate,visit_duration',
+  }
+  try {
+    const res = await getPlausible(paramObj)
+    const aggregate = res.data.results
+    return aggregate
+  } catch (e) {
+    customDebug().log('plausible#getPlausible: e: ', e)
+  }
+}
+
+const getPlausible = async (paramObj) => {
+  const paramArr = Object.keys(paramObj).map((paramKey) => `${paramKey}=${paramObj[paramKey]}`)
+  const params = paramArr.join('&')
+  const plausible = await axios.get(`https://plausible.io/api/v1/stats/aggregate?${params}`, {
+    headers: {
+      Authorization: `Bearer ${bearerToken}`,
+    },
+  })
+  return plausible
 }
 
 
-const client = new Plausible('OmaOB2Q0ifZeGeDIPJBY1ja77rp7HHOcUDGWJzyKozKS4PqocplEGH4MDHpXddhu')
-customDebug().log('plausible: client: ', client)
+const bearerToken = 'pPeqDWqWton3kYZAkbyPYY1HENzHwXncm31cGcAItivVgOGGbe4sLe8TRGxi-bdg'
