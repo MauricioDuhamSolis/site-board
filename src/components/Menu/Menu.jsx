@@ -10,8 +10,15 @@ import {getPlausible} from '../../utils/plausible'
 
 export const Menu = () => {
   useEffect(() => {
-    customDebug().log('Menu#useEffect')
-    getPlausible('bookingsite.me')
+    (async () => {
+      if (isLoading) {
+        return
+      }
+      isLoading = true
+      customDebug().log('Menu#useEffect')
+      await getPlausible('bookingsite.me')
+      isLoading = false
+    })()
   }, [])
 
   return (
@@ -22,3 +29,6 @@ export const Menu = () => {
     </div>
   )
 }
+
+
+let isLoading = false

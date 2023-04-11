@@ -11,7 +11,6 @@ export const getPlausible = async (
       siteId,
       period,
       [
-        'visit_duration',
         'visitors',
         'pageviews',
         'bounce_rate',
