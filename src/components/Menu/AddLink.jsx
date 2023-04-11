@@ -11,13 +11,11 @@ export const AddLink = () => {
   const {nextPlausibleStep} = useZustand()
 
   return (
-    <div className='h-full pt-1 pb-1'>
-      <img
-        className='h-full bg-white rounded-full cursor-pointer'
-        src={AddSvg}
-        alt='Add'
-        onClick={nextPlausibleStep}
-      />
-    </div>
+    <img
+      className='h-full bg-white cursor-pointer'
+      src={AddSvg}
+      alt='Add'
+      onClick={nextPlausibleStep}
+    />
   )
 }

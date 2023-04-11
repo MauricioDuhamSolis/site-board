@@ -44,7 +44,7 @@ export const Character = ({index, url, scale, speed}) => {
   }, [actions])
 
   const activateAllActions = useCallback(() => {
-    customDebug().log('Character#activateAllActions: actions: ', actions)
+    // customDebug().log('Character#activateAllActions: actions: ', actions)
     Object.keys(actions).forEach((actionKey) => {
       actions[actionKey].play()
     })
@@ -108,7 +108,7 @@ export const Character = ({index, url, scale, speed}) => {
     const idleAction = actions['Idle']
 
     if (prevAction !== idleAction) {
-      customDebug().log('Character#playIdleAnimOnly')
+      // customDebug().log('Character#playIdleAnimOnly')
       prepareSyncCrossFade(prevAction, idleAction, 0.3)
       setPrevAction(idleAction)
     }
@@ -118,7 +118,7 @@ export const Character = ({index, url, scale, speed}) => {
     const walkAction = actions['Walk']
 
     if (prevAction !== walkAction) {
-      customDebug().log('Character#playWalkAnimOnly')
+      // customDebug().log('Character#playWalkAnimOnly')
       prepareCrossFade(prevAction, walkAction, 0)
       setPrevAction(walkAction)
     }
@@ -127,7 +127,7 @@ export const Character = ({index, url, scale, speed}) => {
 
   // Call at once
   useEffect(() => {
-    customDebug().log('Character: call at once')
+    // customDebug().log('Character: call at once')
 
     // Set user's initial position
     setUserInitPos(index, [getRandom(GROUND_SIZE / 2), 0, getRandom((GROUND_SIZE - 2) / 2)])
@@ -159,12 +159,12 @@ export const Character = ({index, url, scale, speed}) => {
       }
 
       if (direcLen > TOLERANCE_DISTANCE && userDesPosChanged) {
-        customDebug().log('Character#useFrame: character moving')
+        // customDebug().log('Character#useFrame: character moving')
         playWalkAnimOnly()
         rigidBody.current.addForce(normalDirec.multiplyScalar(speed), true)
         userData.prevNormalDirec = normalDirec
       } else {
-        customDebug().log('Character#useFrame: character stopped')
+        // customDebug().log('Character#useFrame: character stopped')
         playIdleAnimOnly()
         userData.prevNormalDirec = zeroVec3
         setUserDesPosChanged(false)
