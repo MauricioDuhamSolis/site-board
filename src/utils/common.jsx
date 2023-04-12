@@ -1,3 +1,4 @@
+import * as THREE from 'three'
 import {assertDefined} from './custom.assert'
 
 
@@ -35,4 +36,14 @@ export const getModelType = (path) => {
 export const deepClone = (obj) => {
   const clonedObj = JSON.parse(JSON.stringify(obj))
   return clonedObj
+}
+
+
+export const getDimensions = (threeObj) => {
+  const box3 = new THREE.Box3().setFromObject(threeObj)
+  return {
+    width: box3.max.x - box3.min.x,
+    height: box3.max.y - box3.min.y,
+    length: box3.max.z - box3.min.z,
+  }
 }

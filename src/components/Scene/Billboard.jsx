@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unknown-property */
-import React from 'react'
+import React, {useEffect} from 'react'
 import {useFBX} from '@react-three/drei'
 import {RigidBody} from '@react-three/rapier'
 import {BILLBOARD_URL} from '../../utils/constants'
@@ -13,7 +13,13 @@ export const Billboard = () => {
     selUserIndex,
     setUserDesPos,
     billboardInitPos,
+    setBillboardModel,
   } = useZustand()
+
+  useEffect(() => {
+    setBillboardModel(model)
+  }, [model, setBillboardModel])
+
   const bind = useGesture({
     onPointerDown: (state) => {
       const {event} = state
