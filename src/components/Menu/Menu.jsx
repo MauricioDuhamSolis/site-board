@@ -31,7 +31,7 @@ export const Menu = () => {
   // }, [])
 
   return (
-    <div className='absolute top-0 flex w-screen h-12 gap-2 p-2 pb-0 bg-black border-0 border-b-2 border-red-500'>
+    <div className='absolute top-0 flex w-screen h-12 gap-2 p-2 pb-0 bg-black border-0 border-b-2 border-white'>
       <MenuItem/>
       <MenuItem/>
       <AddLink/>

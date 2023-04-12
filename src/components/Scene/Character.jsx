@@ -164,12 +164,17 @@ export const Character = ({index, url, scale, speed}) => {
         playWalkAnimOnly()
         rigidBody.current.addForce(normalDirec.multiplyScalar(speed), true)
         userData.prevNormalDirec = normalDirec
+        stopped = false
       } else {
         // customDebug().log('Character#useFrame: character stopped')
-        playIdleAnimOnly()
-        userData.prevNormalDirec = zeroVec3
-        setUserDesPosChanged(false)
-        seeBillboard()
+        // eslint-disable-next-line no-lonely-if
+        if (!stopped) {
+          playIdleAnimOnly()
+          userData.prevNormalDirec = zeroVec3
+          setUserDesPosChanged(false)
+          seeBillboard()
+          stopped = true
+        }
       }
 
       rigidBody.current.userData = userData
@@ -199,3 +204,4 @@ export const Character = ({index, url, scale, speed}) => {
 
 
 const zeroVec3 = new THREE.Vector3()
+let stopped = true
