@@ -16,7 +16,6 @@ export const Menu = () => {
         return
       }
       isLoading = true
-      customDebug().log('Menu#useEffect')
       const aggregate = await getAggregate('mboard.onrender.com')
       customDebug().log('Menu#useEffect: aggregate: ', aggregate)
       const realtimeVisitors = await getRealtimeVisitors('mboard.onrender.com')
