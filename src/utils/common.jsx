@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import {mergeBufferGeometries} from 'three/examples/jsm/utils/BufferGeometryUtils'
 import {assertDefined} from './custom.assert'
 
 
@@ -46,4 +47,32 @@ export const getDimensions = (threeObj) => {
     height: box3.max.y - box3.min.y,
     length: box3.max.z - box3.min.z,
   }
+}
+
+
+export const mergeModelMeshes = (model, customMaterial) => {
+  const bufferGeometries = []
+  const materials = []
+  const matrix4 = new THREE.Matrix4()
+
+  model.traverse((child) => {
+    if (child.isMesh) {
+      if (child.geometry?.isBufferGeometry) {
+        matrix4.compose(child.position, child.quaternion, child.scale)
+        child.geometry.applyMatrix4(matrix4)
+        bufferGeometries.push(child.geometry)
+      }
+
+      if (child.material?.isMaterial) {
+        materials.push(child.material)
+      }
+    }
+  })
+
+  const material = customMaterial ? customMaterial : materials
+  const useGroups = Array.isArray(material)
+  const mergedBufferGeometry = mergeBufferGeometries(bufferGeometries, useGroups)
+  mergedBufferGeometry.computeBoundingBox()
+  const mergedMesh = new THREE.Mesh(mergedBufferGeometry, material)
+  return mergedMesh
 }
