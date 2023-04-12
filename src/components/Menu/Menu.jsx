@@ -16,15 +16,15 @@ export const Menu = () => {
         return
       }
       isLoading = true
-      const aggregate = await getAggregate('mboard.onrender.com')
+      const aggregate = await getAggregate('jetfuel.tech')
       customDebug().log('Menu#useEffect: aggregate: ', aggregate)
-      const realtimeVisitors = await getRealtimeVisitors('mboard.onrender.com')
+      const realtimeVisitors = await getRealtimeVisitors('jetfuel.tech')
       customDebug().log('Menu#useEffect: realtimeVisitors: ', realtimeVisitors)
-      const timeseries = await getTimeseries('mboard.onrender.com')
+      const timeseries = await getTimeseries('jetfuel.tech')
       customDebug().log('Menu#useEffect: timeseries: ', timeseries)
       const createSiteRes = await createSite('bookingsite.mes', 'Europe/London')
       customDebug().log('Menu#useEffect: createSiteRes: ', createSiteRes)
-      const site = await getSite('mboard.onrender.com')
+      const site = await getSite('jetfuel.tech')
       customDebug().log('Menu#useEffect: site: ', site)
       isLoading = false
     })()
