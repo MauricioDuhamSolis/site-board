@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unknown-property */
 import React, {Suspense} from 'react'
-import {OrbitControls, OrthographicCamera, PerspectiveCamera} from '@react-three/drei'
+import {OrbitControls, OrthographicCamera} from '@react-three/drei'
 import {Canvas} from '@react-three/fiber'
 import {Debug, Physics} from '@react-three/rapier'
 import {Perf} from 'r3f-perf'
@@ -10,6 +10,7 @@ import {CHARACTER_URLS} from '../../utils/constants'
 import {Ground} from './Ground'
 import {Billboard} from './Billboard'
 import {useZustand} from '../../store/useZustand'
+import {Camera} from './Camera'
 
 
 export const Scene = () => {
@@ -50,10 +51,7 @@ export const Scene = () => {
         </Physics>
       </Suspense>
 
-      <PerspectiveCamera
-        makeDefault
-        position={cameraInitPos}
-      />
+      <Camera/>
     </Canvas>
   )
 }

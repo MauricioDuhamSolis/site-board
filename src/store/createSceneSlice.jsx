@@ -46,7 +46,14 @@ export const createSceneSlice = (set, get) => {
       const cameraDesPos = billboardDesPos
       console.log('createSceneSlice#seeBillboard: cameraDesPos: ', cameraDesPos)
       console.log('createSceneSlice#seeBillboard: billboardDesPos: ', get().billboardDesPos)
-      return {cameraDesPos}
+      return {
+        cameraDesPos,
+        enableOrbitControls: false,
+        showMenu: false,
+      }
     }),
+
+    enableOrbitControls: true,
+    setEnableOrbitControls: (newEnableOrbitControls) => set(() => ({enableOrbitControls: newEnableOrbitControls})),
   }
 }
