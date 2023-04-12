@@ -18,7 +18,6 @@ export const Camera = () => {
     if (!billboardDimensions || enableOrbitControls) {
       return
     }
-    console.log(cameraDesPos)
     const {height} = billboardDimensions
     cameraInitPosVec3.set(cameraInitPos[0], cameraInitPos[1], cameraInitPos[2])
     cameraDesPosVec3.set(cameraDesPos[0], cameraDesPos[1] + (height / 4), cameraDesPos[2])

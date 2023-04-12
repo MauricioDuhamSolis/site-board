@@ -8,14 +8,9 @@ export const getRealtimeVisitors = async (siteId) => {
   const paramObj = {
     site_id: siteId,
   }
-
-  try {
-    const res = await getPlausible('stats/realtime/visitors', paramObj)
-    const realtimeVisitors = res.data
-    return realtimeVisitors
-  } catch (e) {
-    customDebug().log('plausible#getRealtimeVisitors: e: ', e)
-  }
+  const res = await getPlausible('stats/realtime/visitors', paramObj)
+  const realtimeVisitors = res?.data
+  return realtimeVisitors
 }
 
 
@@ -26,14 +21,9 @@ export const getAggregate = async (siteId, period = 'month') => {
     period,
     metrics: 'visitors,pageviews,bounce_rate,visit_duration',
   }
-
-  try {
-    const res = await getPlausible('stats/aggregate', paramObj)
-    const aggregate = res.data.results
-    return aggregate
-  } catch (e) {
-    customDebug().log('plausible#getAggregate: e: ', e)
-  }
+  const res = await getPlausible('stats/aggregate', paramObj)
+  const aggregate = res?.data?.results
+  return aggregate
 }
 
 
@@ -43,39 +33,24 @@ export const getTimeseries = async (siteId, period = 'month') => {
     site_id: siteId,
     period,
   }
-
-  try {
-    const res = await getPlausible('stats/timeseries', paramObj)
-    const timeseries = res.data.results
-    return timeseries
-  } catch (e) {
-    customDebug().log('plausible#getTimeseries: e: ', e)
-  }
+  const res = await getPlausible('stats/timeseries', paramObj)
+  const timeseries = res?.data?.results
+  return timeseries
 }
 
 
 export const createSite = async (domain, timezone) => {
   assertDefined(domain, timezone)
   const paramObj = {domain, timezone}
-
-  try {
-    const res = await postPlausible('sites', paramObj)
-    return res
-  } catch (e) {
-    customDebug().log('plausible#createSite: e: ', e)
-  }
+  const res = await postPlausible('sites', paramObj)
+  return res
 }
 
 
 export const getSite = async (domain) => {
   assertDefined(domain)
-
-  try {
-    const res = await getPlausible(`sites/${domain}`)
-    return res
-  } catch (e) {
-    customDebug().log('plausible#getSite: e: ', e)
-  }
+  const res = await getPlausible(`sites/${domain}`)
+  return res
 }
 
 
@@ -109,7 +84,7 @@ const postPlausible = async (path, paramObj) => {
     Object.keys(paramObj).forEach((paramKey) => {
       data.append(paramKey, paramObj[paramKey])
     })
-    const plausible = await axios.post(
+    const res = await axios.post(
         `https://plausible.io/api/v1/${path}`,
         data,
         {
@@ -119,7 +94,8 @@ const postPlausible = async (path, paramObj) => {
           },
         },
     )
-    return plausible
+    customDebug().log('plausible#postPlausible: res: ', res)
+    return res
   } catch (e) {
     customDebug().log('plausible#postPlausible: e: ', e)
   }
