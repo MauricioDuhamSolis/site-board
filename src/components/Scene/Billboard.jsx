@@ -5,6 +5,8 @@ import {RigidBody} from '@react-three/rapier'
 import {BILLBOARD_URL} from '../../utils/constants'
 import {useGesture} from '@use-gesture/react'
 import {useZustand} from '../../store/useZustand'
+import {getDimensions} from '../../utils/common'
+import {customDebug} from '../../utils/custom.debug'
 
 
 export const Billboard = () => {
@@ -13,12 +15,14 @@ export const Billboard = () => {
     selUserIndex,
     setUserDesPos,
     billboardInitPos,
-    setBillboardModel,
+    setBillboardDimensions,
   } = useZustand()
 
   useEffect(() => {
-    setBillboardModel(model)
-  }, [model, setBillboardModel])
+    const billboardDimensions = getDimensions(model)
+    customDebug().log('Billboard#useEffect: billboardDimensions: ', billboardDimensions)
+    setBillboardDimensions(billboardDimensions)
+  }, [model, setBillboardDimensions])
 
   const bind = useGesture({
     onPointerDown: (state) => {

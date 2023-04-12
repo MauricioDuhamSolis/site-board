@@ -32,21 +32,17 @@ export const createSceneSlice = (set, get) => {
     userDesPosChanged: false,
     setUserDesPosChanged: (newUserDesPosChanged) => set(() => ({userDesPosChanged: newUserDesPosChanged})),
 
-    billboardModel: null,
-    setBillboardModel: (newBillboardModel) => set(() => ({billboardModel: newBillboardModel})),
+    billboardDimensions: null,
+    setBillboardDimensions: (newBillboardDimensions) => set(() => ({billboardDimensions: newBillboardDimensions})),
 
     billboardInitPos: [0, 0, 4],
     billboardDesPos: [0, 0, 4],
-    billboardViewDistance: 2,
+    billboardViewDistance: 3.3,
 
     cameraInitPos: [-5, 5, -5],
     cameraDesPos: [-5, 5, -5],
 
     seeBillboard: () => set(() => {
-      const billboardModel = get().billboardModel
-      if (!billboardModel) {
-        return {}
-      }
       const billboardDesPos = deepClone(get().billboardDesPos)
       const billboardViewDistance = get().billboardViewDistance
       billboardDesPos[2] -= billboardViewDistance

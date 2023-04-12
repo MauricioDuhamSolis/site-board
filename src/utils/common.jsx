@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-vars */
 import * as THREE from 'three'
 import {mergeBufferGeometries} from 'three/examples/jsm/utils/BufferGeometryUtils'
 import {assertDefined} from './custom.assert'
+import {customDebug} from './custom.debug'
 
 
 export const getRandom = (size) => {
@@ -41,6 +43,11 @@ export const deepClone = (obj) => {
 
 
 export const getDimensions = (threeObj) => {
+  threeObj.traverse((child) => {
+    if (child.isMesh && child.geometry.isBufferGeometry) {
+      child.geometry.computeBoundingBox()
+    }
+  })
   const box3 = new THREE.Box3().setFromObject(threeObj)
   return {
     width: box3.max.x - box3.min.x,
