@@ -1,3 +1,6 @@
+import {customDebug} from '../utils/custom.debug'
+
+
 export const createSceneSlice = (set, get) => {
   return {
     selUserIndex: 0,
@@ -28,5 +31,16 @@ export const createSceneSlice = (set, get) => {
 
     userDesPosChanged: false,
     setUserDesPosChanged: (newUserDesPosChanged) => set(() => ({userDesPosChanged: newUserDesPosChanged})),
+
+    billboardInitPos: [0, 0, 4],
+    billboardDesPos: [0, 0, 4],
+
+    cameraInitPos: [-5, 5, -5],
+    cameraDesPos: [-5, 5, -5],
+
+    seeBillboard: () => set(() => {
+      customDebug('createSceneSlice#seeBillboard: billboardDesPos: ', get().billboardDesPos)
+      return {}
+    }),
   }
 }

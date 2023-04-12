@@ -20,6 +20,7 @@ export const Character = ({index, url, scale, speed}) => {
     setUserInitPos,
     userDesPosChanged,
     setUserDesPosChanged,
+    seeBillboard,
   } = useZustand()
   const [prevAction, setPrevAction] = useState(null)
 
@@ -168,6 +169,7 @@ export const Character = ({index, url, scale, speed}) => {
         playIdleAnimOnly()
         userData.prevNormalDirec = zeroVec3
         setUserDesPosChanged(false)
+        seeBillboard()
       }
 
       rigidBody.current.userData = userData

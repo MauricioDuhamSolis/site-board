@@ -12,6 +12,7 @@ export const Billboard = () => {
   const {
     selUserIndex,
     setUserDesPos,
+    billboardInitPos,
   } = useZustand()
   const bind = useGesture({
     onPointerDown: (state) => {
@@ -27,7 +28,7 @@ export const Billboard = () => {
 
   return (
     <RigidBody
-      position={[0, 0, 4]}
+      position={billboardInitPos}
       rotation={[0, Math.PI, 0]}
       enabledRotations={[false, true, false]}
       {...bind()}

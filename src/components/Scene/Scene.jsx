@@ -9,9 +9,12 @@ import {Character} from './Character'
 import {CHARACTER_URLS} from '../../utils/constants'
 import {Ground} from './Ground'
 import {Billboard} from './Billboard'
+import {useZustand} from '../../store/useZustand'
 
 
 export const Scene = () => {
+  const {cameraInitPos} = useZustand()
+
   return (
     <Canvas>
       {/* <Perf position="top-left"/> */}
@@ -39,7 +42,7 @@ export const Scene = () => {
               index={index}
               url={url}
               scale={0.005}
-              speed={0.5}
+              speed={WALKING_SPEED}
             />,
           )}
           <Ground/>
@@ -49,8 +52,12 @@ export const Scene = () => {
 
       <PerspectiveCamera
         makeDefault
-        position={[-5, 5, -5]}
+        position={cameraInitPos}
       />
     </Canvas>
   )
 }
+
+
+// const WALKING_SPEED = 0.5
+const WALKING_SPEED = 2
