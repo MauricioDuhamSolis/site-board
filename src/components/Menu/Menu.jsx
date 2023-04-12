@@ -9,6 +9,8 @@ import {createSite, getAggregate, getRealtimeVisitors, getSite, getTimeseries} f
 
 
 export const Menu = () => {
+  const {showMenu} = useZustand()
+
   // useEffect(() => {
   //   (async () => {
   //     if (isLoading) {
@@ -31,7 +33,11 @@ export const Menu = () => {
   // }, [])
 
   return (
-    <div className='absolute top-0 flex w-screen h-12 gap-2 p-2 pb-0 bg-black border-0 border-b-2 border-white'>
+    <div className={classNames({
+      'absolute top-0 flex w-screen h-12 gap-2 p-2 pb-0 bg-black border-0 border-b-2 border-white': true,
+      'hidden': !showMenu,
+    })}
+    >
       <MenuItem/>
       <MenuItem/>
       <AddLink/>
