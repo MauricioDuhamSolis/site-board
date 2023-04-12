@@ -1,3 +1,6 @@
+import {deepClone} from '../utils/common'
+
+
 export const createSceneSlice = (set, get) => {
   return {
     selUserIndex: 0,
@@ -31,13 +34,19 @@ export const createSceneSlice = (set, get) => {
 
     billboardInitPos: [0, 0, 4],
     billboardDesPos: [0, 0, 4],
+    billboardViewDistance: 2,
 
     cameraInitPos: [-5, 5, -5],
     cameraDesPos: [-5, 5, -5],
 
     seeBillboard: () => set(() => {
+      const billboardDesPos = deepClone(get().billboardDesPos)
+      const billboardViewDistance = get().billboardViewDistance
+      billboardDesPos[2] -= billboardViewDistance
+      const cameraDesPos = billboardDesPos
+      console.log('createSceneSlice#seeBillboard: cameraDesPos: ', cameraDesPos)
       console.log('createSceneSlice#seeBillboard: billboardDesPos: ', get().billboardDesPos)
-      return {}
+      return {cameraDesPos}
     }),
   }
 }

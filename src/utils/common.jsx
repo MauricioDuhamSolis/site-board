@@ -30,3 +30,9 @@ export const getModelType = (path) => {
       break
   }
 }
+
+
+export const deepClone = (obj) => {
+  const clonedObj = JSON.parse(JSON.stringify(obj))
+  return clonedObj
+}
