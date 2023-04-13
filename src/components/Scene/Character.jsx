@@ -1,14 +1,15 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/no-unknown-property */
 import React, {useCallback, useEffect, useRef, useState} from 'react'
 import * as THREE from 'three'
+// eslint-disable-next-line no-unused-vars
 import {useAnimations, useFBX, useGLTF} from '@react-three/drei'
 import {RigidBody, vec3} from '@react-three/rapier'
 import {assertDefined} from '../../utils/custom.assert'
+// eslint-disable-next-line no-unused-vars
 import {CHARACTER_SCALE, DEFAULT_ANGULAR_DAMPING, DEFAULT_LINEAR_DAMPING, GROUND_SIZE, TOLERANCE_DISTANCE} from '../../utils/constants'
 import {getRandom} from '../../utils/common'
 import {useZustand} from '../../store/useZustand'
 import {useFrame} from '@react-three/fiber'
+// eslint-disable-next-line no-unused-vars
 import {customDebug} from '../../utils/custom.debug'
 
 
@@ -38,6 +39,7 @@ export const Character = ({index, url, scale, speed}) => {
   const {ref, actions, mixer} = useAnimations(modelAnims)
 
 
+  // eslint-disable-next-line no-unused-vars
   const deactivateAllActions = useCallback(() => {
     Object.keys(actions).forEach((actionKey) => {
       actions[actionKey].stop()
@@ -58,6 +60,7 @@ export const Character = ({index, url, scale, speed}) => {
   }, [actions])
 
 
+  // eslint-disable-next-line no-unused-vars
   const pauseAllActions = useCallback(() => {
     Object.keys(actions).forEach((actionKey) => {
       actions[actionKey].paused = true
@@ -191,9 +194,11 @@ export const Character = ({index, url, scale, speed}) => {
     >
       <primitive
         ref={ref}
+        // eslint-disable-next-line react/no-unknown-property
         object={modelScene}
         // rotation={[0, Math.PI, 0]}
         scale={scale}
+        // eslint-disable-next-line react/no-unknown-property
         castShadow
       >
         {/* <axesHelper args={[GROUND_SIZE / CHARACTER_SCALE]}/> */}

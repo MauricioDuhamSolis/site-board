@@ -1,11 +1,12 @@
-/* eslint-disable prefer-const */
-/* eslint-disable no-unused-vars */
+// eslint-disable-next-line no-unused-vars
 import React, {useEffect} from 'react'
 import classNames from 'classnames'
 import {useZustand} from '../../store/useZustand'
 import {MenuItem} from './MenuItem'
 import {AddLink} from './AddLink'
+// eslint-disable-next-line no-unused-vars
 import {customDebug} from '../../utils/custom.debug'
+// eslint-disable-next-line no-unused-vars
 import {createSite, getAggregate, getRealtimeVisitors, getSite, getTimeseries} from '../../utils/plausible'
 
 
@@ -46,4 +47,5 @@ export const Menu = () => {
 }
 
 
+// eslint-disable-next-line no-unused-vars, prefer-const
 let isLoading = false

@@ -1,8 +1,7 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/no-unknown-property */
 import React, {useEffect} from 'react'
 import {useFBX} from '@react-three/drei'
 import {RigidBody} from '@react-three/rapier'
+// eslint-disable-next-line no-unused-vars
 import {BILLBOARD_SCALE, BILLBOARD_URL, GROUND_SIZE} from '../../utils/constants'
 import {useGesture} from '@use-gesture/react'
 import {useZustand} from '../../store/useZustand'
@@ -44,7 +43,11 @@ export const Billboard = () => {
       enabledRotations={[false, true, false]}
       {...bind()}
     >
-      <primitive object={model} scale={BILLBOARD_SCALE}>
+      <primitive
+        // eslint-disable-next-line react/no-unknown-property
+        object={model}
+        scale={BILLBOARD_SCALE}
+      >
         {/* <axesHelper args={[GROUND_SIZE / BILLBOARD_SCALE]}/> */}
       </primitive>
     </RigidBody>

@@ -1,7 +1,7 @@
-/* eslint-disable no-unused-vars */
 import * as THREE from 'three'
 import {mergeBufferGeometries} from 'three/examples/jsm/utils/BufferGeometryUtils'
 import {assertDefined} from './custom.assert'
+// eslint-disable-next-line no-unused-vars
 import {customDebug} from './custom.debug'
 
 

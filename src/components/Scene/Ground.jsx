@@ -1,4 +1,3 @@
-
 import React from 'react'
 import {Plane} from '@react-three/drei'
 import {RigidBody} from '@react-three/rapier'
