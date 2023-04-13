@@ -11,14 +11,17 @@ import {Ground} from './Ground'
 import {Billboard} from './Billboard'
 import {Camera} from './Camera'
 import {BillboardHtml} from './BillboardHtml'
+import {useZustand} from '../../store/useZustand'
 
 
 export const Scene = () => {
+  const {isSeeingBillboard} = useZustand()
+
   return (
     <Canvas>
       {/* <Perf position="top-left"/> */}
 
-      <OrbitControls makeDefault/>
+      {!isSeeingBillboard && <OrbitControls makeDefault/>}
 
       <directionalLight
         // eslint-disable-next-line react/no-unknown-property
