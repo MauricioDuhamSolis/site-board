@@ -12,9 +12,7 @@ export const BILLBOARD_URL = './models/billboard.fbx'
 
 export const BILLBOARD_PAGE_URL = 'https://mboard.onrender.com/'
 
-export const BILLBOARD_HTML_SIZE = 400
-
-export const WALKING_SPEED = 20
+export const BILLBOARD_HTML_SIZE = 1200
 
 export const DEFAULT_LINEAR_DAMPING = 10
 
@@ -34,7 +32,9 @@ export const BILLBOARD_SCALE = 0.06 * HTML_ASPECT
 
 export const CHARACTER_SCALE = 0.015 * HTML_ASPECT
 
-export const TOLERANCE_DISTANCE = 0.1 * HTML_ASPECT
+export const WALKING_SPEED = BILLBOARD_HTML_SIZE * 2
+
+export const TOLERANCE_DISTANCE = 0.001 * WALKING_SPEED
 
 export const CAMERA_INIT_POS = [-25 * HTML_ASPECT, 25 * HTML_ASPECT, -25 * HTML_ASPECT]
 

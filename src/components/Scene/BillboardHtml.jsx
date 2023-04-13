@@ -25,7 +25,7 @@ export const BillboardHtml = () => {
     >
       <div
         className={classNames({
-          'flex items-center justify-center w-full h-full p-1 text-white bg-black rounded': true,
+          'flex items-center justify-center p-1 text-white bg-black rounded': true,
           'hidden': !isSeeingBillboard,
         })}
         style={{
@@ -34,7 +34,11 @@ export const BillboardHtml = () => {
         }}
       >
         {billboardPageUrl ?
-          <iframe src={billboardPageUrl} title={billboardPageUrl}/> :
+          <iframe
+            className='w-full h-full'
+            src={billboardPageUrl}
+            title={billboardPageUrl}
+          /> :
           <div>Page not exist.</div>
         }
       </div>
