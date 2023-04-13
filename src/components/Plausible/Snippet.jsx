@@ -5,7 +5,9 @@ import {useZustand} from '../../store/useZustand'
 
 
 export const Snippet = () => {
-  const {nextPlausibleStep} = useZustand()
+  const {
+    nextPlausibleStep,
+  } = useZustand()
 
   return (
     <>

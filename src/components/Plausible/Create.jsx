@@ -9,7 +9,9 @@ export const Create = () => {
   const {
     nextPlausibleStep,
     setAlertMsg,
+    menuArr,
     addMenu,
+    setSelMenuIndex,
     onConfirm,
   } = useZustand()
   const inputRef = useRef(null)
@@ -50,6 +52,7 @@ export const Create = () => {
           }
 
           siteData._id = insertedId
+          setSelMenuIndex(menuArr.length)
           addMenu(siteData)
           nextPlausibleStep()
         })}

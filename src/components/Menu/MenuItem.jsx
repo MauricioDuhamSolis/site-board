@@ -1,17 +1,24 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react'
-import classNames from 'classnames'
-// eslint-disable-next-line no-unused-vars
 import {useZustand} from '../../store/useZustand'
+import classNames from 'classnames'
 
 
-export const MenuItem = () => {
+export const MenuItem = ({index, menu}) => {
+  const {
+    selMenuIndex,
+    setSelMenuIndex,
+  } = useZustand()
+
   return (
     <div className={classNames({
-      'flex items-center p-2 text-white border-2 border-b-0 border-white rounded-tl rounded-tr cursor-pointer': true,
+      'flex items-center justify-center gap-2 p-2 text-white border-2 border-b-0 rounded-tl rounded-tr cursor-pointer': true,
+      'border-white': index === selMenuIndex,
+      'border-gray-500': index !== selMenuIndex,
     })}
     >
-      Menu
-      <div className=''/>
+      <div onClick={() => setSelMenuIndex(index)}>{menu.domain}</div>
     </div>
   )
 }

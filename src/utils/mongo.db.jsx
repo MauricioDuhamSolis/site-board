@@ -18,20 +18,35 @@ export const saveData = async (data) => {
 
 
 export const getData = async (id) => {
-  // TODO
+  try {
+    assertDefined(id)
+    const getUrl = `${BACKEND_URL}/${id}`
+    const res = await axios.get(getUrl)
+    return res?.data
+  } catch (e) {
+    customDebug().log('mongo.db#getData: e: ', e)
+  }
 }
 
 
 export const getAllData = async () => {
-  // TODO
+  try {
+    const getAllUrl = `${BACKEND_URL}/`
+    const res = await axios.get(getAllUrl)
+    return res?.data
+  } catch (e) {
+    customDebug().log('mongo.db#getAllData: e: ', e)
+  }
 }
 
 
 export const removeData = async (id) => {
-  // TODO
-}
-
-
-export const removeAllData = async () => {
-  // TODO
+  try {
+    assertDefined(id)
+    const removeUrl = `${BACKEND_URL}/remove/${id}`
+    const res = await axios.delete(removeUrl)
+    return res
+  } catch (e) {
+    customDebug().log('mongo.db#removeData: e: ', e)
+  }
 }
