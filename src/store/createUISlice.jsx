@@ -1,4 +1,4 @@
-import {PLAUSIBLE_STEP_COUNT} from '../utils/constants'
+import {BILLBOARD_PAGE_URL, PLAUSIBLE_STEP_COUNT} from '../utils/constants'
 
 
 export const createUISlice = (set, get) => {
@@ -20,5 +20,8 @@ export const createUISlice = (set, get) => {
     nextPlausibleStep: () => set(() => ({plausibleStep: (get().plausibleStep + 1) % PLAUSIBLE_STEP_COUNT})),
     prevPlausibleStep: () => set(() => ({plausibleStep: (get().plausibleStep + PLAUSIBLE_STEP_COUNT - 1) % PLAUSIBLE_STEP_COUNT})),
     closePlausible: () => set(() => ({plausibleStep: 0})),
+
+    billboardPageUrl: BILLBOARD_PAGE_URL,
+    setBillboardPageUrl: (newBillboardPageUrl) => set(() => ({billboardPageUrl: newBillboardPageUrl})),
   }
 }

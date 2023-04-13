@@ -10,6 +10,7 @@ export const BillboardHtml = () => {
     billboardDesPos,
     billboardDimensions,
     isSeeingBillboard,
+    billboardPageUrl,
   } = useZustand()
 
   const halfHeight = billboardDimensions.height * 0.545
@@ -24,7 +25,7 @@ export const BillboardHtml = () => {
     >
       <div
         className={classNames({
-          'p-1 text-red-900 bg-yellow-300 rounded': true,
+          'flex items-center justify-center w-full h-full p-1 text-white bg-black rounded': true,
           'hidden': !isSeeingBillboard,
         })}
         style={{
@@ -32,8 +33,12 @@ export const BillboardHtml = () => {
           height: BILLBOARD_HTML_SIZE,
         }}
       >
-        BillboardHtml
+        {billboardPageUrl ?
+          <iframe src={billboardPageUrl} title={billboardPageUrl}/> :
+          <div>Page not exist.</div>
+        }
       </div>
+      <div className=''/>
     </Html>
   )
 }
