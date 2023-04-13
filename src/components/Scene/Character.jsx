@@ -19,8 +19,8 @@ export const Character = ({index, url, scale, speed}) => {
     usersInitPos,
     usersDesPos,
     setUserInitPos,
-    userDesPosChanged,
-    setUserDesPosChanged,
+    userIsMoving,
+    setUserIsMoving,
     seeBillboard,
   } = useZustand()
   const [prevAction, setPrevAction] = useState(null)
@@ -162,7 +162,7 @@ export const Character = ({index, url, scale, speed}) => {
         rigidBody.current.addForce(prevNormalNegateDirec, true)
       }
 
-      if (direcLen > TOLERANCE_DISTANCE && userDesPosChanged) {
+      if (direcLen > TOLERANCE_DISTANCE && userIsMoving) {
         // customDebug().log('Character#useFrame: character moving')
         playWalkAnimOnly()
         rigidBody.current.addForce(normalDirec.multiplyScalar(speed), true)
@@ -174,7 +174,7 @@ export const Character = ({index, url, scale, speed}) => {
         if (!stopped) {
           playIdleAnimOnly()
           userData.prevNormalDirec = zeroVec3
-          setUserDesPosChanged(false)
+          setUserIsMoving(false)
           seeBillboard()
           stopped = true
         }

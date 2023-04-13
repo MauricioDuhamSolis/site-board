@@ -4,6 +4,13 @@ import {HTML_ASPECT} from '../utils/constants'
 
 export const createSceneSlice = (set, get) => {
   return {
+    /* Camera */
+
+    cameraInitPos: [-25 * HTML_ASPECT, 25 * HTML_ASPECT, -25 * HTML_ASPECT],
+    cameraDesPos: [-25 * HTML_ASPECT, 25 * HTML_ASPECT, -25 * HTML_ASPECT],
+
+    /* User */
+
     selUserIndex: 0,
     setSelUserIndex: (newSelUserIndex) => set(() => ({selUserIndex: newSelUserIndex})),
 
@@ -26,12 +33,14 @@ export const createSceneSlice = (set, get) => {
       newUsersCurPos[index] = newUserCurPos
       return {
         usersDesPos: newUsersCurPos,
-        userDesPosChanged: true,
+        userIsMoving: true,
       }
     }),
 
-    userDesPosChanged: false,
-    setUserDesPosChanged: (newUserDesPosChanged) => set(() => ({userDesPosChanged: newUserDesPosChanged})),
+    userIsMoving: false,
+    setUserIsMoving: (newUserDesPosChanged) => set(() => ({userIsMoving: newUserDesPosChanged})),
+
+    /* Billboard */
 
     billboardDimensions: {width: 0, height: 0, length: 0},
     setBillboardDimensions: (newBillboardDimensions) => set(() => ({billboardDimensions: newBillboardDimensions})),
@@ -39,9 +48,6 @@ export const createSceneSlice = (set, get) => {
     billboardInitPos: [0, 0, 12 * HTML_ASPECT],
     billboardDesPos: [0, 0, 12 * HTML_ASPECT],
     billboardViewDistance: 14.5 * HTML_ASPECT,
-
-    cameraInitPos: [-25 * HTML_ASPECT, 25 * HTML_ASPECT, -25 * HTML_ASPECT],
-    cameraDesPos: [-25 * HTML_ASPECT, 25 * HTML_ASPECT, -25 * HTML_ASPECT],
 
     isSeeingBillboard: false,
     seeBillboard: () => set(() => {
@@ -52,7 +58,6 @@ export const createSceneSlice = (set, get) => {
       return {
         cameraDesPos,
         isSeeingBillboard: true,
-        showMenu: false,
       }
     }),
   }
