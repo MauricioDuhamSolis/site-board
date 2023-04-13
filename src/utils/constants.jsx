@@ -14,8 +14,7 @@ export const BILLBOARD_PAGE_URL = 'https://mboard.onrender.com/'
 
 export const BILLBOARD_HTML_SIZE = 400
 
-// export const WALKING_SPEED = 20
-export const WALKING_SPEED = 200
+export const WALKING_SPEED = 20
 
 export const DEFAULT_LINEAR_DAMPING = 10
 
