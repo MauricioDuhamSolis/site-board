@@ -21,7 +21,6 @@ export const ColorPicker = ({className, selColor, onChange}) => {
         color={selColor || '#ffffff'}
         onChange={onChange}
       />
-      <div className=''/>
     </div>
   )
 }

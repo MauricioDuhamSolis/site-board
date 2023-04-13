@@ -23,7 +23,6 @@ export const Plausible = () => {
         {plausibleStep === 2 && <Snippet/>}
         {plausibleStep === 3 && <Result/>}
       </div>
-      <div className=''/>
     </div>
   )
 }

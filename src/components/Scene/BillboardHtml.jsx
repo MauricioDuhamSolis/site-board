@@ -42,7 +42,6 @@ export const BillboardHtml = () => {
           <div>Page not exist.</div>
         }
       </div>
-      <div className=''/>
     </Html>
   )
 }
