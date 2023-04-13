@@ -6,7 +6,7 @@ import {Canvas} from '@react-three/fiber'
 import {Debug, Physics} from '@react-three/rapier'
 import {Perf} from 'r3f-perf'
 import {Character} from './Character'
-import {CHARACTER_SCALE, CHARACTER_URLS, WALKING_SPEED} from '../../utils/constants'
+import {CHARACTER_SCALE, CHARACTER_URLS, GROUND_SIZE, WALKING_SPEED} from '../../utils/constants'
 import {Ground} from './Ground'
 import {Billboard} from './Billboard'
 import {useZustand} from '../../store/useZustand'
@@ -15,8 +15,6 @@ import {BillboardHtml} from './BillboardHtml'
 
 
 export const Scene = () => {
-  const {cameraInitPos} = useZustand()
-
   return (
     <Canvas>
       {/* <Perf position="top-left"/> */}
@@ -33,7 +31,7 @@ export const Scene = () => {
       </directionalLight>
       <ambientLight intensity={0.5}/>
 
-      <axesHelper args={[5]}/>
+      {/* <axesHelper args={[GROUND_SIZE]}/> */}
 
       <Suspense>
         <Physics colliders="hull">
@@ -49,7 +47,7 @@ export const Scene = () => {
             />,
           )}
           <Ground/>
-          <Debug/>
+          {/* <Debug/> */}
         </Physics>
       </Suspense>
 

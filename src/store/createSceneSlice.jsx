@@ -33,16 +33,17 @@ export const createSceneSlice = (set, get) => {
     userDesPosChanged: false,
     setUserDesPosChanged: (newUserDesPosChanged) => set(() => ({userDesPosChanged: newUserDesPosChanged})),
 
-    billboardDimensions: null,
+    billboardDimensions: {width: 0, height: 0, length: 0},
     setBillboardDimensions: (newBillboardDimensions) => set(() => ({billboardDimensions: newBillboardDimensions})),
 
     billboardInitPos: [0, 0, 12 * HTML_ASPECT],
     billboardDesPos: [0, 0, 12 * HTML_ASPECT],
-    billboardViewDistance: 9.9 * HTML_ASPECT,
+    billboardViewDistance: 14.5 * HTML_ASPECT,
 
-    cameraInitPos: [-15 * HTML_ASPECT, 15 * HTML_ASPECT, -15 * HTML_ASPECT],
-    cameraDesPos: [-15 * HTML_ASPECT, 15 * HTML_ASPECT, -15 * HTML_ASPECT],
+    cameraInitPos: [-25 * HTML_ASPECT, 25 * HTML_ASPECT, -25 * HTML_ASPECT],
+    cameraDesPos: [-25 * HTML_ASPECT, 25 * HTML_ASPECT, -25 * HTML_ASPECT],
 
+    isSeeingBillboard: false,
     seeBillboard: () => set(() => {
       const billboardDesPos = deepClone(get().billboardDesPos)
       const billboardViewDistance = get().billboardViewDistance
@@ -50,12 +51,9 @@ export const createSceneSlice = (set, get) => {
       const cameraDesPos = billboardDesPos
       return {
         cameraDesPos,
-        enableOrbitControls: false,
+        isSeeingBillboard: true,
         showMenu: false,
       }
     }),
-
-    enableOrbitControls: true,
-    setEnableOrbitControls: (newEnableOrbitControls) => set(() => ({enableOrbitControls: newEnableOrbitControls})),
   }
 }

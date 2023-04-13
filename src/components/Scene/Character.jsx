@@ -5,7 +5,7 @@ import * as THREE from 'three'
 import {useAnimations, useFBX, useGLTF} from '@react-three/drei'
 import {RigidBody, vec3} from '@react-three/rapier'
 import {assertDefined} from '../../utils/custom.assert'
-import {DEFAULT_ANGULAR_DAMPING, DEFAULT_LINEAR_DAMPING, GROUND_SIZE, TOLERANCE_DISTANCE} from '../../utils/constants'
+import {CHARACTER_SCALE, DEFAULT_ANGULAR_DAMPING, DEFAULT_LINEAR_DAMPING, GROUND_SIZE, TOLERANCE_DISTANCE} from '../../utils/constants'
 import {getRandom} from '../../utils/common'
 import {useZustand} from '../../store/useZustand'
 import {useFrame} from '@react-three/fiber'
@@ -160,7 +160,7 @@ export const Character = ({index, url, scale, speed}) => {
       }
 
       if (direcLen > TOLERANCE_DISTANCE && userDesPosChanged) {
-        customDebug().log('Character#useFrame: character moving: ', curPos)
+        // customDebug().log('Character#useFrame: character moving')
         playWalkAnimOnly()
         rigidBody.current.addForce(normalDirec.multiplyScalar(speed), true)
         userData.prevNormalDirec = normalDirec
@@ -196,7 +196,7 @@ export const Character = ({index, url, scale, speed}) => {
         scale={scale}
         castShadow
       >
-        {/* <axesHelper args={[2]}/> */}
+        {/* <axesHelper args={[GROUND_SIZE / CHARACTER_SCALE]}/> */}
       </primitive>
     </RigidBody>
   )

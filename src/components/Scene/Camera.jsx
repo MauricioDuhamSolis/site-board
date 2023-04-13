@@ -11,12 +11,12 @@ export const Camera = () => {
     cameraInitPos,
     cameraDesPos,
     billboardDesPos,
-    enableOrbitControls,
+    isSeeingBillboard,
     billboardDimensions,
   } = useZustand()
 
   useFrame((state, delta) => {
-    if (!billboardDimensions || enableOrbitControls) {
+    if (!billboardDimensions || !isSeeingBillboard) {
       return
     }
     const {height} = billboardDimensions
