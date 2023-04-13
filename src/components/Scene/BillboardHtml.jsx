@@ -25,7 +25,7 @@ export const BillboardHtml = () => {
     >
       <div
         className={classNames({
-          'flex items-center justify-center p-1 text-white bg-black rounded': true,
+          'flex items-center justify-center text-white bg-black rounded': true,
           'hidden': !isSeeingBillboard,
         })}
         style={{
