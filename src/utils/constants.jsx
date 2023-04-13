@@ -30,3 +30,5 @@ export const DEFAULT_ANGULAR_DAMPING = 10
 export const PLAUSIBLE_STEP_COUNT = 4
 
 export const FRAME = 200
+
+export const LERP_ALPHA = 0.1

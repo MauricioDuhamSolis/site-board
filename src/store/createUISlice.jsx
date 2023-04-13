@@ -19,6 +19,6 @@ export const createUISlice = (set, get) => {
     plausibleStep: 0,
     nextPlausibleStep: () => set(() => ({plausibleStep: (get().plausibleStep + 1) % PLAUSIBLE_STEP_COUNT})),
     prevPlausibleStep: () => set(() => ({plausibleStep: (get().plausibleStep + PLAUSIBLE_STEP_COUNT - 1) % PLAUSIBLE_STEP_COUNT})),
-    setPlausibleStep: (newPlausibleStep) => set(() => ({plausibleStep: newPlausibleStep})),
+    closePlausible: () => set(() => ({plausibleStep: 0})),
   }
 }
