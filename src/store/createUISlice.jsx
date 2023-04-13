@@ -30,5 +30,8 @@ export const createUISlice = (set, get) => {
 
     selMenuIndex: null,
     setSelMenuIndex: (newSelMenuIndex) => set(() => ({selMenuIndex: newSelMenuIndex})),
+
+    dashboardData: null,
+    setDashboardData: (newDashboardData) => set(() => ({dashboardData: newDashboardData})),
   }
 }
