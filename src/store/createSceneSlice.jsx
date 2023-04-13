@@ -33,12 +33,8 @@ export const createSceneSlice = (set, get) => {
       newUsersCurPos[index] = newUserCurPos
       return {
         usersDesPos: newUsersCurPos,
-        userIsMoving: true,
       }
     }),
-
-    userIsMoving: false,
-    setUserIsMoving: (newUserDesPosChanged) => set(() => ({userIsMoving: newUserDesPosChanged})),
 
     /* Billboard */
 

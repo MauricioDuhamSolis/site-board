@@ -9,7 +9,6 @@ import {CHARACTER_SCALE, DEFAULT_ANGULAR_DAMPING, DEFAULT_LINEAR_DAMPING, GROUND
 import {getRandom} from '../../utils/common'
 import {useZustand} from '../../store/useZustand'
 import {useFrame} from '@react-three/fiber'
-// eslint-disable-next-line no-unused-vars
 import {customDebug} from '../../utils/custom.debug'
 
 
@@ -19,8 +18,6 @@ export const Character = ({index, url, scale, speed}) => {
     usersInitPos,
     usersDesPos,
     setUserInitPos,
-    userIsMoving,
-    setUserIsMoving,
     seeBillboard,
   } = useZustand()
   const [prevAction, setPrevAction] = useState(null)
@@ -162,19 +159,18 @@ export const Character = ({index, url, scale, speed}) => {
         rigidBody.current.addForce(prevNormalNegateDirec, true)
       }
 
-      if (direcLen > TOLERANCE_DISTANCE && userIsMoving) {
-        // customDebug().log('Character#useFrame: character moving')
+      if (direcLen > TOLERANCE_DISTANCE) {
+        customDebug().log('Character#useFrame: character moving')
         playWalkAnimOnly()
         rigidBody.current.addForce(normalDirec.multiplyScalar(speed), true)
         userData.prevNormalDirec = normalDirec
         stopped = false
       } else {
-        // customDebug().log('Character#useFrame: character stopped')
         // eslint-disable-next-line no-lonely-if
         if (!stopped) {
+          customDebug().log('Character#useFrame: character stopped')
           playIdleAnimOnly()
           userData.prevNormalDirec = zeroVec3
-          setUserIsMoving(false)
           seeBillboard()
           stopped = true
         }

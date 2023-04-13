@@ -6,7 +6,6 @@ import {Debug, Physics} from '@react-three/rapier'
 // eslint-disable-next-line no-unused-vars
 import {Perf} from 'r3f-perf'
 import {Character} from './Character'
-
 import {CHARACTER_SCALE, CHARACTER_URLS, GROUND_SIZE, WALKING_SPEED} from '../../utils/constants'
 import {Ground} from './Ground'
 import {Billboard} from './Billboard'
