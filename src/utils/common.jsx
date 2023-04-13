@@ -1,8 +1,6 @@
 import * as THREE from 'three'
 import {mergeBufferGeometries} from 'three/examples/jsm/utils/BufferGeometryUtils'
 import {assertDefined} from './custom.assert'
-// eslint-disable-next-line no-unused-vars
-import {customDebug} from './custom.debug'
 
 
 export const getRandom = (size) => {
@@ -82,4 +80,10 @@ export const mergeModelMeshes = (model, customMaterial) => {
   mergedBufferGeometry.computeBoundingBox()
   const mergedMesh = new THREE.Mesh(mergedBufferGeometry, material)
   return mergedMesh
+}
+
+
+export const getDomainUrl = (domain) => {
+  const domainUrl = `https://${domain}`
+  return domainUrl
 }

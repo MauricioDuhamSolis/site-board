@@ -4,7 +4,6 @@ import classNames from 'classnames'
 import {useZustand} from '../../store/useZustand'
 import {Create} from './Create'
 import {Snippet} from './Snippet'
-import {Result} from './Result'
 import {Close} from './Close'
 
 
@@ -21,7 +20,6 @@ export const Plausible = () => {
         <Close/>
         {plausibleStep === 1 && <Create/>}
         {plausibleStep === 2 && <Snippet/>}
-        {plausibleStep === 3 && <Result/>}
       </div>
     </div>
   )

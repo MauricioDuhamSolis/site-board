@@ -3,6 +3,7 @@ import {Html} from '@react-three/drei'
 import {BILLBOARD_HTML_SIZE} from '../../utils/constants'
 import {useZustand} from '../../store/useZustand'
 import classNames from 'classnames'
+import {getDomainUrl} from '../../utils/common'
 
 
 export const BillboardHtml = () => {
@@ -10,11 +11,13 @@ export const BillboardHtml = () => {
     billboardDesPos,
     billboardDimensions,
     isSeeingBillboard,
-    billboardDomain,
+    selMenuIndex,
+    menuArr,
   } = useZustand()
 
   const halfHeight = billboardDimensions.height * 0.545
   const htmlPos = [billboardDesPos[0], billboardDesPos[1] + halfHeight, billboardDesPos[2] - 0.2]
+  const billboardDomain = menuArr[selMenuIndex]?.domain
 
   return (
     <Html
@@ -36,7 +39,7 @@ export const BillboardHtml = () => {
         {billboardDomain ?
           <iframe
             className='w-full h-full'
-            src={billboardDomain}
+            src={getDomainUrl(billboardDomain)}
             title={billboardDomain}
           /> :
           <div>Page not exist.</div>

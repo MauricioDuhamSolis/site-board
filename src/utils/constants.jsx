@@ -12,15 +12,13 @@ export const CHARACTER_URLS = [
 
 export const BILLBOARD_URL = './models/billboard.fbx'
 
-export const BILLBOARD_DOMAIN = ''
-
 export const BILLBOARD_HTML_SIZE = 1200
 
 export const DEFAULT_LINEAR_DAMPING = 10
 
 export const DEFAULT_ANGULAR_DAMPING = 10
 
-export const PLAUSIBLE_STEP_COUNT = 4
+export const PLAUSIBLE_STEP_COUNT = 3
 
 export const LERP_ALPHA = 0.1
 

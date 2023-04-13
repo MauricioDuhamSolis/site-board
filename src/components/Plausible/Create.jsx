@@ -5,7 +5,7 @@ import {saveData} from '../../utils/mongo.db'
 import {customDebug} from '../../utils/custom.debug'
 
 
-export const Create = () => {
+export const Create = ({domain}) => {
   const {
     nextPlausibleStep,
     setAlertMsg,
@@ -22,6 +22,7 @@ export const Create = () => {
         className='w-3/5 p-1 text-black rounded'
         ref={inputRef}
         type='text'
+        value={domain}
       />
       <button
         className='pl-2 pr-2 border-2 rounded'
