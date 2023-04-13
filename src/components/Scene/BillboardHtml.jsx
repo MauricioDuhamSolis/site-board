@@ -24,7 +24,7 @@ export const BillboardHtml = () => {
     >
       <div
         className={classNames({
-          'p-1 text-red-500 bg-yellow-500 rounded': true,
+          'p-1 text-red-900 bg-yellow-300 rounded': true,
           'hidden': !isSeeingBillboard,
         })}
         style={{

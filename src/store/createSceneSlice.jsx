@@ -1,13 +1,13 @@
 import {deepClone} from '../utils/common'
-import {HTML_ASPECT} from '../utils/constants'
+import {BILLBOARD_DES_POS, BILLBOARD_INIT_POS, BILLBOARD_VIEW_DISTANCE, CAMERA_DES_POS, CAMERA_INIT_POS} from '../utils/constants'
 
 
 export const createSceneSlice = (set, get) => {
   return {
     /* Camera */
 
-    cameraInitPos: [-25 * HTML_ASPECT, 25 * HTML_ASPECT, -25 * HTML_ASPECT],
-    cameraDesPos: [-25 * HTML_ASPECT, 25 * HTML_ASPECT, -25 * HTML_ASPECT],
+    cameraInitPos: CAMERA_INIT_POS,
+    cameraDesPos: CAMERA_DES_POS,
 
     /* User */
 
@@ -45,9 +45,9 @@ export const createSceneSlice = (set, get) => {
     billboardDimensions: {width: 0, height: 0, length: 0},
     setBillboardDimensions: (newBillboardDimensions) => set(() => ({billboardDimensions: newBillboardDimensions})),
 
-    billboardInitPos: [0, 0, 12 * HTML_ASPECT],
-    billboardDesPos: [0, 0, 12 * HTML_ASPECT],
-    billboardViewDistance: 14.5 * HTML_ASPECT,
+    billboardInitPos: BILLBOARD_INIT_POS,
+    billboardDesPos: BILLBOARD_DES_POS,
+    billboardViewDistance: BILLBOARD_VIEW_DISTANCE,
 
     isSeeingBillboard: false,
     seeBillboard: () => set(() => {

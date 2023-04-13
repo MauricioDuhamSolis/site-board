@@ -1,3 +1,5 @@
+/* Static */
+
 export const CHARACTER_URLS = [
   './models/character 1.fbx',
   // './models/character 2.fbx',
@@ -10,6 +12,19 @@ export const BILLBOARD_URL = './models/billboard.fbx'
 
 export const BILLBOARD_HTML_SIZE = 400
 
+// export const WALKING_SPEED = 20
+export const WALKING_SPEED = 200
+
+export const DEFAULT_LINEAR_DAMPING = 10
+
+export const DEFAULT_ANGULAR_DAMPING = 10
+
+export const PLAUSIBLE_STEP_COUNT = 4
+
+export const LERP_ALPHA = 0.1
+
+/* Dynamic */
+
 export const HTML_ASPECT = BILLBOARD_HTML_SIZE / 400
 
 export const GROUND_SIZE = 30 * HTML_ASPECT
@@ -20,15 +35,12 @@ export const CHARACTER_SCALE = 0.015 * HTML_ASPECT
 
 export const TOLERANCE_DISTANCE = 0.1 * HTML_ASPECT
 
-// export const WALKING_SPEED = 20
-export const WALKING_SPEED = 200
+export const CAMERA_INIT_POS = [-25 * HTML_ASPECT, 25 * HTML_ASPECT, -25 * HTML_ASPECT]
 
-export const DEFAULT_LINEAR_DAMPING = 10
+export const CAMERA_DES_POS = CAMERA_INIT_POS
 
-export const DEFAULT_ANGULAR_DAMPING = 10
+export const BILLBOARD_INIT_POS = [0, 0, 12 * HTML_ASPECT]
 
-export const PLAUSIBLE_STEP_COUNT = 4
+export const BILLBOARD_DES_POS = BILLBOARD_INIT_POS
 
-export const FRAME = 200
-
-export const LERP_ALPHA = 0.1
+export const BILLBOARD_VIEW_DISTANCE = 14.5 * HTML_ASPECT
