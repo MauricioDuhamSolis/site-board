@@ -11,6 +11,7 @@ import {Ground} from './Ground'
 import {Billboard} from './Billboard'
 import {useZustand} from '../../store/useZustand'
 import {Camera} from './Camera'
+import {BillboardHtml} from './BillboardHtml'
 
 
 export const Scene = () => {
@@ -37,6 +38,7 @@ export const Scene = () => {
       <Suspense>
         <Physics colliders="hull">
           <Billboard/>
+          <BillboardHtml/>
           {CHARACTER_URLS.map((url, index) =>
             <Character
               key={index}
@@ -47,7 +49,7 @@ export const Scene = () => {
             />,
           )}
           <Ground/>
-          {/* <Debug/> */}
+          <Debug/>
         </Physics>
       </Suspense>
 
