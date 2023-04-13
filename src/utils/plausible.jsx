@@ -40,7 +40,7 @@ export const getTimeseries = async (siteId, period = 'month') => {
 
 
 export const createSite = async (domain, timezone) => {
-  assertDefined(domain, timezone)
+  assertDefined(domain)
   const paramObj = {domain, timezone}
   const res = await postPlausible('sites', paramObj)
   return res

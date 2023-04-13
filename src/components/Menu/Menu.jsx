@@ -1,3 +1,5 @@
+/* eslint-disable prefer-const */
+/* eslint-disable no-unused-vars */
 import React, {useEffect} from 'react'
 import classNames from 'classnames'
 import {useZustand} from '../../store/useZustand'
@@ -10,25 +12,25 @@ import {createSite, getAggregate, getRealtimeVisitors, getSite, getTimeseries} f
 export const Menu = () => {
   const {isSeeingBillboard} = useZustand()
 
-  useEffect(() => {
-    (async () => {
-      if (isLoading) {
-        return
-      }
-      isLoading = true
-      const aggregate = await getAggregate('jetfuel.tech')
-      customDebug().log('Menu#useEffect: aggregate: ', aggregate)
-      const realtimeVisitors = await getRealtimeVisitors('jetfuel.tech')
-      customDebug().log('Menu#useEffect: realtimeVisitors: ', realtimeVisitors)
-      const timeseries = await getTimeseries('jetfuel.tech')
-      customDebug().log('Menu#useEffect: timeseries: ', timeseries)
-      const createSiteRes = await createSite('bookingsite.mes', 'Europe/London')
-      customDebug().log('Menu#useEffect: createSiteRes: ', createSiteRes)
-      const site = await getSite('jetfuel.tech')
-      customDebug().log('Menu#useEffect: site: ', site)
-      isLoading = false
-    })()
-  }, [])
+  // useEffect(() => {
+  //   (async () => {
+  //     if (isLoading) {
+  //       return
+  //     }
+  //     isLoading = true
+  //     const aggregate = await getAggregate('jetfuel.tech')
+  //     customDebug().log('Menu#useEffect: aggregate: ', aggregate)
+  //     const realtimeVisitors = await getRealtimeVisitors('jetfuel.tech')
+  //     customDebug().log('Menu#useEffect: realtimeVisitors: ', realtimeVisitors)
+  //     const timeseries = await getTimeseries('jetfuel.tech')
+  //     customDebug().log('Menu#useEffect: timeseries: ', timeseries)
+  //     const createSiteRes = await createSite('bookingsite.mes', 'Europe/London')
+  //     customDebug().log('Menu#useEffect: createSiteRes: ', createSiteRes)
+  //     const site = await getSite('jetfuel.tech')
+  //     customDebug().log('Menu#useEffect: site: ', site)
+  //     isLoading = false
+  //   })()
+  // }, [])
 
   return (
     <div className={classNames({
