@@ -1,5 +1,7 @@
 /* Static */
 
+export const BACKEND_URL = 'http://127.0.0.1:4000/main'
+
 export const CHARACTER_URLS = [
   './models/character 1.fbx',
   // './models/character 2.fbx',
@@ -10,7 +12,7 @@ export const CHARACTER_URLS = [
 
 export const BILLBOARD_URL = './models/billboard.fbx'
 
-export const BILLBOARD_PAGE_URL = 'https://mboard.onrender.com/'
+export const BILLBOARD_DOMAIN = ''
 
 export const BILLBOARD_HTML_SIZE = 1200
 

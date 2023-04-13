@@ -1,5 +1,5 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
+
+
 import React from 'react'
 import classNames from 'classnames'
 import {useZustand} from '../../store/useZustand'
@@ -12,22 +12,19 @@ export const Alert = () => {
 
   return (
     <div className={classNames({
-      'absolute flex items-center justify-center w-screen h-screen': true,
+      'fixed flex items-center justify-center w-screen h-screen top-0 left-0': true,
       'hidden': !alertMsg,
     })}
     >
-      <div className='z-10 flex flex-col items-center gap-4 p-4 bg-gray-600 border border-white rounded max-w-max justify-evenly'>
-        <div className='flex items-center justify-center text-white ${true ? "test" : "none"}'>{alertMsg}</div>
-        <div className='flex items-center justify-center w-full gap-4'>
-          <div
-            className='flex items-center px-2 text-white bg-green-500 rounded cursor-pointer'
-            onClick={() => setAlertMsg('')}
-          >
-            Ok
-          </div>
-        </div>
+      <div className='flex flex-col items-center justify-center w-3/5 gap-4 p-4 text-white bg-black border border-white rounded h-3/5'>
+        {alertMsg}
+        <button
+          className='pl-2 pr-2 border-2 rounded'
+          onClick={() => setAlertMsg('')}
+        >
+          Ok
+        </button>
       </div>
-      <div className=''/>
     </div>
   )
 }

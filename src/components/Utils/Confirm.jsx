@@ -16,7 +16,7 @@ export const Confirm = () => {
       'hidden': !confirmFunc,
     })}
     >
-      <div className='z-10 flex flex-col items-center gap-4 p-4 bg-gray-600 border border-white rounded justify-evenly max-w-max'>
+      <div className='flex flex-col items-center gap-4 p-4 bg-gray-600 border border-white rounded justify-evenly max-w-max'>
         <div className='flex items-center justify-center text-white'>{confirmMsg ? confirmMsg : 'Would you like to proceed?'}</div>
         <div className='flex items-center justify-center w-full gap-4'>
           <div

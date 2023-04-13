@@ -38,8 +38,6 @@ export const Menu = () => {
       'hidden': isSeeingBillboard,
     })}
     >
-      <MenuItem/>
-      <MenuItem/>
       <AddLink/>
     </div>
   )

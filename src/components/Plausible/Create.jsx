@@ -1,12 +1,15 @@
 import React, {useRef} from 'react'
 import {useZustand} from '../../store/useZustand'
 import {createSite} from '../../utils/plausible'
+import {saveData} from '../../utils/mongo.db'
+import {customDebug} from '../../utils/custom.debug'
 
 
 export const Create = () => {
   const {
     nextPlausibleStep,
     setAlertMsg,
+    addMenu,
   } = useZustand()
   const inputRef = useRef(null)
 
@@ -28,7 +31,25 @@ export const Create = () => {
           }
 
           const createSiteRes = await createSite(inputVal)
-          console.log(createSiteRes)
+          customDebug().log('Create: createSiteRes: ', createSiteRes)
+          const siteData = createSiteRes?.data
+
+          if (siteData?.domain !== inputVal) {
+            setAlertMsg('This domain cannot be registered. Perhaps one of your colleagues registered it? If that\'s not the case, please contact support@plausible.io')
+            return
+          }
+
+          const saveDataRes = await saveData(siteData)
+          customDebug().log('Create: saveDataRes: ', saveDataRes)
+          const insertedId = saveDataRes?.data?.insertedId
+
+          if (saveDataRes?.status !== 200 || !insertedId) {
+            setAlertMsg('Backend is disconnected. Check your internet connection.')
+            return
+          }
+
+          siteData._id = insertedId
+          addMenu(siteData)
           nextPlausibleStep()
         }}
       >

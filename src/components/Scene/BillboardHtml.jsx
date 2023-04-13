@@ -10,7 +10,7 @@ export const BillboardHtml = () => {
     billboardDesPos,
     billboardDimensions,
     isSeeingBillboard,
-    billboardPageUrl,
+    billboardDomain,
   } = useZustand()
 
   const halfHeight = billboardDimensions.height * 0.545
@@ -33,11 +33,11 @@ export const BillboardHtml = () => {
           height: BILLBOARD_HTML_SIZE,
         }}
       >
-        {billboardPageUrl ?
+        {billboardDomain ?
           <iframe
             className='w-full h-full'
-            src={billboardPageUrl}
-            title={billboardPageUrl}
+            src={billboardDomain}
+            title={billboardDomain}
           /> :
           <div>Page not exist.</div>
         }
