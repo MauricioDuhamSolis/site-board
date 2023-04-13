@@ -2,7 +2,7 @@
 import React, {useEffect} from 'react'
 import {useFBX} from '@react-three/drei'
 import {RigidBody} from '@react-three/rapier'
-import {BILLBOARD_URL} from '../../utils/constants'
+import {BILLBOARD_URL, CHARACTER_SCALE} from '../../utils/constants'
 import {useGesture} from '@use-gesture/react'
 import {useZustand} from '../../store/useZustand'
 import {getDimensions} from '../../utils/common'
@@ -43,10 +43,7 @@ export const Billboard = () => {
       enabledRotations={[false, true, false]}
       {...bind()}
     >
-      <primitive object={model} scale={MODEL_SCALE}/>
+      <primitive object={model} scale={CHARACTER_SCALE}/>
     </RigidBody>
   )
 }
-
-
-const MODEL_SCALE = 0.015

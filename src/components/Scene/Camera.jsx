@@ -3,6 +3,7 @@ import {PerspectiveCamera} from '@react-three/drei'
 import * as THREE from 'three'
 import {useFrame} from '@react-three/fiber'
 import {useZustand} from '../../store/useZustand'
+import {FRAME} from '../../utils/constants'
 
 
 export const Camera = () => {
@@ -40,4 +41,3 @@ export const Camera = () => {
 const cameraInitPosVec3 = new THREE.Vector3()
 const cameraDesPosVec3 = new THREE.Vector3()
 const billboardDesPosVec3 = new THREE.Vector3()
-const FRAME = 200
