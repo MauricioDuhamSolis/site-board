@@ -16,6 +16,7 @@ export const Billboard = () => {
     setUserDesPos,
     billboardInitPos,
     setBillboardDimensions,
+    isSeeingBillboard,
   } = useZustand()
 
   useEffect(() => {
@@ -28,7 +29,7 @@ export const Billboard = () => {
     onPointerDown: (state) => {
       const {event} = state
 
-      if (event.button === 0) { // Left
+      if (event.button === 0 && !isSeeingBillboard) { // Left
         const {point} = event
         const newUserCurPos = [point.x, 0, point.z - 0.5]
         setUserDesPos(selUserIndex, newUserCurPos)
