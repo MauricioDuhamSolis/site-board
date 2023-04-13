@@ -102,4 +102,4 @@ const postPlausible = async (path, paramObj) => {
 }
 
 
-const bearerToken = 'KW_7BcV7amnosu5lmLByxFI3AtGcf2L0qWJBvYwxA1RgvQM-32b9t0tDHfw5liR6'
+const bearerToken = 'I3PXc58CQZAkaEWmv7gtL6PVTAoVMj5_8etxX9M_qAT6r7G043s-E_ceqDGYK5_Z'

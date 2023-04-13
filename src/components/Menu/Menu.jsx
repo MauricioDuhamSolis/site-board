@@ -1,37 +1,34 @@
-// eslint-disable-next-line no-unused-vars
 import React, {useEffect} from 'react'
 import classNames from 'classnames'
 import {useZustand} from '../../store/useZustand'
 import {MenuItem} from './MenuItem'
 import {AddLink} from './AddLink'
-// eslint-disable-next-line no-unused-vars
 import {customDebug} from '../../utils/custom.debug'
-// eslint-disable-next-line no-unused-vars
 import {createSite, getAggregate, getRealtimeVisitors, getSite, getTimeseries} from '../../utils/plausible'
 
 
 export const Menu = () => {
   const {isSeeingBillboard} = useZustand()
 
-  // useEffect(() => {
-  //   (async () => {
-  //     if (isLoading) {
-  //       return
-  //     }
-  //     isLoading = true
-  //     const aggregate = await getAggregate('jetfuel.tech')
-  //     customDebug().log('Menu#useEffect: aggregate: ', aggregate)
-  //     const realtimeVisitors = await getRealtimeVisitors('jetfuel.tech')
-  //     customDebug().log('Menu#useEffect: realtimeVisitors: ', realtimeVisitors)
-  //     const timeseries = await getTimeseries('jetfuel.tech')
-  //     customDebug().log('Menu#useEffect: timeseries: ', timeseries)
-  //     const createSiteRes = await createSite('bookingsite.mes', 'Europe/London')
-  //     customDebug().log('Menu#useEffect: createSiteRes: ', createSiteRes)
-  //     const site = await getSite('jetfuel.tech')
-  //     customDebug().log('Menu#useEffect: site: ', site)
-  //     isLoading = false
-  //   })()
-  // }, [])
+  useEffect(() => {
+    (async () => {
+      if (isLoading) {
+        return
+      }
+      isLoading = true
+      const aggregate = await getAggregate('jetfuel.tech')
+      customDebug().log('Menu#useEffect: aggregate: ', aggregate)
+      const realtimeVisitors = await getRealtimeVisitors('jetfuel.tech')
+      customDebug().log('Menu#useEffect: realtimeVisitors: ', realtimeVisitors)
+      const timeseries = await getTimeseries('jetfuel.tech')
+      customDebug().log('Menu#useEffect: timeseries: ', timeseries)
+      const createSiteRes = await createSite('bookingsite.mes', 'Europe/London')
+      customDebug().log('Menu#useEffect: createSiteRes: ', createSiteRes)
+      const site = await getSite('jetfuel.tech')
+      customDebug().log('Menu#useEffect: site: ', site)
+      isLoading = false
+    })()
+  }, [])
 
   return (
     <div className={classNames({
@@ -47,5 +44,4 @@ export const Menu = () => {
 }
 
 
-// eslint-disable-next-line no-unused-vars, prefer-const
 let isLoading = false
