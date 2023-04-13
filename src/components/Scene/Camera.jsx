@@ -21,8 +21,8 @@ export const Camera = () => {
     }
     const {height} = billboardDimensions
     cameraInitPosVec3.set(cameraInitPos[0], cameraInitPos[1], cameraInitPos[2])
-    cameraDesPosVec3.set(cameraDesPos[0], cameraDesPos[1] + (height / 4), cameraDesPos[2])
-    billboardDesPosVec3.set(billboardDesPos[0], billboardDesPos[1] + (height / 4), billboardDesPos[2])
+    cameraDesPosVec3.set(cameraDesPos[0], cameraDesPos[1] + (height / 2), cameraDesPos[2])
+    billboardDesPosVec3.set(billboardDesPos[0], billboardDesPos[1] + (height / 2), billboardDesPos[2])
     const distance = cameraInitPosVec3.distanceTo(cameraDesPosVec3)
     const alpha = distance / FRAME
     state.camera.position.lerp(cameraDesPosVec3, alpha)

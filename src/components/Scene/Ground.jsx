@@ -9,7 +9,7 @@ export const Ground = () => {
   return (
     <RigidBody>
       <Plane
-        position={[0, -1, 0]}
+        position={[0, 0, 0]}
         receiveShadow
         rotation={[- Math.PI * 0.5, 0, 0]}
         scale={GROUND_SIZE}

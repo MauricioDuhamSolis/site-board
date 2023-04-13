@@ -10,14 +10,18 @@ export const BILLBOARD_URL = './models/billboard.fbx'
 
 export const BILLBOARD_HTML_SIZE = 400
 
-export const GROUND_SIZE = 10
+export const HTML_ASPECT = BILLBOARD_HTML_SIZE / 400
 
-export const CHARACTER_SCALE = 0.015
+export const GROUND_SIZE = 30 * HTML_ASPECT
 
-// export const WALKING_SPEED = 0.5
-export const WALKING_SPEED = 2
+export const BILLBOARD_SCALE = 0.045 * HTML_ASPECT
 
-export const TOLERANCE_DISTANCE = 0.1
+export const CHARACTER_SCALE = 0.015 * HTML_ASPECT
+
+export const TOLERANCE_DISTANCE = 0.1 * HTML_ASPECT
+
+// export const WALKING_SPEED = 20
+export const WALKING_SPEED = 100
 
 export const DEFAULT_LINEAR_DAMPING = 10
 

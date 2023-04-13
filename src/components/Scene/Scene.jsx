@@ -6,7 +6,7 @@ import {Canvas} from '@react-three/fiber'
 import {Debug, Physics} from '@react-three/rapier'
 import {Perf} from 'r3f-perf'
 import {Character} from './Character'
-import {CHARACTER_URLS, WALKING_SPEED} from '../../utils/constants'
+import {CHARACTER_SCALE, CHARACTER_URLS, WALKING_SPEED} from '../../utils/constants'
 import {Ground} from './Ground'
 import {Billboard} from './Billboard'
 import {useZustand} from '../../store/useZustand'
@@ -44,7 +44,7 @@ export const Scene = () => {
               key={index}
               index={index}
               url={url}
-              scale={0.005}
+              scale={CHARACTER_SCALE}
               speed={WALKING_SPEED}
             />,
           )}

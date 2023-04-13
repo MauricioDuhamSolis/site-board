@@ -2,7 +2,7 @@
 import React, {useEffect} from 'react'
 import {useFBX} from '@react-three/drei'
 import {RigidBody} from '@react-three/rapier'
-import {BILLBOARD_URL, CHARACTER_SCALE} from '../../utils/constants'
+import {BILLBOARD_SCALE, BILLBOARD_URL} from '../../utils/constants'
 import {useGesture} from '@use-gesture/react'
 import {useZustand} from '../../store/useZustand'
 import {getDimensions} from '../../utils/common'
@@ -30,7 +30,7 @@ export const Billboard = () => {
 
       if (event.button === 0) { // Left
         const {point} = event
-        const newUserCurPos = [point.x, -1, point.z - 0.5]
+        const newUserCurPos = [point.x, 0, point.z - 0.5]
         setUserDesPos(selUserIndex, newUserCurPos)
       }
     },
@@ -43,7 +43,7 @@ export const Billboard = () => {
       enabledRotations={[false, true, false]}
       {...bind()}
     >
-      <primitive object={model} scale={CHARACTER_SCALE}/>
+      <primitive object={model} scale={BILLBOARD_SCALE}/>
     </RigidBody>
   )
 }

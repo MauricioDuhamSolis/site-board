@@ -160,7 +160,7 @@ export const Character = ({index, url, scale, speed}) => {
       }
 
       if (direcLen > TOLERANCE_DISTANCE && userDesPosChanged) {
-        // customDebug().log('Character#useFrame: character moving')
+        customDebug().log('Character#useFrame: character moving: ', curPos)
         playWalkAnimOnly()
         rigidBody.current.addForce(normalDirec.multiplyScalar(speed), true)
         userData.prevNormalDirec = normalDirec

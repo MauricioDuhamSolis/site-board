@@ -1,4 +1,5 @@
 import {deepClone} from '../utils/common'
+import {HTML_ASPECT} from '../utils/constants'
 
 
 export const createSceneSlice = (set, get) => {
@@ -35,12 +36,12 @@ export const createSceneSlice = (set, get) => {
     billboardDimensions: null,
     setBillboardDimensions: (newBillboardDimensions) => set(() => ({billboardDimensions: newBillboardDimensions})),
 
-    billboardInitPos: [0, 0, 4],
-    billboardDesPos: [0, 0, 4],
-    billboardViewDistance: 3.3,
+    billboardInitPos: [0, 0, 12 * HTML_ASPECT],
+    billboardDesPos: [0, 0, 12 * HTML_ASPECT],
+    billboardViewDistance: 9.9 * HTML_ASPECT,
 
-    cameraInitPos: [-5, 5, -5],
-    cameraDesPos: [-5, 5, -5],
+    cameraInitPos: [-15 * HTML_ASPECT, 15 * HTML_ASPECT, -15 * HTML_ASPECT],
+    cameraDesPos: [-15 * HTML_ASPECT, 15 * HTML_ASPECT, -15 * HTML_ASPECT],
 
     seeBillboard: () => set(() => {
       const billboardDesPos = deepClone(get().billboardDesPos)
