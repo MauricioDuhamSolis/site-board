@@ -16,7 +16,7 @@ export const Alert = () => {
       'hidden': !alertMsg,
     })}
     >
-      <div className='flex flex-col items-center justify-center w-3/5 gap-4 p-4 text-white bg-black border border-white rounded h-3/5'>
+      <div className='flex flex-col items-center justify-center w-2/5 gap-4 p-4 text-white bg-black border border-white rounded h-2/5'>
         {alertMsg}
         <button
           className='pl-2 pr-2 border-2 rounded'

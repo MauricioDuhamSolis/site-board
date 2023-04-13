@@ -10,6 +10,7 @@ export const Create = () => {
     nextPlausibleStep,
     setAlertMsg,
     addMenu,
+    onConfirm,
   } = useZustand()
   const inputRef = useRef(null)
 
@@ -22,7 +23,7 @@ export const Create = () => {
       />
       <button
         className='pl-2 pr-2 border-2 rounded'
-        onClick={async () => {
+        onClick={() => onConfirm(async () => {
           const inputVal = inputRef.current.value
 
           if (!inputVal) {
@@ -51,7 +52,7 @@ export const Create = () => {
           siteData._id = insertedId
           addMenu(siteData)
           nextPlausibleStep()
-        }}
+        })}
       >
         Enter
       </button>

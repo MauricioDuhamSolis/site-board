@@ -1,5 +1,5 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
+
+
 import React from 'react'
 import classNames from 'classnames'
 import {useZustand} from '../../store/useZustand'
@@ -12,31 +12,30 @@ export const Confirm = () => {
 
   return (
     <div className={classNames({
-      'absolute flex items-center justify-center w-screen h-screen': true,
+      'fixed flex items-center justify-center w-screen h-screen top-0 left-0': true,
       'hidden': !confirmFunc,
     })}
     >
-      <div className='flex flex-col items-center gap-4 p-4 bg-gray-600 border border-white rounded justify-evenly max-w-max'>
-        <div className='flex items-center justify-center text-white'>{confirmMsg ? confirmMsg : 'Would you like to proceed?'}</div>
-        <div className='flex items-center justify-center w-full gap-4'>
-          <div
-            className='flex items-center px-2 text-white bg-red-500 rounded cursor-pointer'
+      <div className='flex flex-col items-center justify-center w-2/5 gap-4 p-4 text-white bg-black border border-white rounded h-2/5'>
+        {confirmMsg ? confirmMsg : 'Would you like to proceed?'}
+        <div className='flex items-center justify-center gap-4'>
+          <button
+            className='pl-2 pr-2 border-2 rounded'
             onClick={() => {
               confirmFunc()
               onConfirm()
             }}
           >
             Ok
-          </div>
-          <div
-            className='flex items-center px-2 text-white bg-green-500 rounded cursor-pointer'
+          </button>
+          <button
+            className='pl-2 pr-2 border-2 rounded'
             onClick={() => onConfirm()}
           >
             Cancel
-          </div>
+          </button>
         </div>
       </div>
-      <div className=''/>
     </div>
   )
 }
