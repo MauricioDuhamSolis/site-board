@@ -3,6 +3,7 @@ import {useZustand} from '../../store/useZustand'
 import {createSite} from '../../utils/plausible'
 import {saveData} from '../../utils/mongo.db'
 import {customDebug} from '../../utils/custom.debug'
+import {urlToDomain} from '../../utils/common'
 
 
 export const Create = ({domain}) => {
@@ -28,17 +29,19 @@ export const Create = ({domain}) => {
         className='pl-2 pr-2 border-2 rounded'
         onClick={() => onConfirm(async () => {
           const inputVal = inputRef.current.value
+          const urlDomain = urlToDomain(inputVal)
+          customDebug().log('Create: urlDomain: ', urlDomain)
 
-          if (!inputVal) {
+          if (!urlDomain) {
             setAlertMsg('Input domain please.')
             return
           }
 
-          const createSiteRes = await createSite(inputVal)
+          const createSiteRes = await createSite(urlDomain)
           customDebug().log('Create: createSiteRes: ', createSiteRes)
           const siteData = createSiteRes?.data
 
-          if (siteData?.domain !== inputVal) {
+          if (siteData?.domain !== urlDomain) {
             setAlertMsg('This domain cannot be registered. Perhaps one of your colleagues registered it? If that\'s not the case, please contact support@plausible.io')
             return
           }

@@ -35,12 +35,14 @@ export const getModelType = (path) => {
 
 
 export const deepClone = (obj) => {
+  assertDefined(obj)
   const clonedObj = JSON.parse(JSON.stringify(obj))
   return clonedObj
 }
 
 
 export const getDimensions = (threeObj) => {
+  assertDefined(threeObj)
   threeObj.traverse((child) => {
     if (child.isMesh && child.geometry.isBufferGeometry) {
       child.geometry.computeBoundingBox()
@@ -56,6 +58,7 @@ export const getDimensions = (threeObj) => {
 
 
 export const mergeModelMeshes = (model, customMaterial) => {
+  assertDefined(model)
   const bufferGeometries = []
   const materials = []
   const matrix4 = new THREE.Matrix4()
@@ -83,7 +86,15 @@ export const mergeModelMeshes = (model, customMaterial) => {
 }
 
 
-export const getDomainUrl = (domain) => {
+export const domainToUrl = (domain) => {
+  assertDefined(domain)
   const domainUrl = `https://${domain}`
   return domainUrl
+}
+
+
+export const urlToDomain = (url) => {
+  assertDefined(url)
+  const domain = url.replace(/https:\/\//g, '').split('/').shift()
+  return domain
 }

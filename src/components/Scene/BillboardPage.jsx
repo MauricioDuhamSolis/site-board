@@ -1,6 +1,6 @@
 import React from 'react'
 import {useZustand} from '../../store/useZustand'
-import {getDomainUrl} from '../../utils/common'
+import {domainToUrl} from '../../utils/common'
 import classNames from 'classnames'
 
 
@@ -21,7 +21,7 @@ export const BillboardPage = ({hide}) => {
       {billboardDomain ?
           <iframe
             className='w-full h-full'
-            src={getDomainUrl(billboardDomain)}
+            src={domainToUrl(billboardDomain)}
             title={billboardDomain}
           /> :
           <div>Page not exist.</div>
