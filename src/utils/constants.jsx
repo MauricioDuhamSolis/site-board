@@ -16,7 +16,7 @@ export const BILLBOARD_HTML_SIZE = 1200
 
 export const DEFAULT_LINEAR_DAMPING = 10
 
-export const DEFAULT_ANGULAR_DAMPING = 20
+export const DEFAULT_ANGULAR_DAMPING = 1
 
 export const PLAUSIBLE_STEP_COUNT = 3
 
