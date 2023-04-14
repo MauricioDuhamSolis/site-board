@@ -17,6 +17,7 @@ export const createUISlice = (set, get) => {
     setAlertMsg: (newAlertMsg) => set(() => ({alertMsg: newAlertMsg})),
 
     plausibleStep: 0,
+    setPlausibleStep: (newPlausibleStep) => set(() => ({plausibleStep: newPlausibleStep})),
     nextPlausibleStep: () => set(() => ({plausibleStep: (get().plausibleStep + 1) % PLAUSIBLE_STEP_COUNT})),
     prevPlausibleStep: () => set(() => ({plausibleStep: (get().plausibleStep + PLAUSIBLE_STEP_COUNT - 1) % PLAUSIBLE_STEP_COUNT})),
     closePlausible: () => set(() => ({plausibleStep: 0})),
