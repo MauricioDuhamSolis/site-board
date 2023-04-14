@@ -1,4 +1,4 @@
-import React, {Suspense} from 'react'
+import React, {Suspense, useEffect} from 'react'
 import {OrbitControls, OrthographicCamera} from '@react-three/drei'
 import {Canvas} from '@react-three/fiber'
 // eslint-disable-next-line no-unused-vars
@@ -13,10 +13,20 @@ import {Billboard} from './Billboard'
 import {Camera} from './Camera'
 import {BillboardHtml} from './BillboardHtml'
 import {useZustand} from '../../store/useZustand'
+import {customDebug} from '../../utils/custom.debug'
 
 
 export const Scene = () => {
-  const {isSeeingBillboard} = useZustand()
+  const {
+    isSeeingBillboard,
+    setSelUserIndex,
+  } = useZustand()
+
+  useEffect(() => {
+    const newSelUserIndex = parseInt(Math.random() * CHARACTER_URLS.length)
+    customDebug().log('Scene#useEffect: newSelUserIndex: ', newSelUserIndex)
+    setSelUserIndex(newSelUserIndex)
+  }, [setSelUserIndex])
 
   return (
     <Canvas>
