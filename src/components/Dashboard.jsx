@@ -2,6 +2,8 @@ import React, {useEffect} from 'react'
 import {useZustand} from '../store/useZustand'
 import {customDebug} from '../utils/custom.debug'
 import {getAggregate} from '../utils/plausible'
+import {deepClone} from '../utils/common'
+import {BILLBOARD_DES_POS} from '../utils/constants'
 
 
 export const Dashboard = () => {
@@ -11,6 +13,8 @@ export const Dashboard = () => {
     dashboardData,
     setDashboardData,
     setPlausibleStep,
+    selUserIndex,
+    setUserDesPos,
   } = useZustand()
 
   useEffect(() => {
@@ -35,12 +39,15 @@ export const Dashboard = () => {
           if (!valuesSum) {
             setPlausibleStep(2)
           }
+          const userDesPos = deepClone(BILLBOARD_DES_POS)
+          userDesPos[2] -= 0.5
+          setUserDesPos(selUserIndex, userDesPos)
         }
       }
 
       isLoading = false
     })()
-  }, [menuArr, selMenuIndex, setDashboardData, setPlausibleStep])
+  }, [menuArr, selMenuIndex, selUserIndex, setDashboardData, setPlausibleStep, setUserDesPos])
 
   return (
     <div className='fixed p-2 bg-white rounded top-16 left-2'>
