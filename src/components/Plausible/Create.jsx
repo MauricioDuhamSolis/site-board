@@ -33,7 +33,7 @@ export const Create = ({domain}) => {
           customDebug().log('Create: urlDomain: ', urlDomain)
 
           if (!urlDomain) {
-            setAlertMsg('Input domain please.')
+            setAlertMsg('Input correct domain please.')
             return
           }
 

@@ -95,6 +95,9 @@ export const domainToUrl = (domain) => {
 
 export const urlToDomain = (url) => {
   assertDefined(url)
+  if (url.indexOf('www.') > -1) {
+    return
+  }
   const domain = url.replace(/https:\/\//g, '').split('/').shift()
   return domain
 }
