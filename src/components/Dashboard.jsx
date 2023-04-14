@@ -2,6 +2,8 @@ import React, {useEffect} from 'react'
 import {useZustand} from '../store/useZustand'
 import {customDebug} from '../utils/custom.debug'
 import {getAggregate} from '../utils/plausible'
+import {useControls} from 'leva'
+import classNames from 'classnames'
 // import {deepClone} from '../utils/common'
 // import {BILLBOARD_DES_POS} from '../utils/constants'
 
@@ -16,6 +18,10 @@ export const Dashboard = () => {
     selUserIndex,
     setUserDesPos,
   } = useZustand()
+
+  const {showDashboard} = useControls({
+    showDashboard: {value: true, label: 'Show Dashboard'},
+  })
 
   useEffect(() => {
     (async () => {
@@ -50,7 +56,11 @@ export const Dashboard = () => {
   }, [menuArr, selMenuIndex, selUserIndex, setDashboardData, setPlausibleStep, setUserDesPos])
 
   return (
-    <div className='absolute p-2 bg-white rounded top-3 left-2'>
+    <div className={classNames({
+      'absolute p-2 bg-white rounded top-3 left-2': true,
+      'hidden': !showDashboard,
+    })}
+    >
       <div>Bounce Rate: {dashboardData?.bounce_rate?.value}</div>
       <div>Page Views: {dashboardData?.pageviews?.value}</div>
       <div>Visit Duration: {dashboardData?.visit_duration?.value}</div>
