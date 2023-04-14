@@ -2,8 +2,8 @@ import React, {useEffect} from 'react'
 import {useZustand} from '../store/useZustand'
 import {customDebug} from '../utils/custom.debug'
 import {getAggregate} from '../utils/plausible'
-import {deepClone} from '../utils/common'
-import {BILLBOARD_DES_POS} from '../utils/constants'
+// import {deepClone} from '../utils/common'
+// import {BILLBOARD_DES_POS} from '../utils/constants'
 
 
 export const Dashboard = () => {
@@ -39,9 +39,9 @@ export const Dashboard = () => {
           if (!valuesSum) {
             setPlausibleStep(2)
           }
-          const userDesPos = deepClone(BILLBOARD_DES_POS)
-          userDesPos[2] -= 0.5
-          setUserDesPos(selUserIndex, userDesPos)
+          // const userDesPos = deepClone(BILLBOARD_DES_POS)
+          // userDesPos[2] -= 0.5
+          // setUserDesPos(selUserIndex, userDesPos)
         }
       }
 
