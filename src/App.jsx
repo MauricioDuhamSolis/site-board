@@ -9,10 +9,12 @@ import {Dashboard} from './components/Dashboard'
 
 const App = () => {
   return (
-    <div className='w-screen h-screen bg-black'>
-      <Scene/>
+    <div className='relative flex flex-col w-screen h-screen bg-black'>
       <Menu/>
-      <Dashboard/>
+      <div className='relative w-full h-[calc(100vh-3rem)]'>
+        <Scene/>
+        <Dashboard/>
+      </div>
       <Plausible/>
       <Confirm/>
       <Alert/>

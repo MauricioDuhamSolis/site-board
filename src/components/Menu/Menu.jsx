@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react'
-import classNames from 'classnames'
 import {useZustand} from '../../store/useZustand'
 import {MenuItem} from './MenuItem'
 import {AddLink} from './AddLink'
@@ -9,7 +8,6 @@ import {getAllData} from '../../utils/mongo.db'
 
 export const Menu = () => {
   const {
-    isSeeingBillboard,
     menuArr,
     setMenuArr,
     setSelMenuIndex,
@@ -32,11 +30,7 @@ export const Menu = () => {
   }, [setMenuArr, setSelMenuIndex])
 
   return (
-    <div className={classNames({
-      'absolute top-0 flex w-screen h-12 gap-2 p-2 pb-0 bg-black border-0 border-b-2 border-white': true,
-      'hidden': isSeeingBillboard,
-    })}
-    >
+    <div className='flex w-screen h-12 gap-2 p-2 pb-0 bg-black border-0 border-b-2 border-white'>
       {menuArr.map((menu, index) =>
         <MenuItem
           key={index}

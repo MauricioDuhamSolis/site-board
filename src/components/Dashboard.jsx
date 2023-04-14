@@ -50,7 +50,7 @@ export const Dashboard = () => {
   }, [menuArr, selMenuIndex, selUserIndex, setDashboardData, setPlausibleStep, setUserDesPos])
 
   return (
-    <div className='fixed p-2 bg-white rounded top-16 left-2'>
+    <div className='absolute p-2 bg-white rounded top-3 left-2'>
       <div>Bounce Rate: {dashboardData?.bounce_rate?.value}</div>
       <div>Page Views: {dashboardData?.pageviews?.value}</div>
       <div>Visit Duration: {dashboardData?.visit_duration?.value}</div>
