@@ -5,9 +5,15 @@ import {Confirm} from './components/Utils/Confirm'
 import {Menu} from './components/Menu/Menu'
 import {Plausible} from './components/Plausible/Plausible'
 import {Dashboard} from './components/Dashboard'
+import {BillboardPage} from './components/Scene/BillboardPage'
+import {useControls} from 'leva'
 
 
 const App = () => {
+  const {fullScreen} = useControls({
+    fullScreen: {value: false, label: 'Full Screen'},
+  })
+
   return (
     <div className='relative flex flex-col w-screen h-screen bg-black'>
       <Menu/>
@@ -15,6 +21,7 @@ const App = () => {
         <Scene/>
         <Dashboard/>
       </div>
+      <BillboardPage hide={!fullScreen}/>
       <Plausible/>
       <Confirm/>
       <Alert/>

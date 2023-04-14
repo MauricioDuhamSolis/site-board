@@ -1,9 +1,10 @@
 import React from 'react'
 import {useZustand} from '../../store/useZustand'
 import {getDomainUrl} from '../../utils/common'
+import classNames from 'classnames'
 
 
-export const BillboardPage = () => {
+export const BillboardPage = ({hide}) => {
   const {
     selMenuIndex,
     menuArr,
@@ -12,7 +13,11 @@ export const BillboardPage = () => {
   const billboardDomain = menuArr[selMenuIndex]?.domain
 
   return (
-    <div className='absolute flex items-center justify-center w-full h-full'>
+    <div className={classNames({
+      'absolute flex items-center justify-center w-full h-full text-white bg-black': true,
+      'hidden': !!hide,
+    })}
+    >
       {billboardDomain ?
           <iframe
             className='w-full h-full'
@@ -21,6 +26,7 @@ export const BillboardPage = () => {
           /> :
           <div>Page not exist.</div>
       }
+      <div className=''/>
     </div>
   )
 }
