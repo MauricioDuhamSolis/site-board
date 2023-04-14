@@ -51,7 +51,7 @@ export const MenuItem = ({index, menu}) => {
 
           deleteMenu(index)
 
-          if (index > menuArr.length - 2) {
+          if (index === selMenuIndex && index > menuArr.length - 2) {
             customDebug().log('MenuItem#onClick: last menu deleted')
             if (menuArr.length === 1) {
               setSelMenuIndex(null)
