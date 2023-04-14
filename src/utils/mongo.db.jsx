@@ -44,7 +44,7 @@ export const removeData = async (id) => {
   try {
     assertDefined(id)
     const removeUrl = `${BACKEND_URL}/remove/${id}`
-    const res = await axios.delete(removeUrl)
+    const res = await axios.post(removeUrl)
     return res
   } catch (e) {
     customDebug().log('mongo.db#removeData: e: ', e)

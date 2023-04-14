@@ -25,6 +25,7 @@ export const createUISlice = (set, get) => {
     menuArr: [],
     setMenuArr: (newMenuArr) => set(() => ({menuArr: newMenuArr})),
     addMenu: (newMenu) => set(() => ({menuArr: [...get().menuArr, newMenu]})),
+    deleteMenu: (delIndex) => set(() => ({menuArr: [...get().menuArr.filter((menu, index) => index !== delIndex)]})),
 
     selMenuIndex: null,
     setSelMenuIndex: (newSelMenuIndex) => set(() => ({selMenuIndex: newSelMenuIndex})),

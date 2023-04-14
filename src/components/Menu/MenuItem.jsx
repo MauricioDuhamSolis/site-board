@@ -1,14 +1,23 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react'
 import {useZustand} from '../../store/useZustand'
 import classNames from 'classnames'
+import CloseSvg from '../../assets/icons/close.svg'
+import {customDebug} from '../../utils/custom.debug'
+import {deleteSite} from '../../utils/plausible'
+import {removeData} from '../../utils/mongo.db'
 
 
 export const MenuItem = ({index, menu}) => {
   const {
     selMenuIndex,
     setSelMenuIndex,
+    menuArr,
+    deleteMenu,
+    setAlertMsg,
+    onConfirm,
   } = useZustand()
 
   return (
@@ -19,6 +28,39 @@ export const MenuItem = ({index, menu}) => {
     })}
     >
       <div onClick={() => setSelMenuIndex(index)}>{menu.domain}</div>
+      <img
+        className='w-4 h-4 bg-white cursor-pointer'
+        src={CloseSvg}
+        alt='Close'
+        onClick={() => onConfirm(async () => {
+          if (!menu.domain || !menu._id) {
+            setAlertMsg('Menu info is incorrect.')
+            return
+          }
+
+          customDebug().log('MenuItem#onClick: menu: ', menu)
+          const deleteSiteRes = await deleteSite(menu.domain)
+          customDebug().log('MenuItem#onClick: deleteSiteRes: ', deleteSiteRes)
+          const removeDataRes = await removeData(menu._id)
+          customDebug().log('MenuItem#onClick: removeDataRes: ', removeDataRes)
+
+          if (!removeDataRes || !deleteSiteRes) {
+            setAlertMsg('Site maybe not registered, or check your internet connection.')
+            return
+          }
+
+          deleteMenu(index)
+
+          if (index > menuArr.length - 2) {
+            customDebug().log('MenuItem#onClick: last menu deleted')
+            if (menuArr.length === 1) {
+              setSelMenuIndex(null)
+            } else {
+              setSelMenuIndex(0)
+            }
+          }
+        })}
+      />
     </div>
   )
 }

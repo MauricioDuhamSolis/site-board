@@ -57,6 +57,16 @@ export const getSite = async (domain) => {
 }
 
 
+export const deleteSite = async (domain) => {
+  assertDefined(domain)
+  const res = await deletePlausible(`sites/${domain}`)
+  return res
+}
+
+
+/* Common */
+
+
 const getPlausible = async (path, paramObj = {}) => {
   assertDefined(path)
 
@@ -101,6 +111,26 @@ const postPlausible = async (path, paramObj) => {
     return res
   } catch (e) {
     customDebug().log('plausible#postPlausible: e: ', e)
+  }
+}
+
+
+const deletePlausible = async (path) => {
+  assertDefined(path)
+
+  try {
+    const res = await axios.delete(
+        `https://plausible.io/api/v1/${path}`,
+        {
+          headers: {
+            Authorization: `Bearer ${bearerToken}`,
+          },
+        },
+    )
+    customDebug().log('plausible#deletePlausible: res: ', res)
+    return res
+  } catch (e) {
+    customDebug().log('plausible#deletePlausible: e: ', e)
   }
 }
 
