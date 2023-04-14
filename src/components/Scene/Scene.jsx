@@ -59,7 +59,7 @@ export const Scene = () => {
       <Suspense>
         <Physics colliders="hull">
           <Billboard/>
-          <BillboardHtml/>
+          <BillboardHtml hide={!isSeeingBillboard}/>
           {CHARACTER_URLS.map((url, index) =>
             <Character
               key={index}
