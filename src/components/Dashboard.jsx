@@ -57,7 +57,7 @@ export const Dashboard = () => {
 
   return (
     <div className={classNames({
-      'absolute p-2 bg-white rounded top-3 left-2': true,
+      'absolute z-10 p-2 bg-white rounded top-3 left-2': true,
       'hidden': !showDashboard,
     })}
     >
@@ -65,6 +65,7 @@ export const Dashboard = () => {
       <div>Page Views: {dashboardData?.pageviews?.value}</div>
       <div>Visit Duration: {dashboardData?.visit_duration?.value}</div>
       <div>Visitors: {dashboardData?.visitors?.value}</div>
+      <div className=''/>
     </div>
   )
 }
