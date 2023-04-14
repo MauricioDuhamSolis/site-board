@@ -57,7 +57,7 @@ export const Dashboard = () => {
 
   return (
     <div className={classNames({
-      'absolute z-10 p-2 bg-white rounded top-3 left-2': true,
+      'absolute z-10 p-2 bg-white border-2 border-gray-500 rounded top-3 left-2': true,
       'hidden': !showDashboard,
     })}
     >
