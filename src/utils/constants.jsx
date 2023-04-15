@@ -1,6 +1,6 @@
 /* Static */
 
-export const BACKEND_URL = 'http://127.0.0.1:4000/main'
+export const BACKEND_URL = 'https://mboard-backend.onrender.com/main'
 
 export const CHARACTER_URLS = [
   './models/character 1.fbx',
