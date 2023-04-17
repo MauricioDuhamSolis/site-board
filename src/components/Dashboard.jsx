@@ -13,9 +13,11 @@ export const Dashboard = () => {
   const {
     selMenuIndex,
     menuArr,
-    dashboardData,
-    setDashboardData,
+    aggregate,
+    setAggregate,
     setPlausibleStep,
+    realtimeVisitors,
+    setRealtimeVisitors,
     // selUserIndex,
     // setUserDesPos,
   } = useZustand()
@@ -32,26 +34,23 @@ export const Dashboard = () => {
 
     if (selMenuIndex !== null) {
       const domain = menuArr[selMenuIndex]?.domain
-      customDebug().log('Dashboard#useEffect: domain: ', domain)
+      customDebug().log('Dashboard#loadDashboardData: domain: ', domain)
 
       if (domain) {
-        const aggregate = await getAggregate(domain)
-        customDebug().log('Dashboard#useEffect: aggregate: ', aggregate)
-        const realtimeVisitors = await getRealtimeVisitors(domain)
-        customDebug().log('Dashboard#useEffect: realtimeVisitors: ', realtimeVisitors)
-        const valueArr = Object.keys(aggregate).map((key) => aggregate[key].value)
-        customDebug().log('Dashboard#useEffect: valueArr: ', valueArr)
+        const newAggregate = await getAggregate(domain)
+        customDebug().log('Dashboard#loadDashboardData: newAggregate: ', newAggregate)
+        setAggregate(newAggregate)
+
+        const valueArr = Object.keys(newAggregate).map((key) => newAggregate[key].value)
         const valuesSum = valueArr.reduce((a, b) => a + b, 0)
-        customDebug().log('Dashboard#useEffect: valuesSum: ', valuesSum)
         if (!valuesSum) {
           setPlausibleStep(2)
         }
-        const newDashboardData = {
-          ...aggregate,
-          realtimeVisitors,
-        }
-        customDebug().log('Dashboard#useEffect: newDashboardData: ', newDashboardData)
-        setDashboardData(newDashboardData)
+
+        const newRealtimeVisitors = await getRealtimeVisitors(domain)
+        customDebug().log('Dashboard#loadDashboardData: newRealtimeVisitors: ', newRealtimeVisitors)
+        setRealtimeVisitors(newRealtimeVisitors)
+
         // const userDesPos = deepClone(BILLBOARD_DES_POS)
         // userDesPos[2] -= 0.5
         // setUserDesPos(selUserIndex, userDesPos)
@@ -59,7 +58,7 @@ export const Dashboard = () => {
     }
 
     isLoading = false
-  }, [menuArr, selMenuIndex, setDashboardData, setPlausibleStep])
+  }, [menuArr, selMenuIndex, setAggregate, setRealtimeVisitors, setPlausibleStep])
 
   useEffect(() => {
     loadDashboardData()
@@ -69,14 +68,14 @@ export const Dashboard = () => {
   return (
     <div className={classNames({
       'absolute z-10 p-2 bg-white border-2 border-gray-500 rounded top-3 left-2': true,
-      'hidden': !showDashboard,
+      'hidden': !showDashboard || !realtimeVisitors,
     })}
     >
-      <div>Current Visitors: {dashboardData?.realtimeVisitors}</div>
-      <div>Bounce Rate: {dashboardData?.bounce_rate?.value}</div>
-      <div>Page Views: {dashboardData?.pageviews?.value}</div>
-      <div>Visit Duration: {dashboardData?.visit_duration?.value}</div>
-      <div>Visitors: {dashboardData?.visitors?.value}</div>
+      <div>Current Visitors: {realtimeVisitors}</div>
+      <div>Bounce Rate: {aggregate?.bounce_rate?.value}</div>
+      <div>Page Views: {aggregate?.pageviews?.value}</div>
+      <div>Visit Duration: {aggregate?.visit_duration?.value}</div>
+      <div>Visitors: {aggregate?.visitors?.value}</div>
       <div className=''/>
     </div>
   )

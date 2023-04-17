@@ -30,7 +30,10 @@ export const createUISlice = (set, get) => {
     selMenuIndex: null,
     setSelMenuIndex: (newSelMenuIndex) => set(() => ({selMenuIndex: newSelMenuIndex})),
 
-    dashboardData: null,
-    setDashboardData: (newDashboardData) => set(() => ({dashboardData: newDashboardData})),
+    aggregate: null,
+    setAggregate: (newAggregate) => set(() => ({aggregate: newAggregate})),
+
+    realtimeVisitors: 0,
+    setRealtimeVisitors: (newRealtimeVisitors) => set(() => ({realtimeVisitors: newRealtimeVisitors})),
   }
 }
