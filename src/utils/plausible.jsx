@@ -81,7 +81,7 @@ const getPlausible = async (path, paramObj = {}) => {
           },
         },
     )
-    customDebug().log('plausible#getPlausible: res: ', res)
+    // customDebug().log('plausible#getPlausible: res: ', res)
     return res
   } catch (e) {
     customDebug().log('plausible#getPlausible: e: ', e)

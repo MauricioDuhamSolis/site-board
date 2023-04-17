@@ -13,8 +13,6 @@ import {customDebug} from '../../utils/custom.debug'
 export const Billboard = () => {
   const model = useFBX(BILLBOARD_URL)
   const {
-    selUserIndex,
-    setUserDesPos,
     billboardInitPos,
     setBillboardDimensions,
     isSeeingBillboard,
@@ -32,8 +30,7 @@ export const Billboard = () => {
 
       if (event.button === 0 && !isSeeingBillboard) { // Left
         const {point} = event
-        const newUserCurPos = [point.x, 0, point.z - 0.5]
-        setUserDesPos(selUserIndex, newUserCurPos)
+        customDebug().log('Billboard#useGesture: point: ', point)
       }
     },
   })

@@ -11,9 +11,6 @@ export const createSceneSlice = (set, get) => {
 
     /* User */
 
-    selUserIndex: 0,
-    setSelUserIndex: (newSelUserIndex) => set(() => ({selUserIndex: newSelUserIndex})),
-
     usersInitPos: [],
     setUsersInitPos: (newUsersInitPos) => set(() => ({usersInitPos: newUsersInitPos})),
     setUserInitPos: (index, newUserInitPos) => set(() => {

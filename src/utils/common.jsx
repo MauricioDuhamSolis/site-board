@@ -3,7 +3,7 @@ import {mergeBufferGeometries} from 'three/examples/jsm/utils/BufferGeometryUtil
 import {assertDefined} from './custom.assert'
 
 
-export const getRandom = (size) => {
+export const getRandomFromCenter = (size) => {
   assertDefined(size)
   const halfSize = size / 2
   const random = halfSize - (Math.random() * size)
