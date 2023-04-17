@@ -22,6 +22,8 @@ export const PLAUSIBLE_STEP_COUNT = 3
 
 export const LERP_ALPHA = 0.1
 
+export const REALTIME_DURATION = 1000
+
 /* Dynamic */
 
 export const HTML_ASPECT = BILLBOARD_HTML_SIZE / 400
