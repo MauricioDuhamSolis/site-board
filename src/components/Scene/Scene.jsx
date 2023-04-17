@@ -1,4 +1,4 @@
-import React, {Suspense} from 'react'
+import React, {Suspense, useEffect} from 'react'
 import {OrbitControls, OrthographicCamera} from '@react-three/drei'
 import {Canvas} from '@react-three/fiber'
 // eslint-disable-next-line no-unused-vars
@@ -6,20 +6,28 @@ import {Debug, Physics} from '@react-three/rapier'
 // eslint-disable-next-line no-unused-vars
 import {Perf} from 'r3f-perf'
 import {Character} from './Character'
-// eslint-disable-next-line no-unused-vars
 import {CHARACTER_SCALE, CHARACTER_URLS, GROUND_SIZE, WALKING_SPEED} from '../../utils/constants'
 import {Ground} from './Ground'
 import {Billboard} from './Billboard'
 import {Camera} from './Camera'
 import {BillboardHtml} from './BillboardHtml'
 import {useZustand} from '../../store/useZustand'
+import {getRandomFromCenter} from '../../utils/common'
 
 
 export const Scene = () => {
   const {
     isSeeingBillboard,
     realtimeVisitors,
+    setUsersInitPos,
   } = useZustand()
+
+  useEffect(() => {
+    // Set users' initial position
+    const newUsersInitPos = Array.from({length: realtimeVisitors}).map(() => [getRandomFromCenter(GROUND_SIZE / 2), 1, getRandomFromCenter((GROUND_SIZE - 2) / 2)])
+    console.log('Scene#useEffect: newUsersInitPos: ', newUsersInitPos)
+    setUsersInitPos(newUsersInitPos)
+  }, [realtimeVisitors, setUsersInitPos])
 
   return (
     <Canvas>
@@ -44,10 +52,10 @@ export const Scene = () => {
         intensity={0.5}
       />
 
-      {/* <axesHelper
+      <axesHelper
         // eslint-disable-next-line react/no-unknown-property
         args={[GROUND_SIZE]}
-      /> */}
+      />
 
       <Suspense>
         <Physics colliders="hull">

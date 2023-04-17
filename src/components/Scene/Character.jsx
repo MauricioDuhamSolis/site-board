@@ -6,7 +6,6 @@ import {RigidBody, vec3} from '@react-three/rapier'
 import {assertDefined} from '../../utils/custom.assert'
 // eslint-disable-next-line no-unused-vars
 import {CHARACTER_SCALE, DEFAULT_ANGULAR_DAMPING, DEFAULT_LINEAR_DAMPING, GROUND_SIZE, TOLERANCE_DISTANCE} from '../../utils/constants'
-import {getRandomFromCenter} from '../../utils/common'
 import {useZustand} from '../../store/useZustand'
 import {useFrame} from '@react-three/fiber'
 import {customDebug} from '../../utils/custom.debug'
@@ -17,7 +16,6 @@ export const Character = ({index, url, scale, speed}) => {
   const {
     usersInitPos,
     usersDesPos,
-    setUserInitPos,
     seeBillboard,
   } = useZustand()
   const [prevAction, setPrevAction] = useState(null)
@@ -129,10 +127,6 @@ export const Character = ({index, url, scale, speed}) => {
   // Call at once
   useEffect(() => {
     // customDebug().log('Character: call at once')
-
-    // Set user's initial position
-    setUserInitPos(index, [getRandomFromCenter(GROUND_SIZE / 2), 1, getRandomFromCenter((GROUND_SIZE - 2) / 2)])
-    // setUserInitPos(index, [(GROUND_SIZE - 4) / 2, 0, (4 - GROUND_SIZE) / 2])
 
     // Play idle animation at first
     mixer.timeScale = 1
