@@ -16,7 +16,10 @@ import {useZustand} from '../../store/useZustand'
 
 
 export const Scene = () => {
-  const {isSeeingBillboard} = useZustand()
+  const {
+    isSeeingBillboard,
+    realtimeVisitors,
+  } = useZustand()
 
   return (
     <Canvas>
@@ -50,11 +53,11 @@ export const Scene = () => {
         <Physics colliders="hull">
           <Billboard/>
           <BillboardHtml hide={!isSeeingBillboard}/>
-          {CHARACTER_URLS.map((url, index) =>
+          {Array.from({length: realtimeVisitors}).map((value, index) =>
             <Character
               key={index}
               index={index}
-              url={url}
+              url={CHARACTER_URLS[index % CHARACTER_URLS.length]}
               scale={CHARACTER_SCALE}
               speed={WALKING_SPEED}
             />,

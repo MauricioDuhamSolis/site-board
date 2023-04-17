@@ -131,7 +131,7 @@ export const Character = ({index, url, scale, speed}) => {
     // customDebug().log('Character: call at once')
 
     // Set user's initial position
-    setUserInitPos(index, [getRandomFromCenter(GROUND_SIZE / 2), 0, getRandomFromCenter((GROUND_SIZE - 2) / 2)])
+    setUserInitPos(index, [getRandomFromCenter(GROUND_SIZE / 2), 1, getRandomFromCenter((GROUND_SIZE - 2) / 2)])
     // setUserInitPos(index, [(GROUND_SIZE - 4) / 2, 0, (4 - GROUND_SIZE) / 2])
 
     // Play idle animation at first

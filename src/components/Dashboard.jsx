@@ -42,8 +42,10 @@ export const Dashboard = () => {
           }
         }
 
+        // eslint-disable-next-line no-unused-vars
         const newRealtimeVisitors = await getRealtimeVisitors(domain)
-        setRealtimeVisitors(newRealtimeVisitors)
+        // setRealtimeVisitors(newRealtimeVisitors)
+        setRealtimeVisitors(10)
       }
     }
 
