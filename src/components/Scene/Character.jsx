@@ -170,6 +170,8 @@ export const Character = ({index, url, scale, speed}) => {
         }
       }
 
+      prevPos.copy(curPos)
+      customDebug().log('Character#useFrame: prevPos: ', prevPos)
       rigidBody.current.userData = userData
     }
   })
@@ -198,5 +200,6 @@ export const Character = ({index, url, scale, speed}) => {
 }
 
 
+const prevPos = new THREE.Vector3()
 const zeroVec3 = new THREE.Vector3()
 let stopped = true
