@@ -16,7 +16,7 @@ export const Character = ({index, url, scale, speed}) => {
   const {
     usersInitPos,
     usersDesPos,
-    seeBillboard,
+    // seeBillboard,
   } = useZustand()
   const [prevAction, setPrevAction] = useState(null)
 
@@ -165,7 +165,7 @@ export const Character = ({index, url, scale, speed}) => {
           customDebug().log('Character#useFrame: character stopped')
           playIdleAnimOnly()
           userData.prevNormalDirec = zeroVec3
-          seeBillboard()
+          // seeBillboard()
           stopped = true
         }
       }

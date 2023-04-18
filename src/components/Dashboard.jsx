@@ -4,6 +4,7 @@ import {getAggregate, getRealtimeVisitors} from '../utils/plausible'
 import {useControls} from 'leva'
 import classNames from 'classnames'
 import {REALTIME_DURATION} from '../utils/constants'
+import {customDebug} from '../utils/custom.debug'
 
 
 export const Dashboard = () => {
@@ -42,10 +43,9 @@ export const Dashboard = () => {
           }
         }
 
-        // eslint-disable-next-line no-unused-vars
         const newRealtimeVisitors = await getRealtimeVisitors(domain)
-        // setRealtimeVisitors(newRealtimeVisitors)
-        setRealtimeVisitors(4)
+        customDebug().log('Dashboard#loadDashboardData: newRealtimeVisitors: ', newRealtimeVisitors)
+        setRealtimeVisitors(newRealtimeVisitors)
       }
     }
 

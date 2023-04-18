@@ -12,22 +12,32 @@ import {Billboard} from './Billboard'
 import {Camera} from './Camera'
 import {BillboardHtml} from './BillboardHtml'
 import {useZustand} from '../../store/useZustand'
-import {getRandomFromCenter} from '../../utils/common'
+import {deepClone, getRandomFromCenter} from '../../utils/common'
+import {customDebug} from '../../utils/custom.debug'
 
 
 export const Scene = () => {
   const {
+    billboardDesPos,
     isSeeingBillboard,
     realtimeVisitors,
     setUsersInitPos,
+    setUsersDesPos,
   } = useZustand()
 
   useEffect(() => {
     // Set users' initial position
     const newUsersInitPos = Array.from({length: realtimeVisitors}).map(() => [getRandomFromCenter(GROUND_SIZE / 2), 1, getRandomFromCenter((GROUND_SIZE - 2) / 2)])
-    console.log('Scene#useEffect: newUsersInitPos: ', newUsersInitPos)
+    customDebug().log('Scene#useEffect: newUsersInitPos: ', newUsersInitPos)
     setUsersInitPos(newUsersInitPos)
-  }, [realtimeVisitors, setUsersInitPos])
+
+    // Set users' destination position
+    const newUserDesPos = deepClone(billboardDesPos)
+    newUserDesPos[2] -= 2
+    const newUsersDesPos = Array.from({length: realtimeVisitors}).fill(newUserDesPos)
+    customDebug().log('Scene#useEffect: newUsersDesPos: ', newUsersDesPos, billboardDesPos)
+    setUsersDesPos(newUsersDesPos)
+  }, [billboardDesPos, realtimeVisitors, setUsersDesPos, setUsersInitPos])
 
   return (
     <Canvas>
