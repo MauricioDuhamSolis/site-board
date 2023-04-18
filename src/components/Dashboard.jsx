@@ -54,7 +54,7 @@ export const Dashboard = () => {
 
   useEffect(() => {
     loadDashboardData()
-    setInterval((loadDashboardData), REALTIME_DURATION)
+    setInterval(loadDashboardData, REALTIME_DURATION)
   }, [loadDashboardData])
 
   return (

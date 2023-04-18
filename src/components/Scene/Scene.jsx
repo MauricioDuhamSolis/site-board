@@ -21,13 +21,19 @@ export const Scene = () => {
     billboardDesPos,
     isSeeingBillboard,
     realtimeVisitors,
+    usersInitPos,
     setUsersInitPos,
     setUsersDesPos,
   } = useZustand()
 
   useEffect(() => {
     // Set users' initial position
-    const newUsersInitPos = Array.from({length: realtimeVisitors}).map(() => [getRandomFromCenter(GROUND_SIZE / 2), 1, getRandomFromCenter((GROUND_SIZE - 2) / 2)])
+    const additionalUsersInitPos = Array.from({length: Math.max(realtimeVisitors - usersInitPos, 0)}).map(() => [getRandomFromCenter(GROUND_SIZE / 2), 1, getRandomFromCenter((GROUND_SIZE - 2) / 2)])
+    customDebug().log('Scene#useEffect: additionalUsersInitPos: ', additionalUsersInitPos)
+    const newUsersInitPos = [
+      ...usersInitPos.slice(0, realtimeVisitors),
+      ...additionalUsersInitPos,
+    ]
     customDebug().log('Scene#useEffect: newUsersInitPos: ', newUsersInitPos)
     setUsersInitPos(newUsersInitPos)
 
@@ -37,7 +43,8 @@ export const Scene = () => {
     const newUsersDesPos = Array.from({length: realtimeVisitors}).fill(newUserDesPos)
     customDebug().log('Scene#useEffect: newUsersDesPos: ', newUsersDesPos, billboardDesPos)
     setUsersDesPos(newUsersDesPos)
-  }, [billboardDesPos, realtimeVisitors, setUsersDesPos, setUsersInitPos])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [realtimeVisitors])
 
   return (
     <Canvas>
