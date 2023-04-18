@@ -13,7 +13,7 @@ export const Ground = () => {
         rotation={[- Math.PI * 0.5, 0, 0]}
         scale={GROUND_SIZE}
       >
-        <meshStandardMaterial color="tomato"/>
+        <meshStandardMaterial color="#87493b"/>
       </Plane>
     </RigidBody>
   )
