@@ -34,7 +34,9 @@ export const Dashboard = () => {
 
       if (domain) {
         const newAggregate = await getAggregate(domain)
-        setAggregate(newAggregate)
+        if (newAggregate) {
+          setAggregate(newAggregate)
+        }
 
         if (newAggregate) {
           const valueArr = Object.keys(newAggregate).map((key) => newAggregate[key].value)
@@ -46,7 +48,9 @@ export const Dashboard = () => {
 
         const newRealtimeVisitors = await getRealtimeVisitors(domain)
         customDebug().log('Dashboard#loadDashboardData: newRealtimeVisitors: ', newRealtimeVisitors)
-        setRealtimeVisitors(newRealtimeVisitors)
+        if (newRealtimeVisitors !== undefined) {
+          setRealtimeVisitors(newRealtimeVisitors)
+        }
       }
     }
 
