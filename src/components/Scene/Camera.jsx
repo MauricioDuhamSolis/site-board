@@ -1,3 +1,5 @@
+/* eslint-disable prefer-const */
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import {PerspectiveCamera} from '@react-three/drei'
 import * as THREE from 'three'
@@ -12,30 +14,29 @@ export const Camera = () => {
     cameraInitPos,
     cameraDesPos,
     billboardDesPos,
-    isSeeingBillboard,
     billboardDimensions,
   } = useZustand()
 
-  useFrame((state, delta) => {
-    if (!billboardDimensions || !isSeeingBillboard) {
-      return
-    }
-    const {height} = billboardDimensions
-    cameraDesPosVec3.set(cameraDesPos[0], cameraDesPos[1] + (height / 2), cameraDesPos[2])
-    billboardDesPosVec3.set(billboardDesPos[0], billboardDesPos[1] + (height / 2), billboardDesPos[2])
-    state.camera.position.lerp(cameraDesPosVec3, LERP_ALPHA)
-    state.camera.lookAt(billboardDesPosVec3)
-    const distance = cameraDesPosVec3.sub(state.camera.position).length()
+  // useFrame((state, delta) => {
+  //   if (!billboardDimensions) {
+  //     return
+  //   }
+  //   const {height} = billboardDimensions
+  //   cameraDesPosVec3.set(cameraDesPos[0], cameraDesPos[1] + (height / 2), cameraDesPos[2])
+  //   billboardDesPosVec3.set(billboardDesPos[0], billboardDesPos[1] + (height / 2), billboardDesPos[2])
+  //   state.camera.position.lerp(cameraDesPosVec3, LERP_ALPHA)
+  //   state.camera.lookAt(billboardDesPosVec3)
+  //   const distance = cameraDesPosVec3.sub(state.camera.position).length()
 
-    if (distance > TOLERANCE_DISTANCE) {
-      customDebug().log('Camera#useFrame: camera moving')
-      stopped = false
-    } else if (!stopped) {
-      customDebug().log('Camera#useFrame: camera stopped')
-      cameraCurPosVec3.copy(state.camera.position)
-      stopped = true
-    }
-  })
+  //   if (distance > TOLERANCE_DISTANCE) {
+  //     customDebug().log('Camera#useFrame: camera moving')
+  //     stopped = false
+  //   } else if (!stopped) {
+  //     customDebug().log('Camera#useFrame: camera stopped')
+  //     cameraCurPosVec3.copy(state.camera.position)
+  //     stopped = true
+  //   }
+  // })
 
   return (
     <PerspectiveCamera

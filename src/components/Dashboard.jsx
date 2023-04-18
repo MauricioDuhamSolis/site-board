@@ -16,6 +16,7 @@ export const Dashboard = () => {
     setPlausibleStep,
     realtimeVisitors,
     setRealtimeVisitors,
+    leaveBillboard,
   } = useZustand()
 
   const {showDashboard} = useControls({
@@ -53,9 +54,14 @@ export const Dashboard = () => {
   }, [selMenuIndex, menuArr, setAggregate, setPlausibleStep, setRealtimeVisitors])
 
   useEffect(() => {
+    customDebug().log('Dashboard#useEffect')
     loadDashboardData()
-    setInterval(loadDashboardData, REALTIME_DURATION)
-  }, [loadDashboardData])
+    leaveBillboard()
+    if (intervalId) {
+      clearInterval(intervalId)
+    }
+    intervalId = setInterval(loadDashboardData, REALTIME_DURATION)
+  }, [leaveBillboard, loadDashboardData])
 
   return (
     <div className={classNames({
@@ -75,3 +81,4 @@ export const Dashboard = () => {
 
 
 let isLoading = false
+let intervalId

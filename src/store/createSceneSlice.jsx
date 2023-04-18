@@ -1,4 +1,4 @@
-import {deepClone} from '../utils/common'
+// import {deepClone} from '../utils/common'
 import {BILLBOARD_DES_POS, BILLBOARD_INIT_POS, BILLBOARD_VIEW_DISTANCE, CAMERA_DES_POS, CAMERA_INIT_POS} from '../utils/constants'
 
 
@@ -44,13 +44,18 @@ export const createSceneSlice = (set, get) => {
 
     isSeeingBillboard: false,
     seeBillboard: () => set(() => {
-      const billboardDesPos = deepClone(get().billboardDesPos)
-      const billboardViewDistance = get().billboardViewDistance
-      billboardDesPos[2] -= billboardViewDistance
-      const cameraDesPos = billboardDesPos
+      // const billboardDesPos = deepClone(get().billboardDesPos)
+      // const billboardViewDistance = get().billboardViewDistance
+      // billboardDesPos[2] -= billboardViewDistance
+      // const cameraDesPos = billboardDesPos
       return {
-        cameraDesPos,
+        // cameraDesPos,
         isSeeingBillboard: true,
+      }
+    }),
+    leaveBillboard: () => set(() => {
+      return {
+        isSeeingBillboard: false,
       }
     }),
   }

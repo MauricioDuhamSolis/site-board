@@ -50,7 +50,7 @@ export const Scene = () => {
     <Canvas>
       {/* <Perf position="top-left"/> */}
 
-      {!isSeeingBillboard && <OrbitControls makeDefault/>}
+      <OrbitControls makeDefault/>
 
       <directionalLight
         // eslint-disable-next-line react/no-unknown-property

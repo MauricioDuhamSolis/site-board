@@ -15,7 +15,6 @@ export const Billboard = () => {
   const {
     billboardInitPos,
     setBillboardDimensions,
-    isSeeingBillboard,
   } = useZustand()
 
   useEffect(() => {
@@ -28,7 +27,7 @@ export const Billboard = () => {
     onPointerDown: (state) => {
       const {event} = state
 
-      if (event.button === 0 && !isSeeingBillboard) { // Left
+      if (event.button === 0) { // Left
         const {point} = event
         customDebug().log('Billboard#useGesture: point: ', point)
       }

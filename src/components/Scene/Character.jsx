@@ -17,7 +17,7 @@ export const Character = ({index, url, scale, speed}) => {
     usersInitPos,
     usersDesPos,
     setUserDesPos,
-    // seeBillboard,
+    seeBillboard,
   } = useZustand()
   const [prevAction, setPrevAction] = useState(null)
 
@@ -166,7 +166,7 @@ export const Character = ({index, url, scale, speed}) => {
         if (!stopped) {
           customDebug().log('Character#useFrame: character stopped')
           userData.prevNormalDirec = zeroVec3
-          // seeBillboard()
+          seeBillboard()
           setUserDesPos(index, [curPos.x, curPos.y, curPos.z])
           stopped = true
         }
