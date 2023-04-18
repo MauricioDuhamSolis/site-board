@@ -5,7 +5,7 @@ import {useAnimations, useFBX, useGLTF} from '@react-three/drei'
 import {RigidBody, vec3} from '@react-three/rapier'
 import {assertDefined} from '../../utils/custom.assert'
 // eslint-disable-next-line no-unused-vars
-import {CHARACTER_SCALE, DEFAULT_ANGULAR_DAMPING, DEFAULT_LINEAR_DAMPING, GROUND_SIZE, TOLERANCE_DISTANCE, TOLERANCE_WALK} from '../../utils/constants'
+import {CHARACTER_SCALE, DEFAULT_ANGULAR_DAMPING, DEFAULT_LINEAR_DAMPING, GROUND_SIZE, TOLERANCE_DISTANCE} from '../../utils/constants'
 import {useZustand} from '../../store/useZustand'
 import {useFrame} from '@react-three/fiber'
 import {customDebug} from '../../utils/custom.debug'
@@ -148,15 +148,13 @@ export const Character = ({index, url, scale, speed}) => {
       const normalDirec = direc.normalize()
       const prevNormalDirec = rigidBody.current.userData?.prevNormalDirec
       const userData = {}
-      const walkLen = prevPos.clone().sub(curPos.clone()).length()
-      // customDebug().log('Character#useFrame: walkLen: ', walkLen, TOLERANCE_WALK)
 
       if (prevNormalDirec) {
         const prevNormalNegateDirec = prevNormalDirec.negate()
         rigidBody.current.addForce(prevNormalNegateDirec, true)
       }
 
-      if (direcLen > TOLERANCE_DISTANCE && walkLen > TOLERANCE_WALK) {
+      if (direcLen > TOLERANCE_DISTANCE) {
         customDebug().log('Character#useFrame: character moving')
         playWalkAnimOnly()
         rigidBody.current.addForce(normalDirec.multiplyScalar(speed), true)
@@ -174,7 +172,6 @@ export const Character = ({index, url, scale, speed}) => {
         }
       }
 
-      prevPos.copy(curPos.clone())
       rigidBody.current.userData = userData
     }
   })
@@ -203,6 +200,5 @@ export const Character = ({index, url, scale, speed}) => {
 }
 
 
-const prevPos = new THREE.Vector3()
 const zeroVec3 = new THREE.Vector3()
 let stopped = true

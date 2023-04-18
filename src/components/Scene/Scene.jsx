@@ -62,10 +62,10 @@ export const Scene = () => {
         intensity={0.5}
       />
 
-      <axesHelper
+      {/* <axesHelper
         // eslint-disable-next-line react/no-unknown-property
         args={[GROUND_SIZE]}
-      />
+      /> */}
 
       <Suspense>
         <Physics colliders="hull">

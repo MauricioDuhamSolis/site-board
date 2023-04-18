@@ -45,7 +45,7 @@ export const Dashboard = () => {
 
         const newRealtimeVisitors = await getRealtimeVisitors(domain)
         customDebug().log('Dashboard#loadDashboardData: newRealtimeVisitors: ', newRealtimeVisitors)
-        setRealtimeVisitors(4)
+        setRealtimeVisitors(newRealtimeVisitors)
       }
     }
 
