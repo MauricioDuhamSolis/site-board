@@ -21,12 +21,12 @@ export const Character = ({index, url, scale, speed}) => {
   } = useZustand()
   const [prevAction, setPrevAction] = useState(null)
 
-  const fbx = useFBX(url)
-  const modelScene = fbx
-  const modelAnims = fbx.animations
-  // const gltf = useGLTF(url)
-  // const modelScene = gltf.scene
-  // const modelAnims = gltf.animations
+  // const fbx = useFBX(url)
+  // const modelScene = fbx
+  // const modelAnims = fbx.animations
+  const gltf = useGLTF(url)
+  const modelScene = gltf.scene
+  const modelAnims = gltf.animations
 
   // customDebug().log('Character: modelScene: ', modelScene)
   // customDebug().log('Character: modelAnims: ', modelAnims)

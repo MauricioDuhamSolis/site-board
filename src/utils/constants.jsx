@@ -3,11 +3,11 @@
 export const BACKEND_URL = 'https://mboard-backend.onrender.com/main'
 
 export const CHARACTER_URLS = [
-  './models/character 1.fbx',
-  './models/character 2.fbx',
-  './models/character 3.fbx',
-  './models/character 4.fbx',
-  './models/character 5.fbx',
+  './models/character 1.glb',
+  './models/character 2.glb',
+  './models/character 3.glb',
+  './models/character 4.glb',
+  './models/character 5.glb',
 ]
 
 export const BILLBOARD_URL = './models/billboard.fbx'
