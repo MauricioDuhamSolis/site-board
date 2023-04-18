@@ -33,7 +33,7 @@ export const Scene = () => {
 
     // Set users' destination position
     const newUserDesPos = deepClone(billboardDesPos)
-    newUserDesPos[2] -= 2
+    newUserDesPos[2] -= GROUND_SIZE * 0.1
     const newUsersDesPos = Array.from({length: realtimeVisitors}).fill(newUserDesPos)
     customDebug().log('Scene#useEffect: newUsersDesPos: ', newUsersDesPos, billboardDesPos)
     setUsersDesPos(newUsersDesPos)

@@ -5,7 +5,7 @@ import {useAnimations, useFBX, useGLTF} from '@react-three/drei'
 import {RigidBody, vec3} from '@react-three/rapier'
 import {assertDefined} from '../../utils/custom.assert'
 // eslint-disable-next-line no-unused-vars
-import {CHARACTER_SCALE, DEFAULT_ANGULAR_DAMPING, DEFAULT_LINEAR_DAMPING, GROUND_SIZE, TOLERANCE_DISTANCE} from '../../utils/constants'
+import {CHARACTER_SCALE, DEFAULT_ANGULAR_DAMPING, DEFAULT_LINEAR_DAMPING, GROUND_SIZE, TOLERANCE_DISTANCE, TOLERANCE_WALK} from '../../utils/constants'
 import {useZustand} from '../../store/useZustand'
 import {useFrame} from '@react-three/fiber'
 import {customDebug} from '../../utils/custom.debug'
@@ -16,6 +16,7 @@ export const Character = ({index, url, scale, speed}) => {
   const {
     usersInitPos,
     usersDesPos,
+    setUserDesPos,
     // seeBillboard,
   } = useZustand()
   const [prevAction, setPrevAction] = useState(null)
@@ -147,31 +148,33 @@ export const Character = ({index, url, scale, speed}) => {
       const normalDirec = direc.normalize()
       const prevNormalDirec = rigidBody.current.userData?.prevNormalDirec
       const userData = {}
+      const walkLen = prevPos.clone().sub(curPos.clone()).length()
+      // customDebug().log('Character#useFrame: walkLen: ', walkLen, TOLERANCE_WALK)
 
       if (prevNormalDirec) {
         const prevNormalNegateDirec = prevNormalDirec.negate()
         rigidBody.current.addForce(prevNormalNegateDirec, true)
       }
 
-      if (direcLen > TOLERANCE_DISTANCE) {
+      if (direcLen > TOLERANCE_DISTANCE && walkLen > TOLERANCE_WALK) {
         customDebug().log('Character#useFrame: character moving')
         playWalkAnimOnly()
         rigidBody.current.addForce(normalDirec.multiplyScalar(speed), true)
         userData.prevNormalDirec = normalDirec
         stopped = false
       } else {
-        // eslint-disable-next-line no-lonely-if
+        playIdleAnimOnly()
+
         if (!stopped) {
           customDebug().log('Character#useFrame: character stopped')
-          playIdleAnimOnly()
           userData.prevNormalDirec = zeroVec3
           // seeBillboard()
+          setUserDesPos(index, [curPos.x, curPos.y, curPos.z])
           stopped = true
         }
       }
 
-      prevPos.copy(curPos)
-      customDebug().log('Character#useFrame: prevPos: ', prevPos)
+      prevPos.copy(curPos.clone())
       rigidBody.current.userData = userData
     }
   })
