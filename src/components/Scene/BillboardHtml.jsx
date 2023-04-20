@@ -13,7 +13,7 @@ export const BillboardHtml = ({hide}) => {
   } = useZustand()
 
   const halfHeight = billboardDimensions.height * 0.545
-  const htmlPos = [billboardDesPos[0], billboardDesPos[1] + halfHeight, billboardDesPos[2] - 0.2]
+  const htmlPos = [billboardDesPos[0], billboardDesPos[1] + halfHeight, billboardDesPos[2] - 0.1]
 
   return (
     <Html
@@ -21,6 +21,7 @@ export const BillboardHtml = ({hide}) => {
       position={htmlPos}
       rotation={[0, Math.PI, 0]}
       zIndexRange={[0, 0]}
+      occlude='blending'
     >
       <div
         className={classNames({
