@@ -2,12 +2,12 @@
 /* eslint-disable no-unused-vars */
 import React, {Suspense, useEffect} from 'react'
 import * as THREE from 'three'
-import {OrbitControls, OrthographicCamera} from '@react-three/drei'
+import {OrbitControls, OrthographicCamera, Sky} from '@react-three/drei'
 import {Canvas} from '@react-three/fiber'
 import {Debug, Physics} from '@react-three/rapier'
 import {Perf} from 'r3f-perf'
 import {Character} from './Character'
-import {AXIS_SIZE, CHARACTER_BILLBOARD_VIEW_DISTANCE, CHARACTER_POS_GENERATION_HALF_WIDE, CHARACTER_SCALE, CHARACTER_URLS, GROUND_SIZE, WALKING_SPEED} from '../../utils/constants'
+import {AXIS_SIZE, CHARACTER_BILLBOARD_VIEW_DISTANCE, CHARACTER_POS_GENERATION_HALF_WIDE, CHARACTER_SCALE, CHARACTER_URLS, WALKING_SPEED} from '../../utils/constants'
 import {Ground} from './Ground'
 import {Billboard} from './Billboard'
 import {Camera} from './Camera'
@@ -15,6 +15,7 @@ import {BillboardHtml} from './BillboardHtml'
 import {useZustand} from '../../store/useZustand'
 import {deepClone, getBox3RandomPoint} from '../../utils/common'
 import {customDebug} from '../../utils/custom.debug'
+import {useControls} from 'leva'
 
 
 export const Scene = () => {
@@ -25,8 +26,27 @@ export const Scene = () => {
     usersInitPos,
     setUsersInitPos,
     setUsersDesPos,
-    billboardViewDistance,
   } = useZustand()
+
+  const {
+    distance,
+    sunPosition,
+    inclination,
+    azimuth,
+    mieCoefficient,
+    mieDirectionalG,
+    rayleigh,
+    turbidity,
+  } = useControls({
+    distance: {value: 450, label: 'distance'},
+    sunPosition: {value: [0, 450, 0], label: 'sunPosition'},
+    inclination: {value: 0, label: 'inclination'},
+    azimuth: {value: 0.25, label: 'azimuth'},
+    mieCoefficient: {value: 0, label: 'mieCoefficient'},
+    mieDirectionalG: {value: 0, label: 'mieDirectionalG'},
+    rayleigh: {value: 0.03, label: 'rayleigh'},
+    turbidity: {value: 0, label: 'turbidity'},
+  })
 
   useEffect(() => {
     // Set users' initial position
@@ -72,6 +92,16 @@ export const Scene = () => {
 
       <Suspense>
         <Physics colliders="hull">
+          <Sky
+            distance={distance}
+            sunPosition={sunPosition}
+            inclination={inclination}
+            azimuth={azimuth}
+            mieCoefficient={mieCoefficient}
+            mieDirectionalG={mieDirectionalG}
+            rayleigh={rayleigh}
+            turbidity={turbidity}
+          />
           <Billboard/>
           <BillboardHtml hide={!isSeeingBillboard}/>
           {Array.from({length: realtimeVisitors}).map((value, index) =>
