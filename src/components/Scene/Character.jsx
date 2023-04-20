@@ -11,8 +11,8 @@ import {useFrame} from '@react-three/fiber'
 import {customDebug} from '../../utils/custom.debug'
 
 
-export const Character = ({index, url, scale, speed}) => {
-  assertDefined(index, url)
+export const Character = ({index, url, scale, speed, initPos}) => {
+  assertDefined(index, url, scale, speed, initPos)
   const {
     usersInitPos,
     usersDesPos,
@@ -178,7 +178,7 @@ export const Character = ({index, url, scale, speed}) => {
   return (
     <RigidBody
       ref={rigidBody}
-      position={usersInitPos[index] || [0, 0, 0]}
+      position={initPos}
       enabledRotations={[false, true, false]}
       linearDamping={DEFAULT_LINEAR_DAMPING}
       angularDamping={DEFAULT_ANGULAR_DAMPING}
@@ -186,7 +186,6 @@ export const Character = ({index, url, scale, speed}) => {
       <primitive
         ref={ref}
         object={modelScene}
-        // rotation={[0, Math.PI, 0]}
         scale={scale}
         castShadow
       >
