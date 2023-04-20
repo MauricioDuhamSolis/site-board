@@ -22,7 +22,9 @@ export const PLAUSIBLE_STEP_COUNT = 3
 
 export const LERP_ALPHA = 0.1
 
-export const REALTIME_DURATION = 10000
+export const REALTIME_DURATION = 5000
+
+export const isDevMode = true
 
 /* Dynamic */
 

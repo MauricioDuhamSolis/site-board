@@ -3,7 +3,7 @@ import {useZustand} from '../store/useZustand'
 import {getAggregate, getRealtimeVisitors} from '../utils/plausible'
 import {useControls} from 'leva'
 import classNames from 'classnames'
-import {REALTIME_DURATION} from '../utils/constants'
+import {CHARACTER_URLS, REALTIME_DURATION, isDevMode} from '../utils/constants'
 import {customDebug} from '../utils/custom.debug'
 
 
@@ -30,26 +30,32 @@ export const Dashboard = () => {
     isLoading = true
 
     if (selMenuIndex !== null) {
-      const domain = menuArr[selMenuIndex]?.domain
-
-      if (domain) {
-        const newAggregate = await getAggregate(domain)
-        if (newAggregate) {
-          setAggregate(newAggregate)
-        }
-
-        if (newAggregate) {
-          const valueArr = Object.keys(newAggregate).map((key) => newAggregate[key].value)
-          const valuesSum = valueArr.reduce((a, b) => a + b, 0)
-          if (!valuesSum) {
-            setPlausibleStep(2)
-          }
-        }
-
-        const newRealtimeVisitors = await getRealtimeVisitors(domain)
+      if (isDevMode) {
+        const newRealtimeVisitors = parseInt(Math.random() * CHARACTER_URLS.length)
         customDebug().log('Dashboard#loadDashboardData: newRealtimeVisitors: ', newRealtimeVisitors)
-        if (newRealtimeVisitors !== undefined) {
-          setRealtimeVisitors(newRealtimeVisitors)
+        setRealtimeVisitors(newRealtimeVisitors)
+      } else {
+        const domain = menuArr[selMenuIndex]?.domain
+
+        if (domain) {
+          const newAggregate = await getAggregate(domain)
+          if (newAggregate) {
+            setAggregate(newAggregate)
+          }
+
+          if (newAggregate) {
+            const valueArr = Object.keys(newAggregate).map((key) => newAggregate[key].value)
+            const valuesSum = valueArr.reduce((a, b) => a + b, 0)
+            if (!valuesSum) {
+              setPlausibleStep(2)
+            }
+          }
+
+          const newRealtimeVisitors = await getRealtimeVisitors(domain)
+          customDebug().log('Dashboard#loadDashboardData: newRealtimeVisitors: ', newRealtimeVisitors)
+          if (newRealtimeVisitors !== undefined) {
+            setRealtimeVisitors(newRealtimeVisitors)
+          }
         }
       }
     }
