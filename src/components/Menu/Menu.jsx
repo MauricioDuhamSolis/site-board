@@ -20,11 +20,13 @@ export const Menu = () => {
       }
       isLoading = true
       const getAllDataRes = await getAllData()
-      customDebug().log('Menu#useEffect: getAllDataRes: ', getAllDataRes)
+      customDebug().log('Menu#useEffect[setMenuArr, setSelMenuIndex]: getAllDataRes: ', getAllDataRes)
+
       if (Array.isArray(getAllDataRes) && getAllDataRes.length) {
         setMenuArr(getAllDataRes)
         setSelMenuIndex(0)
       }
+
       isLoading = false
     })()
   }, [setMenuArr, setSelMenuIndex])

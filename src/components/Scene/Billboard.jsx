@@ -3,7 +3,7 @@
 import React, {useEffect} from 'react'
 import {useFBX} from '@react-three/drei'
 import {RigidBody} from '@react-three/rapier'
-import {BILLBOARD_SCALE, BILLBOARD_URL, GROUND_SIZE} from '../../utils/constants'
+import {AXIS_SIZE, BILLBOARD_SCALE, BILLBOARD_URL} from '../../utils/constants'
 import {useGesture} from '@use-gesture/react'
 import {useZustand} from '../../store/useZustand'
 import {getDimensions} from '../../utils/common'
@@ -19,7 +19,7 @@ export const Billboard = () => {
 
   useEffect(() => {
     const billboardDimensions = getDimensions(model)
-    customDebug().log('Billboard#useEffect: billboardDimensions: ', billboardDimensions)
+    customDebug().log('Billboard#useEffect[model, setBillboardDimensions]: billboardDimensions: ', billboardDimensions)
     setBillboardDimensions(billboardDimensions)
   }, [model, setBillboardDimensions])
 
@@ -29,7 +29,7 @@ export const Billboard = () => {
 
       if (event.button === 0) { // Left
         const {point} = event
-        customDebug().log('Billboard#useGesture: point: ', point)
+        customDebug().log('Billboard#useGesture#onPointerDown: point: ', point)
       }
     },
   })
@@ -45,7 +45,7 @@ export const Billboard = () => {
         object={model}
         scale={BILLBOARD_SCALE}
       >
-        {/* <axesHelper args={[GROUND_SIZE / BILLBOARD_SCALE]}/> */}
+        {/* <axesHelper args={[AXIS_SIZE]}/> */}
       </primitive>
     </RigidBody>
   )

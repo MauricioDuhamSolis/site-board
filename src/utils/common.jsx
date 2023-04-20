@@ -1,13 +1,22 @@
 import * as THREE from 'three'
 import {mergeBufferGeometries} from 'three/examples/jsm/utils/BufferGeometryUtils'
 import {assertDefined} from './custom.assert'
+import {customDebug} from './custom.debug'
 
 
-export const getRandomFromCenter = (size) => {
-  assertDefined(size)
-  const halfSize = size / 2
-  const random = halfSize - (Math.random() * size)
-  return random
+export const getBox3RandomPoint = (box3) => {
+  assertDefined(box3, box3.min, box3.max)
+  customDebug().log('common#getBox3RandomPoint: box3: ', box3)
+  const diffX = Math.random() * (box3.max.x - box3.min.x)
+  const diffY = Math.random() * (box3.max.y - box3.min.y)
+  const diffZ = Math.random() * (box3.max.z - box3.min.z)
+  const randomPoint = [
+    box3.min.x + diffX,
+    box3.min.y + diffY,
+    box3.min.z + diffZ,
+  ]
+  customDebug().log('common#getBox3RandomPoint: randomPoint: ', randomPoint)
+  return randomPoint
 }
 
 

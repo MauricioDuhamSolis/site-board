@@ -1,11 +1,11 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/no-unknown-property */
 import React, {useCallback, useEffect, useRef, useState} from 'react'
 import * as THREE from 'three'
-// eslint-disable-next-line no-unused-vars
 import {useAnimations, useFBX, useGLTF} from '@react-three/drei'
 import {RigidBody, vec3} from '@react-three/rapier'
 import {assertDefined} from '../../utils/custom.assert'
-// eslint-disable-next-line no-unused-vars
-import {CHARACTER_SCALE, DEFAULT_ANGULAR_DAMPING, DEFAULT_LINEAR_DAMPING, GROUND_SIZE, TOLERANCE_DISTANCE} from '../../utils/constants'
+import {AXIS_SIZE, CHARACTER_SCALE, DEFAULT_ANGULAR_DAMPING, DEFAULT_LINEAR_DAMPING, GROUND_SIZE, TOLERANCE_DISTANCE} from '../../utils/constants'
 import {useZustand} from '../../store/useZustand'
 import {useFrame} from '@react-three/fiber'
 import {customDebug} from '../../utils/custom.debug'
@@ -24,6 +24,7 @@ export const Character = ({index, url, scale, speed}) => {
   // const fbx = useFBX(url)
   // const modelScene = fbx
   // const modelAnims = fbx.animations
+
   const gltf = useGLTF(url)
   const modelScene = gltf.scene
   const modelAnims = gltf.animations
@@ -35,7 +36,6 @@ export const Character = ({index, url, scale, speed}) => {
   const {ref, actions, mixer} = useAnimations(modelAnims)
 
 
-  // eslint-disable-next-line no-unused-vars
   const deactivateAllActions = useCallback(() => {
     Object.keys(actions).forEach((actionKey) => {
       actions[actionKey].stop()
@@ -56,7 +56,6 @@ export const Character = ({index, url, scale, speed}) => {
   }, [actions])
 
 
-  // eslint-disable-next-line no-unused-vars
   const pauseAllActions = useCallback(() => {
     Object.keys(actions).forEach((actionKey) => {
       actions[actionKey].paused = true
@@ -155,7 +154,7 @@ export const Character = ({index, url, scale, speed}) => {
       }
 
       if (direcLen > TOLERANCE_DISTANCE) {
-        customDebug().log('Character#useFrame: character moving')
+        // customDebug().log('Character#useFrame: character moving')
         playWalkAnimOnly()
         rigidBody.current.addForce(normalDirec.multiplyScalar(speed), true)
         userData.prevNormalDirec = normalDirec
@@ -164,7 +163,7 @@ export const Character = ({index, url, scale, speed}) => {
         playIdleAnimOnly()
 
         if (!stopped) {
-          customDebug().log('Character#useFrame: character stopped')
+          // customDebug().log('Character#useFrame: character stopped')
           userData.prevNormalDirec = zeroVec3
           seeBillboard()
           setUserDesPos(index, [curPos.x, curPos.y, curPos.z])
@@ -186,14 +185,12 @@ export const Character = ({index, url, scale, speed}) => {
     >
       <primitive
         ref={ref}
-        // eslint-disable-next-line react/no-unknown-property
         object={modelScene}
         // rotation={[0, Math.PI, 0]}
         scale={scale}
-        // eslint-disable-next-line react/no-unknown-property
         castShadow
       >
-        {/* <axesHelper args={[GROUND_SIZE / CHARACTER_SCALE]}/> */}
+        {/* <axesHelper args={[AXIS_SIZE]}/> */}
       </primitive>
     </RigidBody>
   )
