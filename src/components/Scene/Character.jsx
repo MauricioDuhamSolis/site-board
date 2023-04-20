@@ -5,7 +5,7 @@ import * as THREE from 'three'
 import {useAnimations, useFBX, useGLTF} from '@react-three/drei'
 import {RigidBody, vec3} from '@react-three/rapier'
 import {assertDefined} from '../../utils/custom.assert'
-import {AXIS_SIZE, CHARACTER_SCALE, DEFAULT_ANGULAR_DAMPING, DEFAULT_LINEAR_DAMPING, GROUND_SIZE, TOLERANCE_DISTANCE} from '../../utils/constants'
+import {AXIS_SIZE, DEFAULT_ANGULAR_DAMPING, DEFAULT_LINEAR_DAMPING, TOLERANCE_DISTANCE} from '../../utils/constants'
 import {useZustand} from '../../store/useZustand'
 import {useFrame} from '@react-three/fiber'
 import {customDebug} from '../../utils/custom.debug'
@@ -14,7 +14,6 @@ import {customDebug} from '../../utils/custom.debug'
 export const Character = ({index, url, scale, speed, initPos}) => {
   assertDefined(index, url, scale, speed, initPos)
   const {
-    usersInitPos,
     usersDesPos,
     setUserDesPos,
     seeBillboard,

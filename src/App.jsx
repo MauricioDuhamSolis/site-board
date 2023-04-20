@@ -18,8 +18,8 @@ const App = () => {
     <div className='relative flex flex-col w-screen h-screen bg-black'>
       <Menu/>
       <div className='relative w-full h-[calc(100vh-3rem)]'>
-        <Scene/>
         <Dashboard/>
+        <Scene/>
       </div>
       <BillboardPage hide={!fullScreen}/>
       <Plausible/>
