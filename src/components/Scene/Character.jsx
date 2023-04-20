@@ -153,7 +153,7 @@ export const Character = ({index, url, scale, speed, initPos}) => {
       }
 
       if (direcLen > TOLERANCE_DISTANCE) {
-        // customDebug().log('Character#useFrame: character moving')
+        customDebug().log('Character#useFrame: character moving')
         playWalkAnimOnly()
         rigidBody.current.addForce(normalDirec.multiplyScalar(speed), true)
         userData.prevNormalDirec = normalDirec
@@ -162,7 +162,7 @@ export const Character = ({index, url, scale, speed, initPos}) => {
         playIdleAnimOnly()
 
         if (!stopped) {
-          // customDebug().log('Character#useFrame: character stopped')
+          customDebug().log('Character#useFrame: character stopped')
           userData.prevNormalDirec = zeroVec3
           seeBillboard()
           setUserDesPos(index, [curPos.x, curPos.y, curPos.z])

@@ -88,7 +88,7 @@ export const Dashboard = () => {
     const additionalUsersInitPos = Array.from({length: Math.max(realtimeVisitors - usersInitPos.length, 0)}).map(() => getBox3RandomPoint(characterPosGenerationBox3))
     customDebug().log('Scene#useEffect[realtimeVisitors]: additionalUsersInitPos: ', additionalUsersInitPos)
     const newUsersInitPos = [
-      ...usersInitPos.slice(0, realtimeVisitors),
+      ...usersInitPos,
       ...additionalUsersInitPos,
     ]
     customDebug().log('Scene#useEffect[realtimeVisitors]: newUsersInitPos: ', newUsersInitPos)
@@ -98,6 +98,9 @@ export const Dashboard = () => {
     const newUserDesPos = deepClone(billboardDesPos)
     newUserDesPos[2] -= CHARACTER_BILLBOARD_VIEW_DISTANCE
     const newUsersDesPos = Array.from({length: realtimeVisitors}).fill(newUserDesPos)
+    for (let i = realtimeVisitors; i < newUsersInitPos.length; i++) {
+      newUsersDesPos.push(newUsersInitPos[i])
+    }
     customDebug().log('Scene#useEffect[realtimeVisitors]: newUsersDesPos: ', newUsersDesPos, billboardDesPos)
     setUsersDesPos(newUsersDesPos)
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -33,6 +33,17 @@ export const createSceneSlice = (set, get) => {
       }
     }),
 
+    usersQuitState: [],
+    setUsersQuitState: (newUsersQuitState) => set(() => ({usersQuitState: newUsersQuitState})),
+    setUserQuitState: (index, newUserQuitState) => set(() => {
+      const state = get()
+      const newUsersQuitState = [...state.usersQuitState]
+      newUsersQuitState[index] = newUserQuitState
+      return {
+        usersQuitState: newUsersQuitState,
+      }
+    }),
+
     /* Billboard */
 
     billboardDimensions: {width: 0, height: 0, length: 0},
