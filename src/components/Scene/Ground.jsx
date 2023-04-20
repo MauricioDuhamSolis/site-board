@@ -1,20 +1,32 @@
+/* eslint-disable react/no-unknown-property */
 import React from 'react'
-import {Plane} from '@react-three/drei'
+import * as THREE from 'three'
+import {Box} from '@react-three/drei'
 import {RigidBody} from '@react-three/rapier'
-import {GROUND_SIZE} from '../../utils/constants'
+import {GROUND_HEIGHT, GROUND_SIZE} from '../../utils/constants'
+import groundImg from '../../assets/texture/ground1.png'
+import {useLoader} from '@react-three/fiber'
 
 
 export const Ground = () => {
+  const groundTexture = useLoader(THREE.TextureLoader, groundImg)
+  groundTexture.wrapS = THREE.RepeatWrapping
+  groundTexture.wrapT = THREE.RepeatWrapping
+  groundTexture.repeat.set(50, 50)
+
   return (
-    <RigidBody>
-      <Plane
-        position={[0, 0, 0]}
+    <RigidBody enabledTranslations={[false, false, false]}>
+      <Box
+        args={[GROUND_SIZE, GROUND_HEIGHT, GROUND_SIZE]}
+        position={[0, -GROUND_HEIGHT / 2, 0]}
         receiveShadow
-        rotation={[- Math.PI * 0.5, 0, 0]}
-        scale={GROUND_SIZE}
       >
-        <meshStandardMaterial color="#87493b"/>
-      </Plane>
+        <meshStandardMaterial
+          // color="#87493b"
+          side={THREE.DoubleSide}
+          map={groundTexture}
+        />
+      </Box>
     </RigidBody>
   )
 }

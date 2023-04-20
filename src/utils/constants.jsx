@@ -14,6 +14,8 @@ export const AXIS_SIZE = 10
 
 export const GROUND_SIZE = 3000
 
+export const GROUND_HEIGHT = 2
+
 export const BILLBOARD_URL = './models/billboard.fbx'
 
 export const BILLBOARD_HTML_SIZE = 1200
