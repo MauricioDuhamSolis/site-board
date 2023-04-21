@@ -1,12 +1,12 @@
 import React, {useCallback, useEffect} from 'react'
 import * as THREE from 'three'
-import {useZustand} from '../store/useZustand'
-import {getAggregate, getRealtimeVisitors} from '../utils/plausible'
 import {useControls} from 'leva'
 import classNames from 'classnames'
-import {CHARACTER_BILLBOARD_VIEW_DISTANCE, CHARACTER_POS_GENERATION_HALF_WIDE, CHARACTER_URLS, REALTIME_DURATION, isDevMode} from '../utils/constants'
-import {customDebug} from '../utils/custom.debug'
-import {deepClone, getBox3RandomPoint} from '../utils/common'
+import {useZustand} from '../../store/useZustand'
+import {getAggregate, getRealtimeVisitors} from '../../utils/plausible'
+import {CHARACTER_BILLBOARD_VIEW_DISTANCE, CHARACTER_POS_GENERATION_HALF_WIDE, CHARACTER_URLS, REALTIME_DURATION, isDevMode} from '../../utils/constants'
+import {customDebug} from '../../utils/custom.debug'
+import {deepClone, getBox3RandomPoint} from '../../utils/common'
 
 
 export const Dashboard = () => {

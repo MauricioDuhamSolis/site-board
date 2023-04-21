@@ -1,12 +1,12 @@
 /* eslint-disable prefer-const */
 /* eslint-disable no-unused-vars */
 import React from 'react'
-import {PerspectiveCamera} from '@react-three/drei'
 import * as THREE from 'three'
+import {PerspectiveCamera} from '@react-three/drei'
 import {useFrame} from '@react-three/fiber'
-import {useZustand} from '../../store/useZustand'
-import {CAMERA_INIT_POS, LERP_ALPHA, TOLERANCE_DISTANCE} from '../../utils/constants'
-import {customDebug} from '../../utils/custom.debug'
+import {useZustand} from '../../../store/useZustand'
+import {CAMERA_INIT_POS, LERP_ALPHA, TOLERANCE_DISTANCE} from '../../../utils/constants'
+import {customDebug} from '../../../utils/custom.debug'
 
 
 export const Camera = () => {

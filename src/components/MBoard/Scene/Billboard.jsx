@@ -3,11 +3,11 @@
 import React, {useEffect} from 'react'
 import {useFBX} from '@react-three/drei'
 import {RigidBody} from '@react-three/rapier'
-import {AXIS_SIZE, BILLBOARD_SCALE, BILLBOARD_URL} from '../../utils/constants'
 import {useGesture} from '@use-gesture/react'
-import {useZustand} from '../../store/useZustand'
-import {getDimensions} from '../../utils/common'
-import {customDebug} from '../../utils/custom.debug'
+import {useZustand} from '../../../store/useZustand'
+import {getDimensions} from '../../../utils/common'
+import {AXIS_SIZE, BILLBOARD_SCALE, BILLBOARD_URL} from '../../../utils/constants'
+import {customDebug} from '../../../utils/custom.debug'
 
 
 export const Billboard = () => {

@@ -3,12 +3,12 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react'
 import * as THREE from 'three'
 import {useAnimations, useFBX, useGLTF} from '@react-three/drei'
-import {RigidBody, vec3} from '@react-three/rapier'
-import {assertDefined} from '../../utils/custom.assert'
-import {AXIS_SIZE, DEFAULT_ANGULAR_DAMPING, DEFAULT_LINEAR_DAMPING, TOLERANCE_DISTANCE} from '../../utils/constants'
-import {useZustand} from '../../store/useZustand'
 import {useFrame} from '@react-three/fiber'
-import {customDebug} from '../../utils/custom.debug'
+import {RigidBody, vec3} from '@react-three/rapier'
+import {useZustand} from '../../../store/useZustand'
+import {AXIS_SIZE, DEFAULT_ANGULAR_DAMPING, DEFAULT_LINEAR_DAMPING, TOLERANCE_DISTANCE} from '../../../utils/constants'
+import {assertDefined} from '../../../utils/custom.assert'
+import {customDebug} from '../../../utils/custom.debug'
 
 
 export const Character = ({index, url, scale, speed, initPos}) => {

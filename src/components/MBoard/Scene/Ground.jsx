@@ -2,10 +2,10 @@
 import React from 'react'
 import * as THREE from 'three'
 import {Box} from '@react-three/drei'
-import {RigidBody} from '@react-three/rapier'
-import {GROUND_HEIGHT, GROUND_SIZE} from '../../utils/constants'
-import groundImg from '../../assets/texture/ground1.png'
 import {useLoader} from '@react-three/fiber'
+import {RigidBody} from '@react-three/rapier'
+import {GROUND_HEIGHT, GROUND_SIZE} from '../../../utils/constants'
+import groundImg from '../../../assets/texture/ground1.png'
 
 
 export const Ground = () => {

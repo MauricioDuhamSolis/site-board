@@ -1,7 +1,7 @@
 import React from 'react'
-import {useZustand} from '../../store/useZustand'
-import {domainToUrl} from '../../utils/common'
 import classNames from 'classnames'
+import {useZustand} from '../../../store/useZustand'
+import {domainToUrl} from '../../../utils/common'
 
 
 export const BillboardPage = ({hide}) => {
@@ -14,7 +14,7 @@ export const BillboardPage = ({hide}) => {
 
   return (
     <div className={classNames({
-      'absolute flex items-center justify-center w-full h-full text-white bg-black': true,
+      'absolute flex items-center justify-center w-full h-full text-white top-0 left-0 bg-white': true,
       'hidden': !!hide,
     })}
     >

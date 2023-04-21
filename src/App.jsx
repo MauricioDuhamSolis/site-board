@@ -1,12 +1,12 @@
 import React from 'react'
-import {Scene} from './components/Scene/Scene'
+import {BrowserRouter, Route, Routes} from 'react-router-dom'
+import {useControls} from 'leva'
 import {Alert} from './components/Utils/Alert'
 import {Confirm} from './components/Utils/Confirm'
 import {Menu} from './components/Menu/Menu'
 import {Plausible} from './components/Plausible/Plausible'
-import {Dashboard} from './components/Dashboard'
-import {BillboardPage} from './components/Scene/BillboardPage'
-import {useControls} from 'leva'
+import {BillboardPage} from './components/MBoard/Scene/BillboardPage'
+import {MBoard} from './components/MBoard/MBoard'
 
 
 const App = () => {
@@ -15,17 +15,20 @@ const App = () => {
   })
 
   return (
-    <div className='relative flex flex-col w-screen h-screen bg-black'>
-      <Menu/>
-      <div className='relative w-full h-[calc(100vh-3rem)]'>
-        <Dashboard/>
-        <Scene/>
+    <BrowserRouter>
+      <div className='relative flex flex-col w-screen h-screen'>
+        <Menu/>
+        <div className='relative w-full h-[calc(100vh-3rem)]'>
+          <Routes>
+            <Route path='/' element={<MBoard/>}/>
+          </Routes>
+          <BillboardPage hide={!fullScreen}/>
+        </div>
+        <Plausible/>
+        <Confirm/>
+        <Alert/>
       </div>
-      <BillboardPage hide={!fullScreen}/>
-      <Plausible/>
-      <Confirm/>
-      <Alert/>
-    </div>
+    </BrowserRouter>
   )
 }
 

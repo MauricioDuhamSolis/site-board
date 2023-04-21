@@ -5,14 +5,14 @@ import {OrbitControls, OrthographicCamera, Sky} from '@react-three/drei'
 import {Canvas} from '@react-three/fiber'
 import {Debug, Physics} from '@react-three/rapier'
 import {Perf} from 'r3f-perf'
+import {useControls} from 'leva'
 import {Character} from './Character'
-import {CHARACTER_SCALE, CHARACTER_URLS, WALKING_SPEED} from '../../utils/constants'
 import {Ground} from './Ground'
 import {Billboard} from './Billboard'
 import {Camera} from './Camera'
 import {BillboardHtml} from './BillboardHtml'
-import {useZustand} from '../../store/useZustand'
-import {useControls} from 'leva'
+import {useZustand} from '../../../store/useZustand'
+import {CHARACTER_SCALE, CHARACTER_URLS, WALKING_SPEED} from '../../../utils/constants'
 
 
 export const Scene = () => {

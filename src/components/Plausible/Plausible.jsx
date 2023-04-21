@@ -1,9 +1,9 @@
 import React from 'react'
 import classNames from 'classnames'
-import {useZustand} from '../../store/useZustand'
 import {Create} from './Create'
 import {Snippet} from './Snippet'
 import {Close} from './Close'
+import {useZustand} from '../../store/useZustand'
 
 
 export const Plausible = () => {

@@ -1,9 +1,9 @@
 import React from 'react'
 import {Html} from '@react-three/drei'
-import {BILLBOARD_HTML_SIZE} from '../../utils/constants'
-import {useZustand} from '../../store/useZustand'
 import classNames from 'classnames'
 import {BillboardPage} from './BillboardPage'
+import {BILLBOARD_HTML_SIZE} from '../../../utils/constants'
+import {useZustand} from '../../../store/useZustand'
 
 
 export const BillboardHtml = ({hide}) => {
@@ -25,7 +25,7 @@ export const BillboardHtml = ({hide}) => {
     >
       <div
         className={classNames({
-          'relative flex items-center justify-center text-white bg-black rounded': true,
+          'relative flex items-center justify-center text-white rounded': true,
           'hidden': !!hide,
         })}
         style={{
