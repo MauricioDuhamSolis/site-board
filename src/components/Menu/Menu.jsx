@@ -4,6 +4,7 @@ import {AddLink} from './AddLink'
 import {useZustand} from '../../store/useZustand'
 import {customDebug} from '../../utils/custom.debug'
 import {getAllData} from '../../utils/mongo.db'
+import {Profile} from './Profile'
 
 
 export const Menu = () => {
@@ -46,6 +47,7 @@ export const Menu = () => {
         )}
         <AddLink/>
       </div>
+      <Profile/>
     </div>
   )
 }

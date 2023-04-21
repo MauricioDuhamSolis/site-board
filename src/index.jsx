@@ -5,12 +5,15 @@ import App from './App'
 import authConfig from './backend/auth.config.json'
 import './index.css'
 import {Auth0Provider} from '@auth0/auth0-react'
+import {customDebug} from './utils/custom.debug'
 
 
 const browserHistory = createBrowserHistory()
 
 
 const onRedirectCallback = (appState) => {
+  customDebug().log('index#onRedirectCallback: appState: ', appState)
+  customDebug().log('index#onRedirectCallback: window.location.pathname: ', window.location.pathname)
   browserHistory.push(
     appState && appState.returnTo ? appState.returnTo : window.location.pathname,
   )
