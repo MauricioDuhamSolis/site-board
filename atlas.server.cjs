@@ -31,7 +31,6 @@ client.connect((connErr) => {
 
   // This help convert the id from string to ObjectId for the _id
   const objectId = require('mongodb').ObjectId
-  console.log('Db connected')
   const mainCollection = client.db('mboard').collection('main')
 
   // This section will help you get a list of all the main
@@ -92,5 +91,5 @@ client.connect((connErr) => {
 })
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port: ${PORT}`)
+  console.log(`Atlas server is running on port: ${PORT}`)
 })
