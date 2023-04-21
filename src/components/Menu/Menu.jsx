@@ -35,15 +35,17 @@ export const Menu = () => {
   }, [])
 
   return (
-    <div className='flex w-screen h-12 gap-2 p-2 pb-0 bg-black border-0 border-b-2 border-white'>
-      {menuArr.map((menu, index) =>
-        <MenuItem
-          key={index}
-          index={index}
-          menu={menu}
-        />,
-      )}
-      <AddLink/>
+    <div className='flex items-center justify-between w-screen h-12 bg-black border-0 border-b-2 border-white'>
+      <div className='flex h-full gap-2 p-2 pb-0'>
+        {menuArr.map((menu, index) =>
+          <MenuItem
+            key={index}
+            index={index}
+            menu={menu}
+          />,
+        )}
+        <AddLink/>
+      </div>
     </div>
   )
 }
