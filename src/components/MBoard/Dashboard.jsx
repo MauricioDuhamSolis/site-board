@@ -30,11 +30,6 @@ export const Dashboard = () => {
   })
 
   const loadDashboardData = useCallback(async () => {
-    if (isLoading) {
-      return
-    }
-    isLoading = true
-
     if (selMenuIndex !== null) {
       if (isDevMode) {
         const newRealtimeVisitors = parseInt(Math.random() * (CHARACTER_URLS.length - 1)) + 1
@@ -65,9 +60,7 @@ export const Dashboard = () => {
         }
       }
     }
-
-    isLoading = false
-  }, [selMenuIndex, menuArr, setAggregate, setPlausibleStep, setRealtimeVisitors])
+  }, [selMenuIndex, setRealtimeVisitors, menuArr, setAggregate, setPlausibleStep])
 
   useEffect(() => {
     customDebug().log('Dashboard#useEffect[leaveBillboard, loadDashboardData]')
@@ -123,5 +116,4 @@ export const Dashboard = () => {
 }
 
 
-let isLoading = false
 let intervalId

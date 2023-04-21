@@ -11,6 +11,8 @@ export const Menu = () => {
     menuArr,
     setMenuArr,
     setSelMenuIndex,
+    isLoading,
+    setIsLoading,
   } = useZustand()
 
   useEffect(() => {
@@ -18,7 +20,7 @@ export const Menu = () => {
       if (isLoading) {
         return
       }
-      isLoading = true
+      setIsLoading(true)
       const getAllDataRes = await getAllData()
       customDebug().log('Menu#useEffect[setMenuArr, setSelMenuIndex]: getAllDataRes: ', getAllDataRes)
 
@@ -27,9 +29,10 @@ export const Menu = () => {
         setSelMenuIndex(0)
       }
 
-      isLoading = false
+      setIsLoading(false)
     })()
-  }, [setMenuArr, setSelMenuIndex])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <div className='flex w-screen h-12 gap-2 p-2 pb-0 bg-black border-0 border-b-2 border-white'>
@@ -44,6 +47,3 @@ export const Menu = () => {
     </div>
   )
 }
-
-
-let isLoading = false
