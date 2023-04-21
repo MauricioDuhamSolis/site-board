@@ -20,6 +20,7 @@ export const Character = ({index, url, scale, speed, initPos}) => {
   } = useZustand()
   const [prevAction, setPrevAction] = useState(null)
   const [stopped, setStopped] = useState(null)
+  const [isFirstMove, setIsFirstMove] = useState(true)
 
   // const fbx = useFBX(url)
   // const modelScene = fbx
@@ -154,21 +155,23 @@ export const Character = ({index, url, scale, speed, initPos}) => {
       }
 
       if (direcLen > TOLERANCE_DISTANCE) {
-        customDebug().log('Character#useFrame: character moving')
-        playWalkAnimOnly()
+        if (isFirstMove) {
+          customDebug().log('Character#useFrame: character moving')
+          playWalkAnimOnly()
+          setIsFirstMove(false)
+        }
+
         rigidBody.current.addForce(normalDirec.multiplyScalar(speed), true)
         userData.prevNormalDirec = normalDirec
         setStopped(false)
-      } else {
+      } else if (!stopped) {
+        customDebug().log('Character#useFrame: character stopped')
         playIdleAnimOnly()
-
-        if (!stopped) {
-          customDebug().log('Character#useFrame: character stopped')
-          userData.prevNormalDirec = zeroVec3
-          seeBillboard()
-          removeCondUser(index)
-          setStopped(true)
-        }
+        userData.prevNormalDirec = zeroVec3
+        seeBillboard()
+        removeCondUser(index)
+        setStopped(true)
+        setIsFirstMove(true)
       }
 
       rigidBody.current.userData = userData
