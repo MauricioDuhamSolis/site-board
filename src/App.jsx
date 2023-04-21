@@ -8,6 +8,7 @@ import {Plausible} from './components/Plausible/Plausible'
 import {BillboardPage} from './components/MBoard/Scene/BillboardPage'
 import {MBoard} from './components/MBoard/MBoard'
 import {Home} from './components/Home'
+import {Loading} from './components/Utils/Loading'
 
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
       <Plausible/>
       <Confirm/>
       <Alert/>
+      <Loading/>
     </div>
   )
 }

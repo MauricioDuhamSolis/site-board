@@ -35,5 +35,8 @@ export const createUISlice = (set, get) => {
 
     realtimeVisitors: 0,
     setRealtimeVisitors: (newRealtimeVisitors) => set(() => ({realtimeVisitors: newRealtimeVisitors})),
+
+    isLoading: false,
+    setIsLoading: (newIsLoading) => set(() => ({isLoading: newIsLoading})),
   }
 }
