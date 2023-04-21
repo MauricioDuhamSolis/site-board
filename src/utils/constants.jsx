@@ -2,7 +2,7 @@
 
 export const isDevMode = true
 
-export const BACKEND_URL = isDevMode ? 'http://localhost:4000' : 'https://mboard-backend.onrender.com/main'
+export const BACKEND_URL = isDevMode ? 'http://127.0.0.1:4000/main' : 'https://mboard-backend.onrender.com/main'
 
 export const CHARACTER_URLS = [
   './models/character 1.glb',
