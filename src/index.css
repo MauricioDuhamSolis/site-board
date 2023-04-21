@@ -7,6 +7,10 @@
   height: 100vh;
 }
 
+#leva__root>div {
+  top: 4rem;
+}
+
 *::-webkit-scrollbar {
   width: 8px;
 }

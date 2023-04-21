@@ -7,6 +7,7 @@ import {Menu} from './components/Menu/Menu'
 import {Plausible} from './components/Plausible/Plausible'
 import {BillboardPage} from './components/MBoard/Scene/BillboardPage'
 import {MBoard} from './components/MBoard/MBoard'
+import {Home} from './components/Home'
 
 
 const App = () => {
@@ -20,7 +21,8 @@ const App = () => {
         <Menu/>
         <div className='relative w-full h-[calc(100vh-3rem)]'>
           <Routes>
-            <Route path='/' element={<MBoard/>}/>
+            <Route path='/' element={<Home/>}/>
+            <Route path='/mboard' element={<MBoard/>}/>
           </Routes>
           <BillboardPage hide={!fullScreen}/>
         </div>
