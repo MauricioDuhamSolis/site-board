@@ -4,6 +4,7 @@ import {createSite} from '../../utils/plausible'
 import {saveData} from '../../utils/mongo.db'
 import {customDebug} from '../../utils/custom.debug'
 import {urlToDomain} from '../../utils/common'
+import {useAuth0} from '@auth0/auth0-react'
 
 
 export const Create = ({domain}) => {
@@ -15,6 +16,7 @@ export const Create = ({domain}) => {
     setSelMenuIndex,
     onConfirm,
   } = useZustand()
+  const {user} = useAuth0()
   const inputRef = useRef(null)
 
   return (
@@ -28,6 +30,11 @@ export const Create = ({domain}) => {
       <button
         className='pl-2 pr-2 border-2 rounded'
         onClick={() => onConfirm(async () => {
+          if (!user?.name) {
+            setAlertMsg('Username not correct.')
+            return
+          }
+
           const inputVal = inputRef.current.value
           const urlDomain = urlToDomain(inputVal)
           customDebug().log('Create#onConfirm: urlDomain: ', urlDomain)
@@ -46,6 +53,7 @@ export const Create = ({domain}) => {
             return
           }
 
+          siteData.username = user.name
           const saveDataRes = await saveData(siteData)
           customDebug().log('Create#onConfirm: saveDataRes: ', saveDataRes)
           const insertedId = saveDataRes?.data?.insertedId
