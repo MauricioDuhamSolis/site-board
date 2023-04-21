@@ -1,5 +1,5 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
-import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import {useControls} from 'leva'
 import {Alert} from './components/Utils/Alert'
 import {Confirm} from './components/Utils/Confirm'
@@ -16,21 +16,17 @@ const App = () => {
   })
 
   return (
-    <BrowserRouter>
-      <div className='relative flex flex-col w-screen h-screen'>
-        <Menu/>
-        <div className='relative w-full h-[calc(100vh-3rem)]'>
-          <Routes>
-            <Route path='/' element={<Home/>}/>
-            <Route path='/mboard' element={<MBoard/>}/>
-          </Routes>
-          <BillboardPage hide={!fullScreen}/>
-        </div>
-        <Plausible/>
-        <Confirm/>
-        <Alert/>
+    <div className='relative flex flex-col w-screen h-screen'>
+      <Menu/>
+      <div className='relative w-full h-[calc(100vh-3rem)]'>
+        <Home/>
+        {/* <MBoard/> */}
+        <BillboardPage hide={!fullScreen}/>
       </div>
-    </BrowserRouter>
+      <Plausible/>
+      <Confirm/>
+      <Alert/>
+    </div>
   )
 }
 
