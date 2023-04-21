@@ -5,6 +5,7 @@ import {useZustand} from '../../store/useZustand'
 import {customDebug} from '../../utils/custom.debug'
 import {getAllData} from '../../utils/mongo.db'
 import {Profile} from './Profile'
+import {useAuth0} from '@auth0/auth0-react'
 
 
 export const Menu = () => {
@@ -15,6 +16,7 @@ export const Menu = () => {
     isLoading,
     setIsLoading,
   } = useZustand()
+  const {isAuthenticated} = useAuth0()
 
   useEffect(() => {
     (async () => {
@@ -45,7 +47,7 @@ export const Menu = () => {
             menu={menu}
           />,
         )}
-        <AddLink/>
+        {isAuthenticated && <AddLink/>}
       </div>
       <Profile/>
     </div>
