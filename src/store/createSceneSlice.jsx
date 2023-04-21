@@ -44,6 +44,20 @@ export const createSceneSlice = (set, get) => {
       }
     }),
 
+    removeCondUser: (index) => set(() => {
+      const state = get()
+      if (state.usersInitPos[index] !== state.usersDesPos[index]) {
+        return {}
+      }
+      const newUsersInitPos = state.usersInitPos.filter((userInitPos, userIndex) => userIndex !== index)
+      console.log('usersInitPos change: ', state.usersInitPos, newUsersInitPos)
+      const newUsersDesPos = state.usersDesPos.filter((userDesPos, userIndex) => userIndex !== index)
+      return {
+        usersInitPos: newUsersInitPos,
+        usersDesPos: newUsersDesPos,
+      }
+    }),
+
     /* Billboard */
 
     billboardDimensions: {width: 0, height: 0, length: 0},

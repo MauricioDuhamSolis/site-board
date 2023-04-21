@@ -15,10 +15,11 @@ export const Character = ({index, url, scale, speed, initPos}) => {
   assertDefined(index, url, scale, speed, initPos)
   const {
     usersDesPos,
-    setUserDesPos,
     seeBillboard,
+    removeCondUser,
   } = useZustand()
   const [prevAction, setPrevAction] = useState(null)
+  const [stopped, setStopped] = useState(null)
 
   // const fbx = useFBX(url)
   // const modelScene = fbx
@@ -157,7 +158,7 @@ export const Character = ({index, url, scale, speed, initPos}) => {
         playWalkAnimOnly()
         rigidBody.current.addForce(normalDirec.multiplyScalar(speed), true)
         userData.prevNormalDirec = normalDirec
-        stopped = false
+        setStopped(false)
       } else {
         playIdleAnimOnly()
 
@@ -165,8 +166,8 @@ export const Character = ({index, url, scale, speed, initPos}) => {
           customDebug().log('Character#useFrame: character stopped')
           userData.prevNormalDirec = zeroVec3
           seeBillboard()
-          setUserDesPos(index, [curPos.x, curPos.y, curPos.z])
-          stopped = true
+          removeCondUser(index)
+          setStopped(true)
         }
       }
 
@@ -196,4 +197,3 @@ export const Character = ({index, url, scale, speed, initPos}) => {
 
 
 const zeroVec3 = new THREE.Vector3()
-let stopped = true
