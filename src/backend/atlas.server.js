@@ -29,6 +29,8 @@ client.connect((connErr) => {
     throw connErr
   }
 
+  console.log('MongoDB connected')
+
   // This help convert the id from string to ObjectId for the _id
   const objectId = require('mongodb').ObjectId
   const mainCollection = client.db('mboard').collection('main')
