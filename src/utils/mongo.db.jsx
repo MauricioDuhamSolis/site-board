@@ -50,3 +50,15 @@ export const removeData = async (id) => {
     customDebug().log('mongo.db#removeData: e: ', e)
   }
 }
+
+
+export const getDataByUsername = async (username) => {
+  try {
+    assertDefined(username)
+    const getUrl = `${BACKEND_URL}/getbyusername/${username}`
+    const res = await axios.get(getUrl)
+    return res?.data
+  } catch (e) {
+    customDebug().log('mongo.db#getAllData: e: ', e)
+  }
+}

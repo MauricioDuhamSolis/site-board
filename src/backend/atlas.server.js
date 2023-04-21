@@ -92,6 +92,18 @@ client.connect((connErr) => {
       response.json(obj)
     })
   })
+
+  // This section will help you get product list by username
+  mainRoute.route('/getbyusername/:username').get((req, res) => {
+    console.log(req.params.username)
+    // const myQuery = {_id: objectId(req.params.username)}
+    // mainCollection.findOne(myQuery, (err, result) => {
+    //   if (err) {
+    //     throw err
+    //   }
+    //   res.json(result)
+    // })
+  })
 })
 
 app.listen(PORT, () => {

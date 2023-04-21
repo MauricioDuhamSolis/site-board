@@ -1,6 +1,8 @@
 /* Static */
 
-export const BACKEND_URL = 'https://mboard-backend.onrender.com/main'
+export const isDevMode = true
+
+export const BACKEND_URL = isDevMode ? 'http://localhost:4000' : 'https://mboard-backend.onrender.com/main'
 
 export const CHARACTER_URLS = [
   './models/character 1.glb',
@@ -29,8 +31,6 @@ export const PLAUSIBLE_STEP_COUNT = 3
 export const LERP_ALPHA = 0.1
 
 export const REALTIME_DURATION = 10000
-
-export const isDevMode = true
 
 /* Dynamic */
 
