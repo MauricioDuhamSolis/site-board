@@ -30,7 +30,7 @@ export const PLAUSIBLE_STEP_COUNT = 3
 
 export const LERP_ALPHA = 0.1
 
-export const REALTIME_DURATION = isDevMode ? 2500 : 10000
+export const REALTIME_DURATION = 10000
 
 /* Dynamic */
 
@@ -40,7 +40,7 @@ export const BILLBOARD_SCALE = 0.06 * HTML_ASPECT
 
 export const CHARACTER_SCALE = 0.015 * HTML_ASPECT
 
-export const WALKING_SPEED = isDevMode ? BILLBOARD_HTML_SIZE * 1.4 * 4 : BILLBOARD_HTML_SIZE * 1.4
+export const WALKING_SPEED = BILLBOARD_HTML_SIZE * 1.6
 
 export const TOLERANCE_DISTANCE = CHARACTER_URLS.length * HTML_ASPECT
 
