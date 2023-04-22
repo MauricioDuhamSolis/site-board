@@ -18,11 +18,12 @@ export const Dashboard = () => {
     setPlausibleStep,
     realtimeVisitors,
     setRealtimeVisitors,
-    leaveBillboard,
     billboardDesPos,
     usersInitPos,
     setUsersInitPos,
     setUsersDesPos,
+    isBackgroundLoading,
+    setIsBackgroundLoading,
   } = useZustand()
 
   const {showDashboard} = useControls({
@@ -30,6 +31,12 @@ export const Dashboard = () => {
   })
 
   const loadDashboardData = useCallback(async () => {
+    if (isBackgroundLoading) {
+      return
+    }
+    setIsBackgroundLoading(true)
+    customDebug().log('Dashboard#loadDashboardData')
+
     if (selMenuIndex !== null) {
       if (isDevMode) {
         const newRealtimeVisitors = parseInt(Math.random() * (CHARACTER_URLS.length - 1)) + 1
@@ -60,17 +67,18 @@ export const Dashboard = () => {
         }
       }
     }
+
+    setIsBackgroundLoading(false)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selMenuIndex, setRealtimeVisitors, menuArr, setAggregate, setPlausibleStep])
 
   useEffect(() => {
-    customDebug().log('Dashboard#useEffect[leaveBillboard, loadDashboardData]')
     loadDashboardData()
-    leaveBillboard()
     if (intervalId) {
       clearInterval(intervalId)
     }
     intervalId = setInterval(loadDashboardData, REALTIME_DURATION)
-  }, [leaveBillboard, loadDashboardData])
+  }, [loadDashboardData])
 
   useEffect(() => {
     // Set users' initial position

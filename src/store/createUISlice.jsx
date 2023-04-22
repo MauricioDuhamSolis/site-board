@@ -38,5 +38,8 @@ export const createUISlice = (set, get) => {
 
     isLoading: false,
     setIsLoading: (newIsLoading) => set(() => ({isLoading: newIsLoading})),
+
+    isBackgroundLoading: false,
+    setIsBackgroundLoading: (newIsBackgroundLoading) => set(() => ({isBackgroundLoading: newIsBackgroundLoading})),
   }
 }
