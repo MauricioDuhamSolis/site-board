@@ -52,10 +52,10 @@ export const removeData = async (id) => {
 }
 
 
-export const getDataByUsername = async (username) => {
+export const getUserData = async (username) => {
   try {
     assertDefined(username)
-    const getUrl = `${BACKEND_URL}/getbyusername/${username}`
+    const getUrl = `${BACKEND_URL}/getuserdata/${username}`
     const res = await axios.get(getUrl)
     return res?.data
   } catch (e) {

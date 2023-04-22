@@ -3,7 +3,7 @@ import {MenuItem} from './MenuItem'
 import {AddLink} from './AddLink'
 import {useZustand} from '../../store/useZustand'
 import {customDebug} from '../../utils/custom.debug'
-import {getDataByUsername} from '../../utils/mongo.db'
+import {getUserData} from '../../utils/mongo.db'
 import {Profile} from './Profile'
 import {useAuth0} from '@auth0/auth0-react'
 
@@ -23,7 +23,7 @@ export const Menu = () => {
         return
       }
       setIsLoading(true)
-      const getDataRes = await getDataByUsername(user.name)
+      const getDataRes = await getUserData(user.name)
       customDebug().log('Menu#useEffect[user]: getDataRes: ', getDataRes)
 
       if (Array.isArray(getDataRes) && getDataRes.length) {
