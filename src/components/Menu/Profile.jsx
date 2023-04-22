@@ -3,7 +3,7 @@ import React from 'react'
 
 
 export const Profile = () => {
-  const {isAuthenticated, loginWithRedirect, logout} = useAuth0()
+  const {isAuthenticated, loginWithRedirect, logout, user} = useAuth0()
 
   const logoutWithRedirect = () => {
     logout({
@@ -14,7 +14,8 @@ export const Profile = () => {
   }
 
   return (
-    <div className='flex items-center justify-center h-full p-2 text-white'>
+    <div className='flex items-center justify-center h-full gap-2 p-2 text-white'>
+      {user?.name}
       {isAuthenticated ?
         <button
           className='pl-2 pr-2 border-2 rounded'
