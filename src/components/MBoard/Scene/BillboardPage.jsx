@@ -14,7 +14,7 @@ export const BillboardPage = ({hide}) => {
 
   return (
     <div className={classNames({
-      'absolute flex items-center justify-center w-full h-full text-white top-0 left-0 bg-white': true,
+      'absolute flex items-center justify-center w-full h-full text-white top-0 left-0 bg-black': true,
       'hidden': !!hide,
     })}
     >
