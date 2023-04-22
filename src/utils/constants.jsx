@@ -1,6 +1,6 @@
 /* Static */
 
-export const isDevMode = true
+export const isDevMode = false
 
 export const BACKEND_URL = isDevMode ? 'http://127.0.0.1:4000/main' : 'https://mboard-backend.onrender.com/main'
 
