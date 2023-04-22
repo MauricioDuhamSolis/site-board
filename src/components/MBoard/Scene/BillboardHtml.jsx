@@ -1,6 +1,5 @@
 import React from 'react'
 import {Html} from '@react-three/drei'
-import classNames from 'classnames'
 import {BILLBOARD_HTML_SIZE} from '../../../utils/constants'
 import {useZustand} from '../../../store/useZustand'
 import {domainToUrl} from '../../../utils/common'
@@ -12,7 +11,6 @@ export const BillboardHtml = () => {
     billboardDimensions,
     selMenuIndex,
     menuArr,
-    isSeeingBillboard,
   } = useZustand()
 
   const halfHeight = billboardDimensions.height * 0.545
@@ -28,10 +26,7 @@ export const BillboardHtml = () => {
       occlude='blending'
     >
       <div
-        className={classNames({
-          rounded: true,
-          hidden: !isSeeingBillboard,
-        })}
+        className='rounded'
         style={{
           width: BILLBOARD_HTML_SIZE,
           height: BILLBOARD_HTML_SIZE,
