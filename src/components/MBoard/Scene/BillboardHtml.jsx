@@ -38,7 +38,7 @@ export const BillboardHtml = () => {
             src={domainToUrl(billboardDomain)}
             title={billboardDomain}
           /> :
-          <div>Page not exist.</div>
+          <div className='flex items-center justify-center w-full h-full text-black text-8xl'>Page not exist.</div>
         }
       </div>
     </Html>
