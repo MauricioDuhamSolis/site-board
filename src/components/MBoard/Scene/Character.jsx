@@ -135,6 +135,7 @@ export const Character = ({index, url}) => {
     activateAllActions()
     setAllWeight(0)
     playIdleAnimOnly()
+    modelScene.visible = false
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -160,23 +161,23 @@ export const Character = ({index, url}) => {
           customDebug().log('Character#useFrame: character moving')
           playWalkAnimOnly()
           setIsFirstMove(false)
+          modelScene.visible = true
         }
 
         rigidBody.current.addForce(normalDirec.multiplyScalar(WALKING_SPEED), true)
         userData.prevNormalDirec = normalDirec
         setStopped(false)
-      } else {
-        if (!stopped) {
-          customDebug().log('Character#useFrame: character stopped')
-          playIdleAnimOnly()
-          userData.prevNormalDirec = zeroVec3
-          setIsSeeingBillboard(true)
-          setStopped(true)
-          setIsFirstMove(true)
-        }
+      } else if (!stopped) {
+        customDebug().log('Character#useFrame: character stopped')
+        playIdleAnimOnly()
+        userData.prevNormalDirec = zeroVec3
+        setIsSeeingBillboard(true)
+        setStopped(true)
+        setIsFirstMove(true)
 
         if (index > realtimeVisitors - 1) {
           customDebug().log('Character#useFrame: user terminated')
+          modelScene.visible = false
         }
       }
 
