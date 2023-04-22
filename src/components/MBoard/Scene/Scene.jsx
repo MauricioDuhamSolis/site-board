@@ -72,7 +72,7 @@ export const Scene = () => {
             turbidity={turbidity}
           />
           <Billboard/>
-          <BillboardHtml hide={!isSeeingBillboard}/>
+          <BillboardHtml/>
           {usersInitPos.map((initPos, index) =>
             <Character
               key={index}

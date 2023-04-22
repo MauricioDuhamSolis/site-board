@@ -110,7 +110,6 @@ export const Dashboard = () => {
       <div>Page Views: {aggregate?.pageviews?.value}</div>
       <div>Visit Duration: {aggregate?.visit_duration?.value}</div>
       <div>Visitors: {aggregate?.visitors?.value}</div>
-      <div className=''/>
     </div>
   )
 }

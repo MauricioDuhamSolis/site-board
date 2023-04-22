@@ -7,7 +7,7 @@ import {Home} from './components/Home'
 import {Loading} from './components/Utils/Loading'
 import {useAuth0} from '@auth0/auth0-react'
 import {useZustand} from './store/useZustand'
-import {FullBillboardPage} from './components/FullBillboardPage'
+import {BillboardPage} from './components/BillboardPage'
 import {MBoard} from './components/MBoard/MBoard'
 
 
@@ -25,7 +25,7 @@ const App = () => {
       <div className='relative w-full h-[calc(100vh-3rem)]'>
         {isAuthenticated ?
           <>
-            <FullBillboardPage/>
+            <BillboardPage/>
             <MBoard/>
           </> :
           <Home/>
