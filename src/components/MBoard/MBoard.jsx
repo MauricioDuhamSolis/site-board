@@ -5,7 +5,7 @@ import {Scene} from './Scene/Scene'
 
 export const MBoard = () => {
   return (
-    <div className='w-full h-full'>
+    <div className='absolute w-full h-full'>
       <Dashboard/>
       <Scene/>
     </div>

@@ -13,7 +13,7 @@ import {MBoard} from './components/MBoard/MBoard'
 
 const App = () => {
   const {setIsLoading} = useZustand()
-  const {isLoading, isAuthenticated} = useAuth0()
+  const {isLoading} = useAuth0()
 
   useEffect(() => {
     setIsLoading(isLoading)
@@ -23,13 +23,9 @@ const App = () => {
     <div className='relative flex flex-col w-screen h-screen'>
       <Menu/>
       <div className='relative w-full h-[calc(100vh-3rem)]'>
-        {isAuthenticated ?
-          <>
-            <BillboardPage/>
-            <MBoard/>
-          </> :
-          <Home/>
-        }
+        <BillboardPage/>
+        <MBoard/>
+        <Home/>
       </div>
       <Plausible/>
       <Confirm/>
