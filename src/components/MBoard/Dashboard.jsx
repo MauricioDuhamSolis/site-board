@@ -94,7 +94,8 @@ export const Dashboard = () => {
     for (let i = realtimeVisitors; i < newUsersInitPos.length; i++) {
       newUsersDesPos.push(newUsersInitPos[i])
     }
-    customDebug().log('Scene#useEffect[realtimeVisitors]: newUsersDesPos: ', newUsersDesPos, billboardDesPos)
+    customDebug().log('Scene#useEffect[realtimeVisitors]: newUsersDesPos: ', newUsersDesPos)
+    customDebug().log('Scene#useEffect[realtimeVisitors]: billboardDesPos: ', billboardDesPos)
     setUsersDesPos(newUsersDesPos)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [realtimeVisitors])

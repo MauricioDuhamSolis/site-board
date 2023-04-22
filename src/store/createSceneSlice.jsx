@@ -50,7 +50,6 @@ export const createSceneSlice = (set, get) => {
         return {}
       }
       const newUsersInitPos = state.usersInitPos.filter((userInitPos, userIndex) => userIndex !== index)
-      console.log('usersInitPos change: ', state.usersInitPos, newUsersInitPos)
       const newUsersDesPos = state.usersDesPos.filter((userDesPos, userIndex) => userIndex !== index)
       return {
         usersInitPos: newUsersInitPos,

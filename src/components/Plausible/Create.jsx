@@ -37,7 +37,7 @@ export const Create = ({domain}) => {
 
           const inputVal = inputRef.current.value
           const urlDomain = urlToDomain(inputVal)
-          customDebug().log('Create#onConfirm: urlDomain: ', urlDomain)
+          customDebug().log('Create#onClick: urlDomain: ', urlDomain)
 
           if (!urlDomain) {
             setAlertMsg('Input correct domain please.')
@@ -45,7 +45,7 @@ export const Create = ({domain}) => {
           }
 
           const createSiteRes = await createSite(urlDomain)
-          customDebug().log('Create#onConfirm: createSiteRes: ', createSiteRes)
+          customDebug().log('Create#onClick: createSiteRes: ', createSiteRes)
           const siteData = createSiteRes?.data
 
           if (siteData?.domain !== urlDomain) {
@@ -55,7 +55,7 @@ export const Create = ({domain}) => {
 
           siteData.username = user.name
           const saveDataRes = await saveData(siteData)
-          customDebug().log('Create#onConfirm: saveDataRes: ', saveDataRes)
+          customDebug().log('Create#onClick: saveDataRes: ', saveDataRes)
           const insertedId = saveDataRes?.data?.insertedId
 
           if (saveDataRes?.status !== 200 || !insertedId) {

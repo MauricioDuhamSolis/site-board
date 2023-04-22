@@ -59,6 +59,6 @@ export const getUserData = async (username) => {
     const res = await axios.get(getUrl)
     return res?.data
   } catch (e) {
-    customDebug().log('mongo.db#getAllData: e: ', e)
+    customDebug().log('mongo.db#getUserData: e: ', e)
   }
 }
