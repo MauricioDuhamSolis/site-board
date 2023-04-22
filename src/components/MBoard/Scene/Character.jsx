@@ -6,17 +6,18 @@ import {useAnimations, useFBX, useGLTF} from '@react-three/drei'
 import {useFrame} from '@react-three/fiber'
 import {RigidBody, vec3} from '@react-three/rapier'
 import {useZustand} from '../../../store/useZustand'
-import {AXIS_SIZE, DEFAULT_ANGULAR_DAMPING, DEFAULT_LINEAR_DAMPING, TOLERANCE_DISTANCE} from '../../../utils/constants'
+import {AXIS_SIZE, CHARACTER_SCALE, DEFAULT_ANGULAR_DAMPING, DEFAULT_LINEAR_DAMPING, TOLERANCE_DISTANCE, WALKING_SPEED} from '../../../utils/constants'
 import {assertDefined} from '../../../utils/custom.assert'
 import {customDebug} from '../../../utils/custom.debug'
 
 
-export const Character = ({index, url, scale, speed, initPos}) => {
-  assertDefined(index, url, scale, speed, initPos)
+export const Character = ({index, url}) => {
+  assertDefined(index, url)
   const {
+    usersInitPos,
     usersDesPos,
-    seeBillboard,
-    removeCondUser,
+    setIsSeeingBillboard,
+    realtimeVisitors,
   } = useZustand()
   const [prevAction, setPrevAction] = useState(null)
   const [stopped, setStopped] = useState(null)
@@ -161,17 +162,22 @@ export const Character = ({index, url, scale, speed, initPos}) => {
           setIsFirstMove(false)
         }
 
-        rigidBody.current.addForce(normalDirec.multiplyScalar(speed), true)
+        rigidBody.current.addForce(normalDirec.multiplyScalar(WALKING_SPEED), true)
         userData.prevNormalDirec = normalDirec
         setStopped(false)
-      } else if (!stopped) {
-        customDebug().log('Character#useFrame: character stopped')
-        playIdleAnimOnly()
-        userData.prevNormalDirec = zeroVec3
-        seeBillboard()
-        removeCondUser(index)
-        setStopped(true)
-        setIsFirstMove(true)
+      } else {
+        if (!stopped) {
+          customDebug().log('Character#useFrame: character stopped')
+          playIdleAnimOnly()
+          userData.prevNormalDirec = zeroVec3
+          setIsSeeingBillboard(true)
+          setStopped(true)
+          setIsFirstMove(true)
+        }
+
+        if (index > realtimeVisitors - 1) {
+          customDebug().log('Character#useFrame: user terminated')
+        }
       }
 
       rigidBody.current.userData = userData
@@ -181,7 +187,7 @@ export const Character = ({index, url, scale, speed, initPos}) => {
   return (
     <RigidBody
       ref={rigidBody}
-      position={initPos}
+      position={usersInitPos[index]}
       enabledRotations={[false, true, false]}
       linearDamping={DEFAULT_LINEAR_DAMPING}
       angularDamping={DEFAULT_ANGULAR_DAMPING}
@@ -189,7 +195,7 @@ export const Character = ({index, url, scale, speed, initPos}) => {
       <primitive
         ref={ref}
         object={modelScene}
-        scale={scale}
+        scale={CHARACTER_SCALE}
         castShadow
       >
         {/* <axesHelper args={[AXIS_SIZE]}/> */}

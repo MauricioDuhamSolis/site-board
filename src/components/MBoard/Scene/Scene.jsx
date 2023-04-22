@@ -12,13 +12,12 @@ import {Billboard} from './Billboard'
 import {Camera} from './Camera'
 import {BillboardHtml} from './BillboardHtml'
 import {useZustand} from '../../../store/useZustand'
-import {CHARACTER_SCALE, CHARACTER_URLS, WALKING_SPEED} from '../../../utils/constants'
+import {CHARACTER_URLS} from '../../../utils/constants'
 
 
 export const Scene = () => {
   const {
     isSeeingBillboard,
-    usersInitPos,
   } = useZustand()
 
   const {
@@ -73,14 +72,11 @@ export const Scene = () => {
           />
           <Billboard/>
           {isSeeingBillboard && <BillboardHtml/>}
-          {usersInitPos.map((initPos, index) =>
+          {CHARACTER_URLS.map((url, index) =>
             <Character
               key={index}
               index={index}
-              url={CHARACTER_URLS[index % CHARACTER_URLS.length]}
-              scale={CHARACTER_SCALE}
-              speed={WALKING_SPEED}
-              initPos={initPos}
+              url={url}
             />,
           )}
           <Ground/>

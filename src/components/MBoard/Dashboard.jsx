@@ -81,15 +81,17 @@ export const Dashboard = () => {
   }, [loadDashboardData])
 
   useEffect(() => {
+    const visibleCharacters = Math.min(realtimeVisitors, CHARACTER_URLS.length)
+
     // Set users' initial position
     const characterPosGenerationBox3 = new THREE.Box3().setFromCenterAndSize(
         new THREE.Vector3(billboardDesPos[0], 0, billboardDesPos[2] - CHARACTER_BILLBOARD_VIEW_DISTANCE - CHARACTER_POS_GENERATION_HALF_WIDE),
         new THREE.Vector3(CHARACTER_POS_GENERATION_HALF_WIDE, 0, CHARACTER_POS_GENERATION_HALF_WIDE),
     )
-    const additionalUsersInitPos = Array.from({length: Math.max(realtimeVisitors - usersInitPos.length, 0)}).map(() => getBox3RandomPoint(characterPosGenerationBox3))
+    const additionalUsersInitPos = Array.from({length: CHARACTER_URLS.length - visibleCharacters}).map(() => getBox3RandomPoint(characterPosGenerationBox3))
     customDebug().log('Scene#useEffect[realtimeVisitors]: additionalUsersInitPos: ', additionalUsersInitPos)
     const newUsersInitPos = [
-      ...usersInitPos,
+      ...usersInitPos.slice(0, visibleCharacters),
       ...additionalUsersInitPos,
     ]
     customDebug().log('Scene#useEffect[realtimeVisitors]: newUsersInitPos: ', newUsersInitPos)

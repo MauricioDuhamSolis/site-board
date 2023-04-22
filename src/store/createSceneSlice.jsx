@@ -33,30 +33,6 @@ export const createSceneSlice = (set, get) => {
       }
     }),
 
-    usersQuitState: [],
-    setUsersQuitState: (newUsersQuitState) => set(() => ({usersQuitState: newUsersQuitState})),
-    setUserQuitState: (index, newUserQuitState) => set(() => {
-      const state = get()
-      const newUsersQuitState = [...state.usersQuitState]
-      newUsersQuitState[index] = newUserQuitState
-      return {
-        usersQuitState: newUsersQuitState,
-      }
-    }),
-
-    removeCondUser: (index) => set(() => {
-      const state = get()
-      if (state.usersInitPos[index] !== state.usersDesPos[index]) {
-        return {}
-      }
-      const newUsersInitPos = state.usersInitPos.filter((userInitPos, userIndex) => userIndex !== index)
-      const newUsersDesPos = state.usersDesPos.filter((userDesPos, userIndex) => userIndex !== index)
-      return {
-        usersInitPos: newUsersInitPos,
-        usersDesPos: newUsersDesPos,
-      }
-    }),
-
     /* Billboard */
 
     billboardDimensions: {width: 0, height: 0, length: 0},
@@ -67,20 +43,6 @@ export const createSceneSlice = (set, get) => {
     billboardViewDistance: BILLBOARD_VIEW_DISTANCE,
 
     isSeeingBillboard: false,
-    seeBillboard: () => set(() => {
-      // const billboardDesPos = deepClone(get().billboardDesPos)
-      // const billboardViewDistance = get().billboardViewDistance
-      // billboardDesPos[2] -= billboardViewDistance
-      // const cameraDesPos = billboardDesPos
-      return {
-        // cameraDesPos,
-        isSeeingBillboard: true,
-      }
-    }),
-    leaveBillboard: () => set(() => {
-      return {
-        isSeeingBillboard: false,
-      }
-    }),
+    setIsSeeingBillboard: (newIsSeeingBillboard) => set(() => ({isSeeingBillboard: newIsSeeingBillboard})),
   }
 }
