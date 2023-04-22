@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable no-unused-vars */
 import React, {Suspense} from 'react'
-import {OrbitControls, OrthographicCamera, Sky} from '@react-three/drei'
+import {OrbitControls, OrthographicCamera, Sky, useGLTF} from '@react-three/drei'
 import {Canvas} from '@react-three/fiber'
 import {Debug, Physics} from '@react-three/rapier'
 import {Perf} from 'r3f-perf'
@@ -88,3 +88,8 @@ export const Scene = () => {
     </Canvas>
   )
 }
+
+
+CHARACTER_URLS.forEach((url) => {
+  useGLTF.preload(url)
+})
