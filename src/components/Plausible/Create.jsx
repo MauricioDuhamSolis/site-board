@@ -15,6 +15,7 @@ export const Create = ({domain}) => {
     addMenu,
     setSelMenuIndex,
     onConfirm,
+    setIsLoading,
   } = useZustand()
   const {user} = useAuth0()
   const inputRef = useRef(null)
@@ -30,6 +31,8 @@ export const Create = ({domain}) => {
       <button
         className='pl-2 pr-2 border-2 rounded'
         onClick={() => onConfirm(async () => {
+          setIsLoading(true)
+
           if (!user?.name) {
             setAlertMsg('Username not correct.')
             return
@@ -67,6 +70,7 @@ export const Create = ({domain}) => {
           setSelMenuIndex(menuArr.length)
           addMenu(siteData)
           nextPlausibleStep()
+          setIsLoading(false)
         })}
       >
         Enter
