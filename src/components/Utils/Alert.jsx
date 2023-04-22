@@ -10,7 +10,7 @@ export const Alert = () => {
 
   return (
     <div className={classNames({
-      'fixed flex items-center justify-center w-screen h-screen top-0 left-0': true,
+      'fixed top-0 left-0 z-10 flex items-center justify-center w-screen h-screen': true,
       'hidden': !alertMsg,
     })}
     >
@@ -23,6 +23,7 @@ export const Alert = () => {
           Ok
         </button>
       </div>
+      <div className=''/>
     </div>
   )
 }

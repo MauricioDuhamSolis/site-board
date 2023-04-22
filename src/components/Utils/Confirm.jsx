@@ -10,7 +10,7 @@ export const Confirm = () => {
 
   return (
     <div className={classNames({
-      'fixed flex items-center justify-center w-screen h-screen top-0 left-0': true,
+      'fixed top-0 left-0 z-10 flex items-center justify-center w-screen h-screen': true,
       'hidden': !confirmFunc,
     })}
     >
@@ -34,6 +34,7 @@ export const Confirm = () => {
           </button>
         </div>
       </div>
+      <div className=''/>
     </div>
   )
 }
