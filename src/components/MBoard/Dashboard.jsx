@@ -81,31 +81,24 @@ export const Dashboard = () => {
   }, [loadDashboardData])
 
   useEffect(() => {
-    const visibleCharacters = Math.min(realtimeVisitors, CHARACTER_URLS.length)
-
     // Set users' initial position
     const characterPosGenerationBox3 = new THREE.Box3().setFromCenterAndSize(
         new THREE.Vector3(billboardDesPos[0], 0, billboardDesPos[2] - CHARACTER_BILLBOARD_VIEW_DISTANCE - CHARACTER_POS_GENERATION_HALF_WIDE),
         new THREE.Vector3(CHARACTER_POS_GENERATION_HALF_WIDE, 0, CHARACTER_POS_GENERATION_HALF_WIDE),
     )
-    const additionalUsersInitPos = Array.from({length: CHARACTER_URLS.length - visibleCharacters}).map(() => getBox3RandomPoint(characterPosGenerationBox3))
-    customDebug().log('Scene#useEffect[realtimeVisitors]: additionalUsersInitPos: ', additionalUsersInitPos)
-    const newUsersInitPos = [
-      ...usersInitPos.slice(0, visibleCharacters),
-      ...additionalUsersInitPos,
-    ]
-    customDebug().log('Scene#useEffect[realtimeVisitors]: newUsersInitPos: ', newUsersInitPos)
+    const newUsersInitPos = Array.from({length: CHARACTER_URLS.length}).map(() => getBox3RandomPoint(characterPosGenerationBox3))
     setUsersInitPos(newUsersInitPos)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
+  useEffect(() => {
     // Set users' destination position
     const newUserDesPos = deepClone(billboardDesPos)
     newUserDesPos[2] -= CHARACTER_BILLBOARD_VIEW_DISTANCE
     const newUsersDesPos = Array.from({length: realtimeVisitors}).fill(newUserDesPos)
-    for (let i = realtimeVisitors; i < newUsersInitPos.length; i++) {
-      newUsersDesPos.push(newUsersInitPos[i])
+    for (let i = realtimeVisitors; i < CHARACTER_URLS.length; i++) {
+      newUsersDesPos.push(usersInitPos[i] || [0, 0, 0])
     }
-    customDebug().log('Scene#useEffect[realtimeVisitors]: newUsersDesPos: ', newUsersDesPos)
-    customDebug().log('Scene#useEffect[realtimeVisitors]: billboardDesPos: ', billboardDesPos)
     setUsersDesPos(newUsersDesPos)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [realtimeVisitors])
