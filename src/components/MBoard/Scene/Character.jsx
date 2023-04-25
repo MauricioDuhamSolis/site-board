@@ -24,8 +24,8 @@ export const Character = ({index, url}) => {
   const [isFirstMove, setIsFirstMove] = useState(true)
 
   const rigidBody = useRef(null)
-  const {modelScene, actions, mixer} = useCloneFbx(url)
-  // const {modelScene, ref, actions, mixer} = useCloneGltf(url)
+  // const {modelScene, actions, mixer} = useCloneFbx(url)
+  const {modelScene, actions, mixer} = useCloneGltf(url)
 
   useEffect(() => {
     if (!mixer) {

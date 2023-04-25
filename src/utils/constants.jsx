@@ -4,8 +4,8 @@ export const isDevMode = true
 
 export const BACKEND_URL = isDevMode ? 'http://127.0.0.1:4000/main' : 'https://mboard-backend.onrender.com/main'
 
-// export const CHARACTER_URLS = Array.from({length: 5}).map((v, i) => `./models/glb/character (${i + 1}).glb`)
-export const CHARACTER_URLS = Array.from({length: 5}).map((v, i) => `./models/fbx/character (${i + 1}).fbx`)
+// export const CHARACTER_URLS = Array.from({length: 5}).map((v, i) => `./models/fbx/character (${i + 1}).fbx`)
+export const CHARACTER_URLS = Array.from({length: 5}).map((v, i) => `./models/glb/character (${i + 1}).glb`)
 
 export const AXIS_SIZE = 10
 
