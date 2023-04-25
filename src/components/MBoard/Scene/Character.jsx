@@ -2,14 +2,13 @@
 /* eslint-disable react/no-unknown-property */
 import React, {useCallback, useEffect, useRef, useState} from 'react'
 import * as THREE from 'three'
-import {clone} from 'three/examples/jsm/utils/SkeletonUtils'
-import {useAnimations, useFBX, useGLTF} from '@react-three/drei'
 import {useFrame} from '@react-three/fiber'
 import {RigidBody, vec3} from '@react-three/rapier'
 import {useZustand} from '../../../store/useZustand'
-import {AXIS_SIZE, CHARACTER_SCALE, DEFAULT_ANGULAR_DAMPING, DEFAULT_LINEAR_DAMPING, TOLERANCE_DISTANCE, WALKING_SPEED} from '../../../utils/constants'
+import {CHARACTER_SCALE, DEFAULT_ANGULAR_DAMPING, DEFAULT_LINEAR_DAMPING, TOLERANCE_DISTANCE, WALKING_SPEED} from '../../../utils/constants'
 import {assertDefined} from '../../../utils/custom.assert'
 import {customDebug} from '../../../utils/custom.debug'
+import {useCloneGltf} from '../../../hooks/useCloneGltf'
 
 
 export const Character = ({index, url}) => {
@@ -23,19 +22,12 @@ export const Character = ({index, url}) => {
   const [stopped, setStopped] = useState(null)
   const [isFirstMove, setIsFirstMove] = useState(true)
 
+  const rigidBody = useRef(null)
+  const {modelScene, ref, actions, mixer} = useCloneGltf(url)
+
   // const fbx = useFBX(url)
   // const modelScene = fbx
   // const modelAnims = fbx.animations
-
-  const gltf = useGLTF(url)
-  const modelScene = gltf.scene
-  const modelAnims = gltf.animations
-
-  // customDebug().log('Character: modelScene: ', modelScene)
-  // customDebug().log('Character: modelAnims: ', modelAnims)
-
-  const rigidBody = useRef(null)
-  const {ref, actions, mixer} = useAnimations(modelAnims)
 
   useEffect(() => {
     if (!mixer) {
@@ -193,12 +185,7 @@ export const Character = ({index, url}) => {
         object={modelScene}
         scale={CHARACTER_SCALE}
         castShadow
-      >
-        {/* <axesHelper args={[AXIS_SIZE]}/> */}
-      </primitive>
+      />
     </RigidBody>
   )
 }
-
-
-const zeroVec3 = new THREE.Vector3()
