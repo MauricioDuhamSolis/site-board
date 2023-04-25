@@ -5,15 +5,15 @@ import * as THREE from 'three'
 import {useFrame} from '@react-three/fiber'
 import {RigidBody, vec3} from '@react-three/rapier'
 import {useZustand} from '../../../store/useZustand'
-import {CHARACTER_SCALE, DEFAULT_ANGULAR_DAMPING, DEFAULT_LINEAR_DAMPING, TOLERANCE_DISTANCE, WALKING_SPEED} from '../../../utils/constants'
+import {CHARACTER_SCALE, CHARACTER_URLS, DEFAULT_ANGULAR_DAMPING, DEFAULT_LINEAR_DAMPING, TOLERANCE_DISTANCE, WALKING_SPEED} from '../../../utils/constants'
 import {assertDefined} from '../../../utils/custom.assert'
 import {customDebug} from '../../../utils/custom.debug'
 import {useCloneFbx} from '../../../hooks/useCloneFbx'
 import {useCloneGltf} from '../../../hooks/useCloneGltf'
 
 
-export const Character = ({index, url}) => {
-  assertDefined(index, url)
+export const Character = ({index}) => {
+  assertDefined(index)
   const {
     usersInitPos,
     usersDesPos,
@@ -24,8 +24,8 @@ export const Character = ({index, url}) => {
   const [isFirstMove, setIsFirstMove] = useState(true)
 
   const rigidBody = useRef(null)
-  // const {modelScene, actions, mixer} = useCloneFbx(url)
-  const {modelScene, actions, mixer} = useCloneGltf(url)
+  // const {modelScene, actions, mixer} = useCloneFbx(CHARACTER_URLS[index % CHARACTER_URLS.length])
+  const {modelScene, actions, mixer} = useCloneGltf(CHARACTER_URLS[index % CHARACTER_URLS.length])
 
   useEffect(() => {
     if (!modelScene || !mixer) {

@@ -18,6 +18,7 @@ import {AXIS_SIZE, CHARACTER_URLS} from '../../../utils/constants'
 export const Scene = () => {
   const {
     isSeeingBillboard,
+    curCharacterNum,
   } = useZustand()
 
   const {
@@ -72,11 +73,10 @@ export const Scene = () => {
           />
           <Billboard/>
           {isSeeingBillboard && <BillboardHtml/>}
-          {CHARACTER_URLS.map((url, index) =>
+          {Array.from({length: curCharacterNum}).map((v, index) =>
             <Character
               key={index}
               index={index}
-              url={url}
             />,
           )}
           <Ground/>
