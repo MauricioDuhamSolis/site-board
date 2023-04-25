@@ -1,12 +1,10 @@
 import React, {useCallback, useEffect} from 'react'
-import * as THREE from 'three'
 import {useControls} from 'leva'
 import classNames from 'classnames'
 import {useZustand} from '../../store/useZustand'
 import {getAggregate, getRealtimeVisitors} from '../../utils/plausible'
-import {CHARACTER_BILLBOARD_VIEW_DISTANCE, CHARACTER_POS_GENERATION_HALF_WIDE, CHARACTER_URLS, FLOATING_HEIGHT, REALTIME_DURATION, isDevMode} from '../../utils/constants'
+import {CHARACTER_URLS, REALTIME_DURATION, isDevMode} from '../../utils/constants'
 import {customDebug} from '../../utils/custom.debug'
-import {deepClone, getBox3RandomPoint} from '../../utils/common'
 
 
 export const Dashboard = () => {
@@ -18,10 +16,6 @@ export const Dashboard = () => {
     setPlausibleStep,
     realtimeVisitors,
     setRealtimeVisitors,
-    billboardDesPos,
-    usersInitPos,
-    setUsersInitPos,
-    setUsersDesPos,
     isBackgroundLoading,
     setIsBackgroundLoading,
   } = useZustand()
@@ -78,29 +72,6 @@ export const Dashboard = () => {
     }
     intervalId = setInterval(loadDashboardData, REALTIME_DURATION)
   }, [loadDashboardData])
-
-  useEffect(() => {
-    // Set users' initial position
-    const characterPosGenerationBox3 = new THREE.Box3().setFromCenterAndSize(
-        new THREE.Vector3(billboardDesPos[0], FLOATING_HEIGHT, billboardDesPos[2] - CHARACTER_BILLBOARD_VIEW_DISTANCE - CHARACTER_POS_GENERATION_HALF_WIDE),
-        new THREE.Vector3(CHARACTER_POS_GENERATION_HALF_WIDE, FLOATING_HEIGHT, CHARACTER_POS_GENERATION_HALF_WIDE),
-    )
-    const newUsersInitPos = Array.from({length: CHARACTER_URLS.length}).map(() => getBox3RandomPoint(characterPosGenerationBox3))
-    setUsersInitPos(newUsersInitPos)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  useEffect(() => {
-    // Set users' destination position
-    const newUserDesPos = deepClone(billboardDesPos)
-    newUserDesPos[2] -= CHARACTER_BILLBOARD_VIEW_DISTANCE
-    const newUsersDesPos = Array.from({length: realtimeVisitors}).fill(newUserDesPos)
-    for (let i = realtimeVisitors; i < CHARACTER_URLS.length; i++) {
-      newUsersDesPos.push(usersInitPos[i] || [0, 0, 0])
-    }
-    setUsersDesPos(newUsersDesPos)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [realtimeVisitors])
 
   return (
     <div className={classNames({

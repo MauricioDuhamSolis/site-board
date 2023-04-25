@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable no-unused-vars */
-import React, {Suspense} from 'react'
+import React, {Suspense, useEffect} from 'react'
+import * as THREE from 'three'
 import {OrbitControls, OrthographicCamera, Sky, useGLTF} from '@react-three/drei'
 import {Canvas} from '@react-three/fiber'
 import {Debug, Physics} from '@react-three/rapier'
@@ -12,13 +13,19 @@ import {Billboard} from './Billboard'
 import {Camera} from './Camera'
 import {BillboardHtml} from './BillboardHtml'
 import {useZustand} from '../../../store/useZustand'
-import {AXIS_SIZE, CHARACTER_URLS} from '../../../utils/constants'
+import {AXIS_SIZE, CHARACTER_BILLBOARD_VIEW_DISTANCE, CHARACTER_POS_GENERATION_HALF_WIDE, CHARACTER_URLS, FLOATING_HEIGHT} from '../../../utils/constants'
+import {deepClone, getBox3RandomPoint} from '../../../utils/common'
 
 
 export const Scene = () => {
   const {
     isSeeingBillboard,
     curCharacterNum,
+    billboardDesPos,
+    usersInitPos,
+    setUsersInitPos,
+    setUsersDesPos,
+    realtimeVisitors,
   } = useZustand()
 
   const {
@@ -40,6 +47,29 @@ export const Scene = () => {
     rayleigh: {value: 0.03, label: 'rayleigh'},
     turbidity: {value: 0, label: 'turbidity'},
   })
+
+  useEffect(() => {
+    // Set users' initial position
+    const characterPosGenerationBox3 = new THREE.Box3().setFromCenterAndSize(
+        new THREE.Vector3(billboardDesPos[0], FLOATING_HEIGHT, billboardDesPos[2] - CHARACTER_BILLBOARD_VIEW_DISTANCE - CHARACTER_POS_GENERATION_HALF_WIDE),
+        new THREE.Vector3(CHARACTER_POS_GENERATION_HALF_WIDE, FLOATING_HEIGHT, CHARACTER_POS_GENERATION_HALF_WIDE),
+    )
+    const newUsersInitPos = Array.from({length: CHARACTER_URLS.length}).map(() => getBox3RandomPoint(characterPosGenerationBox3))
+    setUsersInitPos(newUsersInitPos)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
+    // Set users' destination position
+    const newUserDesPos = deepClone(billboardDesPos)
+    newUserDesPos[2] -= CHARACTER_BILLBOARD_VIEW_DISTANCE
+    const newUsersDesPos = Array.from({length: realtimeVisitors}).fill(newUserDesPos)
+    for (let i = realtimeVisitors; i < CHARACTER_URLS.length; i++) {
+      newUsersDesPos.push(usersInitPos[i] || [0, 0, 0])
+    }
+    setUsersDesPos(newUsersDesPos)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [realtimeVisitors])
 
   return (
     <Canvas>
