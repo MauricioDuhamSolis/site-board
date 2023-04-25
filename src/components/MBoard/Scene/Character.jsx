@@ -28,7 +28,7 @@ export const Character = ({index, url}) => {
   const {modelScene, actions, mixer} = useCloneGltf(url)
 
   useEffect(() => {
-    if (!mixer) {
+    if (!modelScene || !mixer) {
       return
     }
 
@@ -39,7 +39,7 @@ export const Character = ({index, url}) => {
     playIdleAnimOnly()
     modelScene.visible = false
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [mixer])
+  }, [mixer, modelScene])
 
   // Move model to destination position
   useFrame((state, delta) => {
@@ -60,7 +60,7 @@ export const Character = ({index, url}) => {
           setStopped(false)
         }
 
-        if (index < realtimeVisitors) {
+        if (index < realtimeVisitors && modelScene) {
           modelScene.visible = true
         }
         rigidBody.current.applyImpulse(normalDirec.multiplyScalar(WALKING_SPEED), true)
@@ -69,7 +69,7 @@ export const Character = ({index, url}) => {
         playIdleAnimOnly()
         setIsFirstMove(true)
         setStopped(true)
-        if (index > realtimeVisitors - 1) {
+        if (index > realtimeVisitors - 1 && modelScene) {
           modelScene.visible = false
         }
       }

@@ -7,7 +7,7 @@ import {useEffect, useState} from 'react'
 export const useCloneGltf = (url) => {
   const [modelScene, setModelScene] = useState(null)
   const [mixer, setMixer] = useState(null)
-  const [actions, setActions] = useState(null)
+  const [actions, setActions] = useState([])
   const gltf = useGLTF(url)
 
   useEffect(() => {
