@@ -5,11 +5,11 @@ export const isDevMode = true
 export const BACKEND_URL = isDevMode ? 'http://127.0.0.1:4000/main' : 'https://mboard-backend.onrender.com/main'
 
 export const CHARACTER_URLS = [
-  './models/character 1.glb',
-  './models/character 2.glb',
-  './models/character 3.glb',
-  './models/character 4.glb',
-  './models/character 5.glb',
+  './models/glb/character (1).glb',
+  './models/glb/character (2).glb',
+  './models/glb/character (3).glb',
+  './models/glb/character (4).glb',
+  './models/glb/character (5).glb',
 ]
 
 export const AXIS_SIZE = 10
@@ -18,7 +18,7 @@ export const GROUND_SIZE = 3000
 
 export const GROUND_HEIGHT = 2
 
-export const BILLBOARD_URL = './models/billboard.fbx'
+export const BILLBOARD_URL = './models/fbx/billboard.fbx'
 
 export const BILLBOARD_HTML_SIZE = 1200
 
@@ -40,7 +40,7 @@ export const BILLBOARD_SCALE = 0.06 * HTML_ASPECT
 
 export const CHARACTER_SCALE = 0.015 * HTML_ASPECT
 
-export const WALKING_SPEED = DEFAULT_LINEAR_DAMPING * 1.2
+export const WALKING_SPEED = DEFAULT_LINEAR_DAMPING * 1.4
 
 export const TOLERANCE_DISTANCE = CHARACTER_URLS.length * HTML_ASPECT
 
