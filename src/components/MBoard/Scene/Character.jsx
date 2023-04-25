@@ -16,7 +16,6 @@ export const Character = ({index, url}) => {
   const {
     usersInitPos,
     usersDesPos,
-    setIsSeeingBillboard,
     realtimeVisitors,
   } = useZustand()
   const [prevAction, setPrevAction] = useState(null)
@@ -120,7 +119,7 @@ export const Character = ({index, url}) => {
 
     if (prevAction !== walkAction) {
       // customDebug().log('Character#playWalkAnimOnly')
-      prepareCrossFade(prevAction, walkAction, 0)
+      prepareCrossFade(prevAction, walkAction, 0.3)
       setPrevAction(walkAction)
     }
   }, [actions, prepareCrossFade, prevAction])
@@ -148,40 +147,32 @@ export const Character = ({index, url}) => {
       const direc = desPos.sub(curPos)
       const direcLen = direc.length()
       const normalDirec = direc.normalize()
-      const prevNormalDirec = rigidBody.current.userData?.prevNormalDirec
-      const userData = {}
-
-      if (prevNormalDirec) {
-        const prevNormalNegateDirec = prevNormalDirec.negate()
-        rigidBody.current.addForce(prevNormalNegateDirec, true)
-      }
 
       if (direcLen > TOLERANCE_DISTANCE) {
         if (isFirstMove) {
           customDebug().log('Character#useFrame: character moving')
           playWalkAnimOnly()
           setIsFirstMove(false)
+          setStopped(false)
+        }
+
+        if (index < realtimeVisitors) {
+          customDebug().log('Character#useFrame: user stayed')
           modelScene.visible = true
         }
 
-        rigidBody.current.addForce(normalDirec.multiplyScalar(WALKING_SPEED), true)
-        userData.prevNormalDirec = normalDirec
-        setStopped(false)
+        rigidBody.current.applyImpulse(normalDirec.multiplyScalar(WALKING_SPEED), true)
       } else if (!stopped) {
         customDebug().log('Character#useFrame: character stopped')
         playIdleAnimOnly()
-        userData.prevNormalDirec = zeroVec3
-        setIsSeeingBillboard(true)
-        setStopped(true)
         setIsFirstMove(true)
+        setStopped(true)
 
         if (index > realtimeVisitors - 1) {
           customDebug().log('Character#useFrame: user terminated')
           modelScene.visible = false
         }
       }
-
-      rigidBody.current.userData = userData
     }
   })
 

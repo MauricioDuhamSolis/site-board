@@ -42,7 +42,7 @@ export const createSceneSlice = (set, get) => {
     billboardDesPos: BILLBOARD_DES_POS,
     billboardViewDistance: BILLBOARD_VIEW_DISTANCE,
 
-    isSeeingBillboard: false,
+    isSeeingBillboard: true,
     setIsSeeingBillboard: (newIsSeeingBillboard) => set(() => ({isSeeingBillboard: newIsSeeingBillboard})),
   }
 }

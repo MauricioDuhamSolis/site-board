@@ -1,6 +1,6 @@
 /* Static */
 
-export const isDevMode = false
+export const isDevMode = true
 
 export const BACKEND_URL = isDevMode ? 'http://127.0.0.1:4000/main' : 'https://mboard-backend.onrender.com/main'
 
@@ -22,9 +22,7 @@ export const BILLBOARD_URL = './models/billboard.fbx'
 
 export const BILLBOARD_HTML_SIZE = 1200
 
-export const DEFAULT_LINEAR_DAMPING = 10
-
-export const DEFAULT_ANGULAR_DAMPING = 10
+export const DEFAULT_LINEAR_DAMPING = 1000
 
 export const PLAUSIBLE_STEP_COUNT = 3
 
@@ -34,13 +32,15 @@ export const REALTIME_DURATION = 10000
 
 /* Dynamic */
 
+export const DEFAULT_ANGULAR_DAMPING = DEFAULT_LINEAR_DAMPING * 10
+
 export const HTML_ASPECT = BILLBOARD_HTML_SIZE / 400
 
 export const BILLBOARD_SCALE = 0.06 * HTML_ASPECT
 
 export const CHARACTER_SCALE = 0.015 * HTML_ASPECT
 
-export const WALKING_SPEED = BILLBOARD_HTML_SIZE * 1.2
+export const WALKING_SPEED = DEFAULT_LINEAR_DAMPING * 1.2
 
 export const TOLERANCE_DISTANCE = CHARACTER_URLS.length * HTML_ASPECT
 
