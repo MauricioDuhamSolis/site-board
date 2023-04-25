@@ -2,6 +2,7 @@
 /* eslint-disable react/no-unknown-property */
 import React, {useCallback, useEffect, useRef, useState} from 'react'
 import * as THREE from 'three'
+import {clone} from 'three/examples/jsm/utils/SkeletonUtils'
 import {useAnimations, useFBX, useGLTF} from '@react-three/drei'
 import {useFrame} from '@react-three/fiber'
 import {RigidBody, vec3} from '@react-three/rapier'
@@ -36,6 +37,54 @@ export const Character = ({index, url}) => {
   const rigidBody = useRef(null)
   const {ref, actions, mixer} = useAnimations(modelAnims)
 
+  useEffect(() => {
+    if (!mixer) {
+      return
+    }
+
+    // Play idle animation at first
+    mixer.timeScale = 1
+    activateAllActions()
+    setAllWeight(0)
+    playIdleAnimOnly()
+    modelScene.visible = false
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mixer])
+
+  // Move model to destination position
+  useFrame((state, delta) => {
+    if (rigidBody.current && usersDesPos[index]) {
+      const curPos = vec3(rigidBody.current.translation())
+      const userDesPos = usersDesPos[index]
+      const desPos = new THREE.Vector3(userDesPos[0], userDesPos[1], userDesPos[2])
+      const direc = desPos.sub(curPos)
+      const direcLen = direc.length()
+      const normalDirec = direc.normalize()
+      normalDirec.setY(0)
+
+      if (direcLen > TOLERANCE_DISTANCE) {
+        if (isFirstMove) {
+          customDebug().log('Character#useFrame: character moving')
+          playWalkAnimOnly()
+          setIsFirstMove(false)
+          setStopped(false)
+        }
+
+        if (index < realtimeVisitors) {
+          modelScene.visible = true
+        }
+        rigidBody.current.applyImpulse(normalDirec.multiplyScalar(WALKING_SPEED), true)
+      } else if (!stopped) {
+        customDebug().log('Character#useFrame: character stopped')
+        playIdleAnimOnly()
+        setIsFirstMove(true)
+        setStopped(true)
+        if (index > realtimeVisitors - 1) {
+          modelScene.visible = false
+        }
+      }
+    }
+  })
 
   const deactivateAllActions = useCallback(() => {
     Object.keys(actions).forEach((actionKey) => {
@@ -55,7 +104,6 @@ export const Character = ({index, url}) => {
       actions[actionKey].paused = false
     })
   }, [actions])
-
 
   const pauseAllActions = useCallback(() => {
     Object.keys(actions).forEach((actionKey) => {
@@ -106,6 +154,10 @@ export const Character = ({index, url}) => {
 
   const playIdleAnimOnly = useCallback(() => {
     const idleAction = actions['Idle']
+    customDebug().log('Character#playIdleAnimOnly: idleAction: ', idleAction)
+    if (!idleAction) {
+      return
+    }
 
     if (prevAction !== idleAction) {
       // customDebug().log('Character#playIdleAnimOnly')
@@ -116,6 +168,10 @@ export const Character = ({index, url}) => {
 
   const playWalkAnimOnly = useCallback(() => {
     const walkAction = actions['Walk']
+    customDebug().log('Character#playIdleAnimOnly: walkAction: ', walkAction)
+    if (!walkAction) {
+      return
+    }
 
     if (prevAction !== walkAction) {
       // customDebug().log('Character#playWalkAnimOnly')
@@ -123,55 +179,6 @@ export const Character = ({index, url}) => {
       setPrevAction(walkAction)
     }
   }, [actions, prepareCrossFade, prevAction])
-
-
-  // Call at once
-  useEffect(() => {
-    // customDebug().log('Character: call at once')
-
-    // Play idle animation at first
-    mixer.timeScale = 1
-    activateAllActions()
-    setAllWeight(0)
-    playIdleAnimOnly()
-    modelScene.visible = false
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  // Move model to destination position
-  useFrame((state, delta) => {
-    if (rigidBody.current && usersDesPos[index]) {
-      const curPos = vec3(rigidBody.current.translation())
-      const userDesPos = usersDesPos[index]
-      const desPos = new THREE.Vector3(userDesPos[0], userDesPos[1], userDesPos[2])
-      const direc = desPos.sub(curPos)
-      const direcLen = direc.length()
-      const normalDirec = direc.normalize()
-      normalDirec.setY(0)
-
-      if (direcLen > TOLERANCE_DISTANCE) {
-        if (isFirstMove) {
-          customDebug().log('Character#useFrame: character moving')
-          playWalkAnimOnly()
-          setIsFirstMove(false)
-          setStopped(false)
-        }
-
-        if (index < realtimeVisitors) {
-          modelScene.visible = true
-        }
-        rigidBody.current.applyImpulse(normalDirec.multiplyScalar(WALKING_SPEED), true)
-      } else if (!stopped) {
-        customDebug().log('Character#useFrame: character stopped')
-        playIdleAnimOnly()
-        setIsFirstMove(true)
-        setStopped(true)
-        if (index > realtimeVisitors - 1) {
-          modelScene.visible = false
-        }
-      }
-    }
-  })
 
   return (
     <RigidBody
