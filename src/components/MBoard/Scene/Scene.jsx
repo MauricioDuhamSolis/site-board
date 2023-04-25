@@ -12,7 +12,7 @@ import {Billboard} from './Billboard'
 import {Camera} from './Camera'
 import {BillboardHtml} from './BillboardHtml'
 import {useZustand} from '../../../store/useZustand'
-import {CHARACTER_URLS} from '../../../utils/constants'
+import {AXIS_SIZE, CHARACTER_URLS} from '../../../utils/constants'
 
 
 export const Scene = () => {

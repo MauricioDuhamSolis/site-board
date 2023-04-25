@@ -147,6 +147,7 @@ export const Character = ({index, url}) => {
       const direc = desPos.sub(curPos)
       const direcLen = direc.length()
       const normalDirec = direc.normalize()
+      normalDirec.setY(0)
 
       if (direcLen > TOLERANCE_DISTANCE) {
         if (isFirstMove) {
@@ -157,19 +158,15 @@ export const Character = ({index, url}) => {
         }
 
         if (index < realtimeVisitors) {
-          customDebug().log('Character#useFrame: user stayed')
           modelScene.visible = true
         }
-
         rigidBody.current.applyImpulse(normalDirec.multiplyScalar(WALKING_SPEED), true)
       } else if (!stopped) {
         customDebug().log('Character#useFrame: character stopped')
         playIdleAnimOnly()
         setIsFirstMove(true)
         setStopped(true)
-
         if (index > realtimeVisitors - 1) {
-          customDebug().log('Character#useFrame: user terminated')
           modelScene.visible = false
         }
       }

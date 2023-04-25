@@ -4,7 +4,7 @@ import {useControls} from 'leva'
 import classNames from 'classnames'
 import {useZustand} from '../../store/useZustand'
 import {getAggregate, getRealtimeVisitors} from '../../utils/plausible'
-import {CHARACTER_BILLBOARD_VIEW_DISTANCE, CHARACTER_POS_GENERATION_HALF_WIDE, CHARACTER_URLS, REALTIME_DURATION, isDevMode} from '../../utils/constants'
+import {CHARACTER_BILLBOARD_VIEW_DISTANCE, CHARACTER_POS_GENERATION_HALF_WIDE, CHARACTER_URLS, FLOATING_HEIGHT, REALTIME_DURATION, isDevMode} from '../../utils/constants'
 import {customDebug} from '../../utils/custom.debug'
 import {deepClone, getBox3RandomPoint} from '../../utils/common'
 
@@ -83,8 +83,8 @@ export const Dashboard = () => {
   useEffect(() => {
     // Set users' initial position
     const characterPosGenerationBox3 = new THREE.Box3().setFromCenterAndSize(
-        new THREE.Vector3(billboardDesPos[0], 0, billboardDesPos[2] - CHARACTER_BILLBOARD_VIEW_DISTANCE - CHARACTER_POS_GENERATION_HALF_WIDE),
-        new THREE.Vector3(CHARACTER_POS_GENERATION_HALF_WIDE, 0, CHARACTER_POS_GENERATION_HALF_WIDE),
+        new THREE.Vector3(billboardDesPos[0], FLOATING_HEIGHT, billboardDesPos[2] - CHARACTER_BILLBOARD_VIEW_DISTANCE - CHARACTER_POS_GENERATION_HALF_WIDE),
+        new THREE.Vector3(CHARACTER_POS_GENERATION_HALF_WIDE, FLOATING_HEIGHT, CHARACTER_POS_GENERATION_HALF_WIDE),
     )
     const newUsersInitPos = Array.from({length: CHARACTER_URLS.length}).map(() => getBox3RandomPoint(characterPosGenerationBox3))
     setUsersInitPos(newUsersInitPos)
