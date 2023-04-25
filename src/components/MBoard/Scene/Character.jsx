@@ -24,7 +24,7 @@ export const Character = ({index, url}) => {
   const [isFirstMove, setIsFirstMove] = useState(true)
 
   const rigidBody = useRef(null)
-  const {modelScene, ref, actions, mixer} = useCloneFbx(url)
+  const {modelScene, actions, mixer} = useCloneFbx(url)
   // const {modelScene, ref, actions, mixer} = useCloneGltf(url)
 
   useEffect(() => {
@@ -73,6 +73,10 @@ export const Character = ({index, url}) => {
           modelScene.visible = false
         }
       }
+    }
+
+    if (mixer) {
+      mixer.update(delta)
     }
   })
 
@@ -129,7 +133,9 @@ export const Character = ({index, url}) => {
       }
     }
 
-    mixer.addEventListener('loop', onLoopFinished)
+    if (mixer) {
+      mixer.addEventListener('loop', onLoopFinished)
+    }
   }, [executeCrossFade, mixer])
 
   const prepareCrossFade = useCallback((startAction, endAction, duration) => {
@@ -168,7 +174,7 @@ export const Character = ({index, url}) => {
     }
   }, [actions, prepareCrossFade, prevAction])
 
-  return (
+  return modelScene && (
     <RigidBody
       ref={rigidBody}
       position={usersInitPos[index]}
@@ -177,7 +183,6 @@ export const Character = ({index, url}) => {
       angularDamping={DEFAULT_ANGULAR_DAMPING}
     >
       <primitive
-        ref={ref}
         object={modelScene}
         scale={CHARACTER_SCALE}
         castShadow

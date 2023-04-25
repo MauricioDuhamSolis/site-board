@@ -1,12 +1,26 @@
-// import {clone} from 'three/examples/jsm/utils/SkeletonUtils'
-import {useAnimations, useFBX} from '@react-three/drei'
+import * as THREE from 'three'
+import {clone} from 'three/examples/jsm/utils/SkeletonUtils'
+import {useFBX} from '@react-three/drei'
+import {useEffect, useState} from 'react'
 
 
 export const useCloneFbx = (url) => {
+  const [modelScene, setModelScene] = useState(null)
+  const [mixer, setMixer] = useState(null)
+  const [actions, setActions] = useState(null)
   const fbx = useFBX(url)
-  const modelScene = fbx
-  const modelAnims = fbx.animations
-  const {ref, actions, mixer} = useAnimations(modelAnims)
 
-  return {modelScene, ref, actions, mixer}
+  useEffect(() => {
+    const newModelScene = clone(fbx)
+    const newMixer = new THREE.AnimationMixer(newModelScene)
+    const newActions = {}
+    fbx.animations.forEach((animation) => {
+      newActions[animation.name] = newMixer.clipAction(animation)
+    })
+    setModelScene(newModelScene)
+    setMixer(newMixer)
+    setActions(newActions)
+  }, [fbx])
+
+  return {modelScene, actions, mixer}
 }
