@@ -35,7 +35,6 @@ export const Dashboard = () => {
       return
     }
     setIsBackgroundLoading(true)
-    customDebug().log('Dashboard#loadDashboardData')
 
     if (selMenuIndex !== null) {
       if (isDevMode) {
