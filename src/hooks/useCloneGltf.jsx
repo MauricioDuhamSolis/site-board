@@ -8,5 +8,5 @@ export const useCloneGltf = (url) => {
   const modelAnims = gltf.animations
   const {ref, actions, mixer} = useAnimations(modelAnims)
 
-  return {modelScene, modelAnims, ref, actions, mixer}
+  return {modelScene, ref, actions, mixer}
 }

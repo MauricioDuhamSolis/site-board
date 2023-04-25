@@ -8,6 +8,7 @@ import {useZustand} from '../../../store/useZustand'
 import {CHARACTER_SCALE, DEFAULT_ANGULAR_DAMPING, DEFAULT_LINEAR_DAMPING, TOLERANCE_DISTANCE, WALKING_SPEED} from '../../../utils/constants'
 import {assertDefined} from '../../../utils/custom.assert'
 import {customDebug} from '../../../utils/custom.debug'
+import {useCloneFbx} from '../../../hooks/useCloneFbx'
 import {useCloneGltf} from '../../../hooks/useCloneGltf'
 
 
@@ -23,11 +24,8 @@ export const Character = ({index, url}) => {
   const [isFirstMove, setIsFirstMove] = useState(true)
 
   const rigidBody = useRef(null)
-  const {modelScene, ref, actions, mixer} = useCloneGltf(url)
-
-  // const fbx = useFBX(url)
-  // const modelScene = fbx
-  // const modelAnims = fbx.animations
+  const {modelScene, ref, actions, mixer} = useCloneFbx(url)
+  // const {modelScene, ref, actions, mixer} = useCloneGltf(url)
 
   useEffect(() => {
     if (!mixer) {
@@ -146,7 +144,6 @@ export const Character = ({index, url}) => {
 
   const playIdleAnimOnly = useCallback(() => {
     const idleAction = actions['Idle']
-    customDebug().log('Character#playIdleAnimOnly: idleAction: ', idleAction)
     if (!idleAction) {
       return
     }
@@ -160,7 +157,6 @@ export const Character = ({index, url}) => {
 
   const playWalkAnimOnly = useCallback(() => {
     const walkAction = actions['Walk']
-    customDebug().log('Character#playIdleAnimOnly: walkAction: ', walkAction)
     if (!walkAction) {
       return
     }
