@@ -43,34 +43,37 @@ export const Character = ({index}) => {
 
   // Move model to destination position
   useFrame((state, delta) => {
-    if (rigidBody.current && usersDesPos[index]) {
+    if (rigidBody.current) {
       const curPos = vec3(rigidBody.current.translation())
-      const userDesPos = usersDesPos[index]
-      const desPos = new THREE.Vector3(userDesPos[0], userDesPos[1], userDesPos[2])
-      const direc = desPos.sub(curPos)
-      const direcLen = direc.length()
-      const normalDirec = direc.normalize()
-      normalDirec.setY(0)
 
-      if (direcLen > TOLERANCE_DISTANCE) {
-        if (isFirstMove) {
-          customDebug().log('Character#useFrame: character moving')
-          playWalkAnimOnly()
-          setIsFirstMove(false)
-          setStopped(false)
-        }
+      if (usersDesPos[index]) {
+        const userDesPos = usersDesPos[index]
+        const desPos = new THREE.Vector3(userDesPos[0], userDesPos[1], userDesPos[2])
+        const desDirec = desPos.sub(curPos)
+        const desDirecLen = desDirec.length()
+        const normalDesDirec = desDirec.normalize()
+        normalDesDirec.setY(0)
 
-        if (index < realtimeVisitors && modelScene) {
-          // modelScene.visible = true
-        }
-        rigidBody.current.applyImpulse(normalDirec.multiplyScalar(WALKING_SPEED), true)
-      } else if (!stopped) {
-        customDebug().log('Character#useFrame: character stopped')
-        playIdleAnimOnly()
-        setIsFirstMove(true)
-        setStopped(true)
-        if (index > realtimeVisitors - 1 && modelScene) {
-          // modelScene.visible = false
+        if (desDirecLen > TOLERANCE_DISTANCE) {
+          if (isFirstMove) {
+            customDebug().log('Character#useFrame: character moving')
+            playWalkAnimOnly()
+            setIsFirstMove(false)
+            setStopped(false)
+          }
+
+          if (index < realtimeVisitors && modelScene) {
+            // modelScene.visible = true
+          }
+          rigidBody.current.applyImpulse(normalDesDirec.multiplyScalar(WALKING_SPEED), true)
+        } else if (!stopped) {
+          customDebug().log('Character#useFrame: character stopped')
+          playIdleAnimOnly()
+          setIsFirstMove(true)
+          setStopped(true)
+          if (index > realtimeVisitors - 1 && modelScene) {
+            // modelScene.visible = false
+          }
         }
       }
     }

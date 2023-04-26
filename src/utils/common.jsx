@@ -113,6 +113,8 @@ export const urlToDomain = (url) => {
 
 
 export const getCharacterUrls = (modelType, characterCnt) => {
+  assertDefined(modelType, characterCnt)
+
   switch (modelType) {
     case 'glb':
       return Array.from({length: characterCnt}).map((v, i) => `./models/glb/character (${i + 1}).glb`)
@@ -125,9 +127,19 @@ export const getCharacterUrls = (modelType, characterCnt) => {
 
 
 export const isIndexInInterval = (firstIndex, lastIndex, index) => {
+  assertDefined(firstIndex, lastIndex, index)
   if (firstIndex < lastIndex) {
     return index >= firstIndex && index <= lastIndex
   } else {
     return index >= firstIndex || index <= lastIndex
   }
+}
+
+
+export const getDirec = (start, end) => {
+  assertDefined(start, end)
+  const startVec3 = new THREE.Vector3(start[0], start[1], start[2])
+  const endVec3 = new THREE.Vector3(end[0], end[1], end[2])
+  const direc = endVec3.sub(startVec3)
+  return direc
 }
