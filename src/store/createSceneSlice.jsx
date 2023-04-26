@@ -1,5 +1,5 @@
 // import {deepClone} from '../utils/common'
-import {BILLBOARD_DES_POS, BILLBOARD_INIT_POS, BILLBOARD_VIEW_DISTANCE, CAMERA_DES_POS, CAMERA_INIT_POS} from '../utils/constants'
+import {BILLBOARD_DES_POS, BILLBOARD_INIT_POS, CAMERA_DES_POS, CAMERA_INIT_POS} from '../utils/constants'
 
 
 export const createSceneSlice = (set, get) => {
@@ -11,28 +11,6 @@ export const createSceneSlice = (set, get) => {
 
     /* User */
 
-    usersInitPos: [],
-    setUsersInitPos: (newUsersInitPos) => set(() => ({usersInitPos: newUsersInitPos})),
-    setUserInitPos: (index, newUserInitPos) => set(() => {
-      const state = get()
-      const newUsersInitPos = [...state.usersInitPos]
-      newUsersInitPos[index] = newUserInitPos
-      return {
-        usersInitPos: newUsersInitPos,
-      }
-    }),
-
-    usersDesPos: [],
-    setUsersDesPos: (newUsersCurPos) => set(() => ({usersDesPos: newUsersCurPos})),
-    setUserDesPos: (index, newUserCurPos) => set(() => {
-      const state = get()
-      const newUsersCurPos = [...state.usersDesPos]
-      newUsersCurPos[index] = newUserCurPos
-      return {
-        usersDesPos: newUsersCurPos,
-      }
-    }),
-
     curLastCharacterInd: 0,
     setCurLastCharacterInd: (newCurLastCharacterInd) => set(() => ({curLastCharacterInd: newCurLastCharacterInd})),
 
@@ -43,7 +21,6 @@ export const createSceneSlice = (set, get) => {
 
     billboardInitPos: BILLBOARD_INIT_POS,
     billboardDesPos: BILLBOARD_DES_POS,
-    billboardViewDistance: BILLBOARD_VIEW_DISTANCE,
 
     isSeeingBillboard: true,
     setIsSeeingBillboard: (newIsSeeingBillboard) => set(() => ({isSeeingBillboard: newIsSeeingBillboard})),

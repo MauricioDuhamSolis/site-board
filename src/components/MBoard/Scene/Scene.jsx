@@ -20,7 +20,6 @@ import {usePrevious} from '../../../hooks/usePrevious'
 export const Scene = () => {
   const {
     isSeeingBillboard,
-    setUsersInitPos,
     realtimeVisitors,
     curLastCharacterInd,
     setCurLastCharacterInd,
@@ -59,8 +58,6 @@ export const Scene = () => {
       ]
     })
     customDebug().log('Scene#useEffect: newUsersInitPos: ', newUsersInitPos)
-    setUsersInitPos(newUsersInitPos)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {

@@ -22,7 +22,6 @@ export const Ground = () => {
         receiveShadow
       >
         <meshStandardMaterial
-          // color="#87493b"
           side={THREE.DoubleSide}
           map={groundTexture}
         />

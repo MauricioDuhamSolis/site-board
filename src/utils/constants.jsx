@@ -54,8 +54,6 @@ export const BILLBOARD_INIT_POS = [0, 0, 12 * HTML_ASPECT]
 
 export const BILLBOARD_DES_POS = BILLBOARD_INIT_POS
 
-export const BILLBOARD_VIEW_DISTANCE = 14.5 * HTML_ASPECT
-
 
 export const CHARACTER_URLS = getCharacterUrls(MODEL_TYPE, 5)
 

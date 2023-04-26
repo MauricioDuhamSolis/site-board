@@ -14,11 +14,7 @@ import {useCloneGltf} from '../../../hooks/useCloneGltf'
 
 export const Character = ({index}) => {
   assertDefined(index)
-  const {
-    usersInitPos,
-    usersDesPos,
-    realtimeVisitors,
-  } = useZustand()
+  const {realtimeVisitors} = useZustand()
   const [prevAction, setPrevAction] = useState(null)
   const [stopped, setStopped] = useState(null)
   const [isFirstMove, setIsFirstMove] = useState(true)
@@ -43,9 +39,9 @@ export const Character = ({index}) => {
 
   // Move model to destination position
   useFrame((state, delta) => {
-    if (rigidBody.current && usersDesPos[index]) {
+    if (rigidBody.current) {
       const curPos = vec3(rigidBody.current.translation())
-      const userDesPos = usersDesPos[index]
+      const userDesPos = [0, 0, 0]
       const desPos = new THREE.Vector3(userDesPos[0], userDesPos[1], userDesPos[2])
       const direc = desPos.sub(curPos)
       const direcLen = direc.length()
@@ -61,7 +57,7 @@ export const Character = ({index}) => {
         }
 
         if (index < realtimeVisitors && modelScene) {
-          modelScene.visible = true
+          // modelScene.visible = true
         }
         rigidBody.current.applyImpulse(normalDirec.multiplyScalar(WALKING_SPEED), true)
       } else if (!stopped) {
@@ -70,7 +66,7 @@ export const Character = ({index}) => {
         setIsFirstMove(true)
         setStopped(true)
         if (index > realtimeVisitors - 1 && modelScene) {
-          modelScene.visible = false
+          // modelScene.visible = false
         }
       }
     }
