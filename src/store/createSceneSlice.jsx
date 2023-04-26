@@ -1,5 +1,5 @@
 // import {deepClone} from '../utils/common'
-import {BILLBOARD_DES_POS, BILLBOARD_INIT_POS, BILLBOARD_VIEW_DISTANCE, CAMERA_DES_POS, CAMERA_INIT_POS, CHARACTER_URLS} from '../utils/constants'
+import {BILLBOARD_DES_POS, BILLBOARD_INIT_POS, BILLBOARD_VIEW_DISTANCE, CAMERA_DES_POS, CAMERA_INIT_POS} from '../utils/constants'
 
 
 export const createSceneSlice = (set, get) => {
@@ -33,8 +33,8 @@ export const createSceneSlice = (set, get) => {
       }
     }),
 
-    curCharacterNum: CHARACTER_URLS.length,
-    setCurCharacterNum: (newCurCharacterNum) => set(() => ({curCharacterNum: newCurCharacterNum})),
+    curLastCharacterInd: 0,
+    setCurLastCharacterInd: (newCurLastCharacterInd) => set(() => ({curLastCharacterInd: newCurLastCharacterInd})),
 
     /* Billboard */
 

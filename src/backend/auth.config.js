@@ -1,7 +1,7 @@
-import {isDevMode} from '../utils/constants'
+import {IS_DEV_MODE} from '../utils/constants'
 
 
-export const authConfig = isDevMode ?
+export const authConfig = IS_DEV_MODE ?
 {
   domain: 'dev-ku6ur1mt530rft6t.us.auth0.com',
   clientId: 'vnaVUHcNstsBWh2cFAZs2btEqbaIX9DO',

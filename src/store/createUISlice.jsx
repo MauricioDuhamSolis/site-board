@@ -1,4 +1,4 @@
-import {CHARACTER_URLS, PLAUSIBLE_STEP_COUNT} from '../utils/constants'
+import {PLAUSIBLE_STEP_COUNT} from '../utils/constants'
 
 
 export const createUISlice = (set, get) => {
@@ -33,7 +33,7 @@ export const createUISlice = (set, get) => {
     aggregate: null,
     setAggregate: (newAggregate) => set(() => ({aggregate: newAggregate})),
 
-    realtimeVisitors: CHARACTER_URLS.length,
+    realtimeVisitors: 0,
     setRealtimeVisitors: (newRealtimeVisitors) => set(() => ({realtimeVisitors: newRealtimeVisitors})),
 
     isLoading: false,

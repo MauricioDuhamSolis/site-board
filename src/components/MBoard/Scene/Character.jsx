@@ -37,7 +37,7 @@ export const Character = ({index}) => {
     activateAllActions()
     setAllWeight(0)
     playIdleAnimOnly()
-    modelScene.visible = false
+    // modelScene.visible = false
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mixer, modelScene])
 
@@ -177,7 +177,7 @@ export const Character = ({index}) => {
   return modelScene && (
     <RigidBody
       ref={rigidBody}
-      position={usersInitPos[index]}
+      position={[0, 0, 0]}
       enabledRotations={[false, true, false]}
       linearDamping={DEFAULT_LINEAR_DAMPING}
       angularDamping={DEFAULT_ANGULAR_DAMPING}

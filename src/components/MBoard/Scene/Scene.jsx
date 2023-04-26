@@ -1,7 +1,6 @@
-/* eslint-disable react/no-unknown-property */
 /* eslint-disable no-unused-vars */
+/* eslint-disable react/no-unknown-property */
 import React, {Suspense, useEffect} from 'react'
-import * as THREE from 'three'
 import {OrbitControls, OrthographicCamera, Sky, useGLTF} from '@react-three/drei'
 import {Canvas} from '@react-three/fiber'
 import {Debug, Physics} from '@react-three/rapier'
@@ -13,20 +12,20 @@ import {Billboard} from './Billboard'
 import {Camera} from './Camera'
 import {BillboardHtml} from './BillboardHtml'
 import {useZustand} from '../../../store/useZustand'
-import {AXIS_SIZE, CHARACTER_BILLBOARD_VIEW_DISTANCE, CHARACTER_POS_GENERATION_HALF_WIDE, CHARACTER_URLS, FLOATING_HEIGHT} from '../../../utils/constants'
-import {deepClone, getBox3RandomPoint} from '../../../utils/common'
+import {AXIS_SIZE, CHARACTERS_GAP, CHARACTER_COL_NUM, CHARACTER_URLS, ENTER_ORIGIN_POS, FLOATING_HEIGHT, MAX_CHARACTER_NUM} from '../../../utils/constants'
+import {customDebug} from '../../../utils/custom.debug'
+import {usePrevious} from '../../../hooks/usePrevious'
 
 
 export const Scene = () => {
   const {
     isSeeingBillboard,
-    curCharacterNum,
-    billboardDesPos,
-    usersInitPos,
     setUsersInitPos,
-    setUsersDesPos,
     realtimeVisitors,
+    curLastCharacterInd,
+    setCurLastCharacterInd,
   } = useZustand()
+  const prevRealtimeVisitors = usePrevious(realtimeVisitors, 0)
 
   const {
     distance,
@@ -50,24 +49,25 @@ export const Scene = () => {
 
   useEffect(() => {
     // Set users' initial position
-    const characterPosGenerationBox3 = new THREE.Box3().setFromCenterAndSize(
-        new THREE.Vector3(billboardDesPos[0], FLOATING_HEIGHT, billboardDesPos[2] - CHARACTER_BILLBOARD_VIEW_DISTANCE - CHARACTER_POS_GENERATION_HALF_WIDE),
-        new THREE.Vector3(CHARACTER_POS_GENERATION_HALF_WIDE, FLOATING_HEIGHT, CHARACTER_POS_GENERATION_HALF_WIDE),
-    )
-    const newUsersInitPos = Array.from({length: CHARACTER_URLS.length}).map(() => getBox3RandomPoint(characterPosGenerationBox3))
+    const newUsersInitPos = Array.from({length: MAX_CHARACTER_NUM}).map((v, index) => {
+      const x = index % CHARACTER_COL_NUM
+      const y = (index - x) / CHARACTER_COL_NUM
+      return [
+        ENTER_ORIGIN_POS[0] - (CHARACTERS_GAP * x),
+        FLOATING_HEIGHT,
+        ENTER_ORIGIN_POS[2] - (CHARACTERS_GAP * y),
+      ]
+    })
+    customDebug().log('Scene#useEffect: newUsersInitPos: ', newUsersInitPos)
     setUsersInitPos(newUsersInitPos)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
-    // Set users' destination position
-    const newUserDesPos = deepClone(billboardDesPos)
-    newUserDesPos[2] -= CHARACTER_BILLBOARD_VIEW_DISTANCE
-    const newUsersDesPos = Array.from({length: realtimeVisitors}).fill(newUserDesPos)
-    for (let i = realtimeVisitors; i < CHARACTER_URLS.length; i++) {
-      newUsersDesPos.push(usersInitPos[i] || [0, 0, 0])
-    }
-    setUsersDesPos(newUsersDesPos)
+    const diffRealtimeVisitors = Math.max(realtimeVisitors - prevRealtimeVisitors, 0)
+    const newCurLastCharacterInd = (curLastCharacterInd + diffRealtimeVisitors) % MAX_CHARACTER_NUM
+    customDebug().log('Scene#useEffect: newCurLastCharacterInd: ', newCurLastCharacterInd)
+    setCurLastCharacterInd(newCurLastCharacterInd)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [realtimeVisitors])
 
@@ -103,7 +103,7 @@ export const Scene = () => {
           />
           <Billboard/>
           {isSeeingBillboard && <BillboardHtml/>}
-          {Array.from({length: curCharacterNum}).map((v, index) =>
+          {Array.from({length: MAX_CHARACTER_NUM}).map((v, index) =>
             <Character
               key={index}
               index={index}

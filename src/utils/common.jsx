@@ -110,3 +110,14 @@ export const urlToDomain = (url) => {
   const domain = url.replace(/https:\/\//g, '').split('/').shift()
   return domain
 }
+
+export const getCharacterUrls = (modelType, characterNum) => {
+  switch (modelType) {
+    case 'glb':
+      return Array.from({length: characterNum}).map((v, i) => `./models/glb/character (${i + 1}).glb`)
+    case 'fbx':
+      return Array.from({length: characterNum}).map((v, i) => `./models/fbx/character (${i + 1}).fbx`)
+    default:
+      return []
+  }
+}
