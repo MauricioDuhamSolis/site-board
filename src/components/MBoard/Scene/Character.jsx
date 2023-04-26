@@ -43,6 +43,7 @@ export const Character = ({index}) => {
   useFrame((state, delta) => {
     if (rigidBody.current) {
       const curPos = vec3(rigidBody.current.translation())
+      tempObject.position.copy(curPos)
       const quitDirecLen = quitPosVec3.clone().sub(curPos).length()
       if (quitDirecLen <= TOLERANCE_DISTANCE) {
         rigidBody.current.setTranslation(CHARACTER_FALL_POS)
@@ -51,6 +52,7 @@ export const Character = ({index}) => {
       if (usersDesPos[index]) {
         const userDesPos = usersDesPos[index]
         const desPos = new THREE.Vector3(userDesPos[0], userDesPos[1], userDesPos[2])
+        tempObject.lookAt(desPos)
         const desDirec = desPos.sub(curPos)
         const desDirecLen = desDirec.length()
         const normalDesDirec = desDirec.normalize()
@@ -64,6 +66,7 @@ export const Character = ({index}) => {
             setStopped(false)
           }
 
+          rigidBody.current.setRotation(tempObject.quaternion, true)
           rigidBody.current.applyImpulse(normalDesDirec.multiplyScalar(WALKING_SPEED), true)
         } else if (!stopped) {
           // customDebug().log('Character#useFrame: character stopped')
@@ -192,3 +195,4 @@ export const Character = ({index}) => {
 
 
 const quitPosVec3 = new THREE.Vector3(QUIT_ORIGIN_POS[0], QUIT_ORIGIN_POS[1], QUIT_ORIGIN_POS[2])
+const tempObject = new THREE.Object3D()
