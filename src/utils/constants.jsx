@@ -1,3 +1,4 @@
+import * as THREE from 'three'
 import {getCharacterUrls} from './common'
 
 
@@ -7,7 +8,7 @@ export const IS_DEV_MODE = true
 
 export const MODEL_TYPE = 'glb'
 
-export const MAX_CHARACTER_CNT = 10
+export const MAX_CHARACTER_CNT = 100
 
 export const REALTIME_DURATION = 10000
 
@@ -37,6 +38,8 @@ export const LERP_ALPHA = 0.1
 export const FLOATING_HEIGHT = 0
 
 export const CHARACTER_COL_CNT = 10
+
+export const CHARACTER_FALL_POS = new THREE.Vector3(0, -10, 0)
 
 
 /* Dynamic */

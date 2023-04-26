@@ -5,7 +5,7 @@ import * as THREE from 'three'
 import {useFrame} from '@react-three/fiber'
 import {RigidBody, vec3} from '@react-three/rapier'
 import {useZustand} from '../../../store/useZustand'
-import {CHARACTER_SCALE, CHARACTER_URLS, DEFAULT_ANGULAR_DAMPING, DEFAULT_LINEAR_DAMPING, QUIT_ORIGIN_POS, TOLERANCE_DISTANCE, WALKING_SPEED} from '../../../utils/constants'
+import {CHARACTER_FALL_POS, CHARACTER_SCALE, CHARACTER_URLS, DEFAULT_ANGULAR_DAMPING, DEFAULT_LINEAR_DAMPING, QUIT_ORIGIN_POS, TOLERANCE_DISTANCE, WALKING_SPEED} from '../../../utils/constants'
 import {assertDefined} from '../../../utils/custom.assert'
 import {customDebug} from '../../../utils/custom.debug'
 import {useCloneFbx} from '../../../hooks/useCloneFbx'
@@ -36,7 +36,6 @@ export const Character = ({index}) => {
     activateAllActions()
     setAllWeight(0)
     playIdleAnimOnly()
-    modelScene.visible = false
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mixer, modelScene])
 
@@ -45,10 +44,8 @@ export const Character = ({index}) => {
     if (rigidBody.current) {
       const curPos = vec3(rigidBody.current.translation())
       const quitDirecLen = quitPosVec3.clone().sub(curPos).length()
-      if (quitDirecLen >= TOLERANCE_DISTANCE) {
-        modelScene.visible = true
-      } else {
-        modelScene.visible = false
+      if (quitDirecLen <= TOLERANCE_DISTANCE) {
+        rigidBody.current.setTranslation(CHARACTER_FALL_POS)
       }
 
       if (usersDesPos[index]) {
