@@ -14,7 +14,10 @@ import {useCloneGltf} from '../../../hooks/useCloneGltf'
 
 export const Character = ({index}) => {
   assertDefined(index)
-  const {realtimeVisitors} = useZustand()
+  const {
+    realtimeVisitors,
+    curLastCharacterIndex,
+  } = useZustand()
   const [prevAction, setPrevAction] = useState(null)
   const [stopped, setStopped] = useState(null)
   const [isFirstMove, setIsFirstMove] = useState(true)

@@ -11,8 +11,8 @@ export const createSceneSlice = (set, get) => {
 
     /* User */
 
-    curLastCharacterInd: 0,
-    setCurLastCharacterInd: (newCurLastCharacterInd) => set(() => ({curLastCharacterInd: newCurLastCharacterInd})),
+    curLastCharacterIndex: -1,
+    setCurLastCharacterIndex: (newCurLastCharacterIndex) => set(() => ({curLastCharacterIndex: newCurLastCharacterIndex})),
 
     /* Billboard */
 

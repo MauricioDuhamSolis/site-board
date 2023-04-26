@@ -3,7 +3,7 @@ import {useControls} from 'leva'
 import classNames from 'classnames'
 import {useZustand} from '../../store/useZustand'
 import {getAggregate, getRealtimeVisitors} from '../../utils/plausible'
-import {REALTIME_DURATION, IS_DEV_MODE, MAX_CHARACTER_NUM} from '../../utils/constants'
+import {REALTIME_DURATION, IS_DEV_MODE, MAX_CHARACTER_CNT} from '../../utils/constants'
 import {customDebug} from '../../utils/custom.debug'
 
 
@@ -32,7 +32,7 @@ export const Dashboard = () => {
 
     if (selMenuIndex !== null) {
       if (IS_DEV_MODE) {
-        const newRealtimeVisitors = parseInt(Math.random() * (MAX_CHARACTER_NUM - 1)) + 1
+        const newRealtimeVisitors = parseInt(Math.random() * (MAX_CHARACTER_CNT - 1)) + 1
         // customDebug().log('Dashboard#loadDashboardData: newRealtimeVisitors: ', newRealtimeVisitors)
         setRealtimeVisitors(newRealtimeVisitors)
       } else {

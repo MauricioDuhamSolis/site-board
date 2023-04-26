@@ -1,4 +1,4 @@
-import {PLAUSIBLE_STEP_COUNT} from '../utils/constants'
+import {PLAUSIBLE_STEP_CNT} from '../utils/constants'
 
 
 export const createUISlice = (set, get) => {
@@ -18,8 +18,8 @@ export const createUISlice = (set, get) => {
 
     plausibleStep: 0,
     setPlausibleStep: (newPlausibleStep) => set(() => ({plausibleStep: newPlausibleStep})),
-    nextPlausibleStep: () => set(() => ({plausibleStep: (get().plausibleStep + 1) % PLAUSIBLE_STEP_COUNT})),
-    prevPlausibleStep: () => set(() => ({plausibleStep: (get().plausibleStep + PLAUSIBLE_STEP_COUNT - 1) % PLAUSIBLE_STEP_COUNT})),
+    nextPlausibleStep: () => set(() => ({plausibleStep: (get().plausibleStep + 1) % PLAUSIBLE_STEP_CNT})),
+    prevPlausibleStep: () => set(() => ({plausibleStep: (get().plausibleStep + PLAUSIBLE_STEP_CNT - 1) % PLAUSIBLE_STEP_CNT})),
     closePlausible: () => set(() => ({plausibleStep: 0})),
 
     menuArr: [],

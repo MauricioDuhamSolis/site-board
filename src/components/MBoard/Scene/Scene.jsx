@@ -12,7 +12,7 @@ import {Billboard} from './Billboard'
 import {Camera} from './Camera'
 import {BillboardHtml} from './BillboardHtml'
 import {useZustand} from '../../../store/useZustand'
-import {AXIS_SIZE, CHARACTERS_GAP, CHARACTER_COL_NUM, CHARACTER_URLS, ENTER_ORIGIN_POS, FLOATING_HEIGHT, MAX_CHARACTER_NUM} from '../../../utils/constants'
+import {AXIS_SIZE, CHARACTERS_GAP, CHARACTER_COL_CNT, CHARACTER_URLS, ENTER_ORIGIN_POS, FLOATING_HEIGHT, MAX_CHARACTER_CNT} from '../../../utils/constants'
 import {customDebug} from '../../../utils/custom.debug'
 import {usePrevious} from '../../../hooks/usePrevious'
 
@@ -21,8 +21,8 @@ export const Scene = () => {
   const {
     isSeeingBillboard,
     realtimeVisitors,
-    curLastCharacterInd,
-    setCurLastCharacterInd,
+    curLastCharacterIndex,
+    setCurLastCharacterIndex,
   } = useZustand()
   const prevRealtimeVisitors = usePrevious(realtimeVisitors, 0)
 
@@ -48,9 +48,9 @@ export const Scene = () => {
 
   useEffect(() => {
     // Set users' initial position
-    const newUsersInitPos = Array.from({length: MAX_CHARACTER_NUM}).map((v, index) => {
-      const x = index % CHARACTER_COL_NUM
-      const y = (index - x) / CHARACTER_COL_NUM
+    const newUsersInitPos = Array.from({length: MAX_CHARACTER_CNT}).map((v, index) => {
+      const x = index % CHARACTER_COL_CNT
+      const y = (index - x) / CHARACTER_COL_CNT
       return [
         ENTER_ORIGIN_POS[0] - (CHARACTERS_GAP * x),
         FLOATING_HEIGHT,
@@ -62,9 +62,9 @@ export const Scene = () => {
 
   useEffect(() => {
     const diffRealtimeVisitors = Math.max(realtimeVisitors - prevRealtimeVisitors, 0)
-    const newCurLastCharacterInd = (curLastCharacterInd + diffRealtimeVisitors) % MAX_CHARACTER_NUM
-    customDebug().log('Scene#useEffect: newCurLastCharacterInd: ', newCurLastCharacterInd)
-    setCurLastCharacterInd(newCurLastCharacterInd)
+    const newCurLastCharacterIndex = (curLastCharacterIndex + diffRealtimeVisitors) % MAX_CHARACTER_CNT
+    customDebug().log('Scene#useEffect: newCurLastCharacterIndex: ', newCurLastCharacterIndex)
+    setCurLastCharacterIndex(newCurLastCharacterIndex)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [realtimeVisitors])
 
@@ -100,7 +100,7 @@ export const Scene = () => {
           />
           <Billboard/>
           {isSeeingBillboard && <BillboardHtml/>}
-          {Array.from({length: MAX_CHARACTER_NUM}).map((v, index) =>
+          {Array.from({length: MAX_CHARACTER_CNT}).map((v, index) =>
             <Character
               key={index}
               index={index}

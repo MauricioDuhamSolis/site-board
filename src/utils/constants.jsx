@@ -7,7 +7,7 @@ export const IS_DEV_MODE = true
 
 export const MODEL_TYPE = 'glb'
 
-export const MAX_CHARACTER_NUM = 10
+export const MAX_CHARACTER_CNT = 10
 
 
 /* Static */
@@ -15,7 +15,7 @@ export const MAX_CHARACTER_NUM = 10
 export const AXIS_SIZE = 10
 
 
-export const PLAUSIBLE_STEP_COUNT = 3
+export const PLAUSIBLE_STEP_CNT = 3
 
 
 export const GROUND_SIZE = 3000
@@ -36,7 +36,7 @@ export const FLOATING_HEIGHT = 0
 
 export const TOLERANCE_DISTANCE = 5
 
-export const CHARACTER_COL_NUM = 10
+export const CHARACTER_COL_CNT = 10
 
 
 /* Dynamic */
