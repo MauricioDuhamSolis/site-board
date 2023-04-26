@@ -16,7 +16,8 @@ export const Character = ({index}) => {
   assertDefined(index)
   const {
     realtimeVisitors,
-    curLastCharacterIndex,
+    usersInitPos,
+    usersDesPos,
   } = useZustand()
   const [prevAction, setPrevAction] = useState(null)
   const [stopped, setStopped] = useState(null)
@@ -42,9 +43,9 @@ export const Character = ({index}) => {
 
   // Move model to destination position
   useFrame((state, delta) => {
-    if (rigidBody.current) {
+    if (rigidBody.current && usersDesPos[index]) {
       const curPos = vec3(rigidBody.current.translation())
-      const userDesPos = [0, 0, 0]
+      const userDesPos = usersDesPos[index]
       const desPos = new THREE.Vector3(userDesPos[0], userDesPos[1], userDesPos[2])
       const direc = desPos.sub(curPos)
       const direcLen = direc.length()
@@ -176,7 +177,7 @@ export const Character = ({index}) => {
   return modelScene && (
     <RigidBody
       ref={rigidBody}
-      position={[0, 0, 0]}
+      position={usersInitPos[index] || [0, 0, 0]}
       enabledRotations={[false, true, false]}
       linearDamping={DEFAULT_LINEAR_DAMPING}
       angularDamping={DEFAULT_ANGULAR_DAMPING}

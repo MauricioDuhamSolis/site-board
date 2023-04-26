@@ -9,6 +9,8 @@ export const MODEL_TYPE = 'glb'
 
 export const MAX_CHARACTER_CNT = 10
 
+export const REALTIME_DURATION = 10000
+
 
 /* Static */
 
@@ -34,16 +36,12 @@ export const LERP_ALPHA = 0.1
 
 export const FLOATING_HEIGHT = 0
 
-export const TOLERANCE_DISTANCE = 5
-
-export const CHARACTER_COL_CNT = 10
+export const CHARACTER_COL_CNT = 5
 
 
 /* Dynamic */
 
 export const BACKEND_URL = IS_DEV_MODE ? 'http://127.0.0.1:4000/main' : 'https://mboard-backend.onrender.com/main'
-
-export const REALTIME_DURATION = IS_DEV_MODE ? 2000 : 10000
 
 export const HTML_ASPECT = BILLBOARD_HTML_SIZE / 400
 
@@ -63,13 +61,15 @@ export const CHARACTER_SCALE = 0.015 * HTML_ASPECT
 
 export const WALKING_SPEED = IS_DEV_MODE ? DEFAULT_LINEAR_DAMPING * 10 : DEFAULT_LINEAR_DAMPING * 2
 
-export const ENTER_ORIGIN_POS = [BILLBOARD_DES_POS[0], 0, BILLBOARD_DES_POS[2] - (20 * HTML_ASPECT)]
+export const INIT_ORIGIN_POS = [BILLBOARD_DES_POS[0], 0, BILLBOARD_DES_POS[2] - (20 * HTML_ASPECT)]
 
-export const VIEW_ORIGIN_POS = [BILLBOARD_DES_POS[0], 0, BILLBOARD_DES_POS[2] - (2 * HTML_ASPECT)]
+export const VIEW_ORIGIN_POS = [BILLBOARD_DES_POS[0], 0, BILLBOARD_DES_POS[2] - (4 * HTML_ASPECT)]
 
-export const QUIT_ORIGIN_POS = [BILLBOARD_DES_POS[0] + 10, 0, BILLBOARD_DES_POS[2] - HTML_ASPECT]
+export const QUIT_ORIGIN_POS = [BILLBOARD_DES_POS[0] + 30, 0, BILLBOARD_DES_POS[2] - HTML_ASPECT]
 
 export const CHARACTERS_GAP = HTML_ASPECT
+
+export const TOLERANCE_DISTANCE = HTML_ASPECT * CHARACTER_URLS.length / 5
 
 
 export const CAMERA_INIT_POS = [-25 * HTML_ASPECT, 25 * HTML_ASPECT, -25 * HTML_ASPECT]

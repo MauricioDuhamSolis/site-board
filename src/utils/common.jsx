@@ -111,6 +111,7 @@ export const urlToDomain = (url) => {
   return domain
 }
 
+
 export const getCharacterUrls = (modelType, characterCnt) => {
   switch (modelType) {
     case 'glb':
@@ -119,5 +120,14 @@ export const getCharacterUrls = (modelType, characterCnt) => {
       return Array.from({length: characterCnt}).map((v, i) => `./models/fbx/character (${i + 1}).fbx`)
     default:
       return []
+  }
+}
+
+
+export const isIndexInInterval = (firstIndex, lastIndex, index) => {
+  if (firstIndex < lastIndex) {
+    return index >= firstIndex && index <= lastIndex
+  } else {
+    return index >= firstIndex || index <= lastIndex
   }
 }

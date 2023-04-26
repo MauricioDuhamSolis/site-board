@@ -12,17 +12,22 @@ import {Billboard} from './Billboard'
 import {Camera} from './Camera'
 import {BillboardHtml} from './BillboardHtml'
 import {useZustand} from '../../../store/useZustand'
-import {AXIS_SIZE, CHARACTERS_GAP, CHARACTER_COL_CNT, CHARACTER_URLS, ENTER_ORIGIN_POS, FLOATING_HEIGHT, MAX_CHARACTER_CNT} from '../../../utils/constants'
+import {AXIS_SIZE, CHARACTERS_GAP, CHARACTER_COL_CNT, CHARACTER_URLS, INIT_ORIGIN_POS, FLOATING_HEIGHT, MAX_CHARACTER_CNT, VIEW_ORIGIN_POS, QUIT_ORIGIN_POS} from '../../../utils/constants'
 import {customDebug} from '../../../utils/custom.debug'
 import {usePrevious} from '../../../hooks/usePrevious'
+import {deepClone} from '../../../utils/common'
 
 
 export const Scene = () => {
   const {
     isSeeingBillboard,
     realtimeVisitors,
-    curLastCharacterIndex,
-    setCurLastCharacterIndex,
+    prevLastCharacterIndex,
+    setPrevLastCharacterIndex,
+    usersInitPos,
+    setUsersInitPos,
+    usersDesPos,
+    setUsersDesPos,
   } = useZustand()
   const prevRealtimeVisitors = usePrevious(realtimeVisitors, 0)
 
@@ -47,24 +52,43 @@ export const Scene = () => {
   })
 
   useEffect(() => {
-    // Set users' initial position
-    const newUsersInitPos = Array.from({length: MAX_CHARACTER_CNT}).map((v, index) => {
-      const x = index % CHARACTER_COL_CNT
-      const y = (index - x) / CHARACTER_COL_CNT
-      return [
-        ENTER_ORIGIN_POS[0] - (CHARACTERS_GAP * x),
-        FLOATING_HEIGHT,
-        ENTER_ORIGIN_POS[2] - (CHARACTERS_GAP * y),
-      ]
-    })
-    customDebug().log('Scene#useEffect: newUsersInitPos: ', newUsersInitPos)
-  }, [])
+    const diffRealtimeVisitors = realtimeVisitors - prevRealtimeVisitors
+    const newUsersInitPos = deepClone(usersInitPos)
+    const newUsersDesPos = deepClone(usersDesPos)
 
-  useEffect(() => {
-    const diffRealtimeVisitors = Math.max(realtimeVisitors - prevRealtimeVisitors, 0)
-    const newCurLastCharacterIndex = (curLastCharacterIndex + diffRealtimeVisitors) % MAX_CHARACTER_CNT
-    customDebug().log('Scene#useEffect: newCurLastCharacterIndex: ', newCurLastCharacterIndex)
-    setCurLastCharacterIndex(newCurLastCharacterIndex)
+    if (diffRealtimeVisitors > 0) {
+      for (let i = 0; i < diffRealtimeVisitors; i++) {
+        const userIndex = (prevLastCharacterIndex + i + 1) % MAX_CHARACTER_CNT
+        const x = userIndex % CHARACTER_COL_CNT
+        const y = (userIndex - x) / CHARACTER_COL_CNT
+        newUsersInitPos[userIndex] = [
+          INIT_ORIGIN_POS[0] - (x * CHARACTERS_GAP),
+          FLOATING_HEIGHT,
+          INIT_ORIGIN_POS[2] - (y * CHARACTERS_GAP),
+        ]
+        newUsersDesPos[userIndex] = [
+          VIEW_ORIGIN_POS[0] - (x * CHARACTERS_GAP),
+          FLOATING_HEIGHT,
+          VIEW_ORIGIN_POS[2] - (y * CHARACTERS_GAP),
+        ]
+      }
+
+      const newPrevLastCharacterIndex = (prevLastCharacterIndex + diffRealtimeVisitors) % MAX_CHARACTER_CNT
+      setPrevLastCharacterIndex(newPrevLastCharacterIndex)
+    } else {
+      const prevFirstCharacterIndex = (MAX_CHARACTER_CNT + (prevLastCharacterIndex - prevRealtimeVisitors + 1)) % MAX_CHARACTER_CNT
+      const absDiffRealtimeVisitors = Math.abs(diffRealtimeVisitors)
+
+      for (let i = 0; i < absDiffRealtimeVisitors; i++) {
+        const userIndex = (prevFirstCharacterIndex + i) % MAX_CHARACTER_CNT
+        newUsersDesPos[userIndex] = QUIT_ORIGIN_POS
+      }
+    }
+
+    customDebug().log('Scene#useEffect[realtimeVisitors]: newUsersInitPos: ', newUsersInitPos)
+    setUsersInitPos(newUsersInitPos)
+    customDebug().log('Scene#useEffect[realtimeVisitors]: newUsersDesPos: ', newUsersDesPos)
+    setUsersDesPos(newUsersDesPos)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [realtimeVisitors])
 
