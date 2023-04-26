@@ -4,11 +4,11 @@ import {getCharacterUrls} from './common'
 
 /* Environment */
 
-export const IS_DEV_MODE = false
+export const IS_DEV_MODE = true
 
 export const MODEL_TYPE = 'glb'
 
-export const MAX_CHARACTER_CNT = 100
+export const MAX_CHARACTER_CNT = 50
 
 export const REALTIME_DURATION = 10000
 
@@ -62,7 +62,7 @@ export const DEFAULT_ANGULAR_DAMPING = DEFAULT_LINEAR_DAMPING * 10
 
 export const CHARACTER_SCALE = 0.015 * HTML_ASPECT
 
-export const WALKING_SPEED = IS_DEV_MODE ? DEFAULT_LINEAR_DAMPING * 10 : DEFAULT_LINEAR_DAMPING * 2
+export const WALKING_SPEED = DEFAULT_LINEAR_DAMPING * 2
 
 export const INIT_ORIGIN_POS = [BILLBOARD_DES_POS[0] + 15, 0, BILLBOARD_DES_POS[2] - (30 * HTML_ASPECT)]
 
