@@ -85,9 +85,9 @@ export const Scene = () => {
       }
     }
 
-    customDebug().log('Scene#useEffect[realtimeVisitors]: newUsersInitPos: ', newUsersInitPos)
+    // customDebug().log('Scene#useEffect[realtimeVisitors]: newUsersInitPos: ', newUsersInitPos)
     setUsersInitPos(newUsersInitPos)
-    customDebug().log('Scene#useEffect[realtimeVisitors]: newUsersDesPos: ', newUsersDesPos)
+    // customDebug().log('Scene#useEffect[realtimeVisitors]: newUsersDesPos: ', newUsersDesPos)
     setUsersDesPos(newUsersDesPos)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [realtimeVisitors])

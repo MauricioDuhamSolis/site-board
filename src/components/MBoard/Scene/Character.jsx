@@ -5,7 +5,7 @@ import * as THREE from 'three'
 import {useFrame} from '@react-three/fiber'
 import {RigidBody, vec3} from '@react-three/rapier'
 import {useZustand} from '../../../store/useZustand'
-import {CHARACTER_SCALE, CHARACTER_URLS, DEFAULT_ANGULAR_DAMPING, DEFAULT_LINEAR_DAMPING, TOLERANCE_DISTANCE, WALKING_SPEED} from '../../../utils/constants'
+import {CHARACTER_SCALE, CHARACTER_URLS, DEFAULT_ANGULAR_DAMPING, DEFAULT_LINEAR_DAMPING, QUIT_ORIGIN_POS, TOLERANCE_DISTANCE, WALKING_SPEED} from '../../../utils/constants'
 import {assertDefined} from '../../../utils/custom.assert'
 import {customDebug} from '../../../utils/custom.debug'
 import {useCloneFbx} from '../../../hooks/useCloneFbx'
@@ -15,7 +15,6 @@ import {useCloneGltf} from '../../../hooks/useCloneGltf'
 export const Character = ({index}) => {
   assertDefined(index)
   const {
-    realtimeVisitors,
     usersInitPos,
     usersDesPos,
   } = useZustand()
@@ -45,6 +44,12 @@ export const Character = ({index}) => {
   useFrame((state, delta) => {
     if (rigidBody.current) {
       const curPos = vec3(rigidBody.current.translation())
+      const quitDirecLen = quitPosVec3.clone().sub(curPos).length()
+      if (quitDirecLen >= TOLERANCE_DISTANCE) {
+        modelScene.visible = true
+      } else {
+        modelScene.visible = false
+      }
 
       if (usersDesPos[index]) {
         const userDesPos = usersDesPos[index]
@@ -56,24 +61,18 @@ export const Character = ({index}) => {
 
         if (desDirecLen > TOLERANCE_DISTANCE) {
           if (isFirstMove) {
-            customDebug().log('Character#useFrame: character moving')
+            // customDebug().log('Character#useFrame: character moving')
             playWalkAnimOnly()
             setIsFirstMove(false)
             setStopped(false)
           }
 
-          if (index < realtimeVisitors && modelScene) {
-            // modelScene.visible = true
-          }
           rigidBody.current.applyImpulse(normalDesDirec.multiplyScalar(WALKING_SPEED), true)
         } else if (!stopped) {
-          customDebug().log('Character#useFrame: character stopped')
+          // customDebug().log('Character#useFrame: character stopped')
           playIdleAnimOnly()
           setIsFirstMove(true)
           setStopped(true)
-          if (index > realtimeVisitors - 1 && modelScene) {
-            // modelScene.visible = false
-          }
         }
       }
     }
@@ -193,3 +192,6 @@ export const Character = ({index}) => {
     </RigidBody>
   )
 }
+
+
+const quitPosVec3 = new THREE.Vector3(QUIT_ORIGIN_POS[0], QUIT_ORIGIN_POS[1], QUIT_ORIGIN_POS[2])
