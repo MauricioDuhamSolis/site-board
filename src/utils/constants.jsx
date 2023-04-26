@@ -4,7 +4,7 @@ import {getCharacterUrls} from './common'
 
 /* Environment */
 
-export const IS_DEV_MODE = true
+export const IS_DEV_MODE = false
 
 export const MODEL_TYPE = 'glb'
 
