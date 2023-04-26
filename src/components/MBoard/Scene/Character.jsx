@@ -36,7 +36,7 @@ export const Character = ({index}) => {
     activateAllActions()
     setAllWeight(0)
     playIdleAnimOnly()
-    // modelScene.visible = false
+    modelScene.visible = false
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mixer, modelScene])
 
