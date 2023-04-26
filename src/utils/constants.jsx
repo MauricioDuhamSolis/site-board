@@ -8,7 +8,7 @@ export const IS_DEV_MODE = false
 
 export const MODEL_TYPE = 'glb'
 
-export const MAX_CHARACTER_CNT = 50
+export const MAX_CHARACTER_CNT = 100
 
 export const REALTIME_DURATION = 10000
 
@@ -70,7 +70,7 @@ export const VIEW_ORIGIN_POS = [BILLBOARD_DES_POS[0] + 15, 0, BILLBOARD_DES_POS[
 
 export const QUIT_ORIGIN_POS = [BILLBOARD_DES_POS[0] + 40, 0, BILLBOARD_DES_POS[2] - HTML_ASPECT]
 
-export const CHARACTERS_GAP = HTML_ASPECT
+export const CHARACTERS_GAP = HTML_ASPECT * 1.6
 
 export const TOLERANCE_DISTANCE = HTML_ASPECT * 10
 
