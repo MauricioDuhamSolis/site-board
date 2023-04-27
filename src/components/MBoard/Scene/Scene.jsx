@@ -32,6 +32,7 @@ export const Scene = () => {
   const prevRealtimeVisitors = usePrevious(realtimeVisitors, 0)
 
   const {
+    showPerf,
     distance,
     sunPosition,
     inclination,
@@ -41,6 +42,7 @@ export const Scene = () => {
     rayleigh,
     turbidity,
   } = useControls({
+    showPerf: {value: false, label: 'Show Performance'},
     distance: {value: 450, label: 'distance'},
     sunPosition: {value: [0, 450, 0], label: 'sunPosition'},
     inclination: {value: 0, label: 'inclination'},
@@ -94,7 +96,7 @@ export const Scene = () => {
 
   return (
     <Canvas>
-      <Perf position="top-left"/>
+      {showPerf && <Perf position="top-left"/>}
 
       <OrbitControls makeDefault/>
 
