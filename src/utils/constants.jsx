@@ -8,7 +8,7 @@ export const IS_DEV_MODE = false
 
 export const MODEL_TYPE = 'glb'
 
-export const MAX_CHARACTER_CNT = 100
+export const MAX_CHARACTER_CNT = 50
 
 export const REALTIME_DURATION = 10000
 

@@ -94,7 +94,7 @@ export const Scene = () => {
 
   return (
     <Canvas>
-      {/* <Perf position="top-left"/> */}
+      <Perf position="top-left"/>
 
       <OrbitControls makeDefault/>
 
