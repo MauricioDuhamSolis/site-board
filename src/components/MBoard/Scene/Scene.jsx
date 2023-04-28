@@ -38,6 +38,7 @@ export const Scene = () => {
     isSeeingBillboard,
     realtimeVisitors,
     prevLastCharacterIndex,
+    setPrevLastCharacterIndex,
     usersInitPos,
     setUsersInitPos,
     usersDesPos,
@@ -66,6 +67,9 @@ export const Scene = () => {
           VIEW_ORIGIN_POS[2] - (y * CHARACTERS_GAP),
         ]
       }
+
+      const newPrevLastCharacterIndex = (prevLastCharacterIndex + diffRealtimeVisitors) % MAX_CHARACTER_CNT
+      setPrevLastCharacterIndex(newPrevLastCharacterIndex)
     } else {
       const prevFirstCharacterIndex = (MAX_CHARACTER_CNT + (prevLastCharacterIndex - prevRealtimeVisitors + 1)) % MAX_CHARACTER_CNT
       const absDiffRealtimeVisitors = Math.abs(diffRealtimeVisitors)
