@@ -9,7 +9,7 @@ export const MODEL_TYPE = 'glb'
 
 export const MAX_CHARACTER_CNT = 20
 
-export const REALTIME_DURATION = 60000
+export const REALTIME_DURATION = 10000
 
 
 /* Static */

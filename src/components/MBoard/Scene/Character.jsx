@@ -57,6 +57,7 @@ export const Character = ({index}) => {
 
         if (desDirecLen > TOLERANCE_DISTANCE) {
           if (isFirstMove) {
+            customDebug().log(`Character#useFrame: character ${index + 1} moving`)
             setIsQuit(false)
             playWalkAnimOnly()
             setIsFirstMove(false)
@@ -68,9 +69,9 @@ export const Character = ({index}) => {
 
           rigidBody.current.setRotation(tempObject.quaternion, true)
         } else if (!stopped) {
+          customDebug().log(`Character#useFrame: character ${index + 1} stopped`)
           const quitDirecLen = quitPosVec3.clone().sub(curPos).length()
           const newIsQuit = quitDirecLen <= TOLERANCE_DISTANCE
-          customDebug().log('Character#useFrame: character stopped: newIsQuit: ', newIsQuit)
           setIsQuit(newIsQuit)
           playIdleAnimOnly()
           setIsFirstMove(true)
