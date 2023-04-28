@@ -11,11 +11,26 @@ import {Billboard} from './Billboard'
 import {Camera} from './Camera'
 import {BillboardHtml} from './BillboardHtml'
 import {useZustand} from '../../../store/useZustand'
-import {AXIS_SIZE, CHARACTERS_GAP, CHARACTER_COL_CNT, CHARACTER_URLS, INIT_ORIGIN_POS, FLOATING_HEIGHT, MAX_CHARACTER_CNT, VIEW_ORIGIN_POS, QUIT_ORIGIN_POS, GRAVITY} from '../../../utils/constants'
+import {
+  AXIS_SIZE,
+  CHARACTERS_GAP,
+  CHARACTER_COL_CNT,
+  CHARACTER_URLS,
+  INIT_ORIGIN_POS,
+  FLOATING_HEIGHT,
+  MAX_CHARACTER_CNT,
+  VIEW_ORIGIN_POS,
+  QUIT_ORIGIN_POS,
+  GRAVITY,
+  TREE_URLS,
+  LEFT_TREES_POS,
+  RIGHT_TREES_POS,
+} from '../../../utils/constants'
 import {customDebug} from '../../../utils/custom.debug'
 import {usePrevious} from '../../../hooks/usePrevious'
 import {deepClone} from '../../../utils/common'
 import {Land} from './Land'
+import {Tree} from './Tree'
 
 
 export const Scene = () => {
@@ -115,6 +130,22 @@ export const Scene = () => {
             />,
           )}
           {/* <Ground/> */}
+          {TREE_URLS.map((url, index) =>
+            <Tree
+              key={index}
+              url={url}
+              position={LEFT_TREES_POS}
+              rotation={[0, Math.PI / 2, 0]}
+            />,
+          )}
+          {TREE_URLS.map((url, index) =>
+            <Tree
+              key={index}
+              url={url}
+              position={RIGHT_TREES_POS}
+              rotation={[0, Math.PI / 2, 0]}
+            />,
+          )}
           <Land/>
           {/* <Debug/> */}
         </Physics>

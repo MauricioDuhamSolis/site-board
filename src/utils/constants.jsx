@@ -25,6 +25,15 @@ export const GROUND_SIZE = 3000
 export const GROUND_HEIGHT = 2
 
 
+export const TREE_URLS = [
+  './models/fbx/trees/Tree1.fbx',
+  './models/fbx/trees/Tree2.fbx',
+  './models/fbx/trees/Tree3.fbx',
+  './models/fbx/trees/Tree4.fbx',
+  './models/fbx/trees/Tree5.fbx',
+]
+
+
 export const BILLBOARD_URL = './models/fbx/billboard.fbx'
 
 export const BILLBOARD_HTML_SIZE = 1200
@@ -51,6 +60,13 @@ export const GRAVITY = 980 * HTML_ASPECT
 export const LAND_SCALE = 0.06 * HTML_ASPECT
 
 export const LAND_INIT_POS = [36 / LAND_SCALE, -46.8 / LAND_SCALE, -70 / LAND_SCALE]
+
+
+export const TREE_SCALE = 0.6 * HTML_ASPECT
+
+export const LEFT_TREES_POS = [120 / TREE_SCALE, 0, 30 / TREE_SCALE]
+
+export const RIGHT_TREES_POS = [-120 / TREE_SCALE, 0, 30 / TREE_SCALE]
 
 
 export const BILLBOARD_SCALE = 0.06 * HTML_ASPECT
