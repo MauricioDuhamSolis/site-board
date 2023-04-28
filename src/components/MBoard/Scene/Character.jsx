@@ -61,10 +61,12 @@ export const Character = ({index}) => {
             playWalkAnimOnly()
             setIsFirstMove(false)
             setStopped(false)
+            rigidBody.current.applyImpulse(normalDesDirec.multiplyScalar(WALKING_SPEED * 3), true)
+          } else {
+            rigidBody.current.applyImpulse(normalDesDirec.multiplyScalar(WALKING_SPEED), true)
           }
 
           rigidBody.current.setRotation(tempObject.quaternion, true)
-          rigidBody.current.applyImpulse(normalDesDirec.multiplyScalar(WALKING_SPEED), true)
         } else if (!stopped) {
           const quitDirecLen = quitPosVec3.clone().sub(curPos).length()
           const newIsQuit = quitDirecLen <= TOLERANCE_DISTANCE
