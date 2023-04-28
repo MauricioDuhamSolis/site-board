@@ -5,7 +5,7 @@ import * as THREE from 'three'
 import {useFrame} from '@react-three/fiber'
 import {RigidBody, vec3} from '@react-three/rapier'
 import {useZustand} from '../../../store/useZustand'
-import {CHARACTER_FALL_POS, CHARACTER_SCALE, CHARACTER_URLS, DEFAULT_ANGULAR_DAMPING, DEFAULT_LINEAR_DAMPING, QUIT_ORIGIN_POS, TOLERANCE_DISTANCE, WALKING_SPEED} from '../../../utils/constants'
+import {CHARACTER_SCALE, CHARACTER_URLS, DEFAULT_ANGULAR_DAMPING, DEFAULT_LINEAR_DAMPING, QUIT_ORIGIN_POS, TOLERANCE_DISTANCE, WALKING_SPEED} from '../../../utils/constants'
 import {assertDefined} from '../../../utils/custom.assert'
 import {customDebug} from '../../../utils/custom.debug'
 import {useCloneFbx} from '../../../hooks/useCloneFbx'
@@ -21,6 +21,7 @@ export const Character = ({index}) => {
   const [prevAction, setPrevAction] = useState(null)
   const [stopped, setStopped] = useState(null)
   const [isFirstMove, setIsFirstMove] = useState(true)
+  const [isQuit, setIsQuit] = useState(true)
 
   const rigidBody = useRef(null)
   // const {modelScene, actions, mixer} = useCloneFbx(CHARACTER_URLS[index % CHARACTER_URLS.length])
@@ -44,10 +45,6 @@ export const Character = ({index}) => {
     if (rigidBody.current) {
       const curPos = vec3(rigidBody.current.translation())
       tempObject.position.copy(curPos)
-      const quitDirecLen = quitPosVec3.clone().sub(curPos).length()
-      if (quitDirecLen <= TOLERANCE_DISTANCE) {
-        rigidBody.current.setTranslation(CHARACTER_FALL_POS)
-      }
 
       if (usersDesPos[index]) {
         const userDesPos = usersDesPos[index]
@@ -60,7 +57,7 @@ export const Character = ({index}) => {
 
         if (desDirecLen > TOLERANCE_DISTANCE) {
           if (isFirstMove) {
-            // customDebug().log('Character#useFrame: character moving')
+            setIsQuit(false)
             playWalkAnimOnly()
             setIsFirstMove(false)
             setStopped(false)
@@ -69,10 +66,18 @@ export const Character = ({index}) => {
           rigidBody.current.setRotation(tempObject.quaternion, true)
           rigidBody.current.applyImpulse(normalDesDirec.multiplyScalar(WALKING_SPEED), true)
         } else if (!stopped) {
-          // customDebug().log('Character#useFrame: character stopped')
+          const quitDirecLen = quitPosVec3.clone().sub(curPos).length()
+          const newIsQuit = quitDirecLen <= TOLERANCE_DISTANCE
+          customDebug().log('Character#useFrame: character stopped: newIsQuit: ', newIsQuit)
+          setIsQuit(newIsQuit)
           playIdleAnimOnly()
           setIsFirstMove(true)
           setStopped(true)
+          if (newIsQuit) {
+            rigidBody.current.applyImpulse(normalDesDirec.multiplyScalar(WALKING_SPEED * TOLERANCE_DISTANCE * 5), true)
+          } else {
+            rigidBody.current.applyImpulse(normalDesDirec.multiplyScalar(WALKING_SPEED * 2), true)
+          }
         }
       }
     }
@@ -179,6 +184,7 @@ export const Character = ({index}) => {
   return modelScene && (
     <RigidBody
       ref={rigidBody}
+      colliders={isQuit ? false : 'hull'}
       position={usersInitPos[index] || [0, 0, 0]}
       enabledRotations={[false, true, false]}
       linearDamping={DEFAULT_LINEAR_DAMPING}
@@ -186,6 +192,7 @@ export const Character = ({index}) => {
     >
       <primitive
         object={modelScene}
+        visible={!isQuit}
         scale={CHARACTER_SCALE}
         castShadow
       />

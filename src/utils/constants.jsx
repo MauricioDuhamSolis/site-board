@@ -1,14 +1,13 @@
-import * as THREE from 'three'
 import {getCharacterUrls} from './common'
 
 
 /* Environment */
 
-export const IS_DEV_MODE = false
+export const IS_DEV_MODE = true
 
 export const MODEL_TYPE = 'glb'
 
-export const MAX_CHARACTER_CNT = 20
+export const MAX_CHARACTER_CNT = 30
 
 export const REALTIME_DURATION = 10000
 
@@ -39,8 +38,6 @@ export const FLOATING_HEIGHT = 0
 
 export const CHARACTER_COL_CNT = 10
 
-export const CHARACTER_FALL_POS = new THREE.Vector3(0, -10, 0)
-
 
 /* Dynamic */
 
@@ -70,7 +67,7 @@ export const INIT_ORIGIN_POS = [BILLBOARD_DES_POS[0] + 15, 0, BILLBOARD_DES_POS[
 
 export const VIEW_ORIGIN_POS = [BILLBOARD_DES_POS[0] + 15, 0, BILLBOARD_DES_POS[2]]
 
-export const QUIT_ORIGIN_POS = [BILLBOARD_DES_POS[0] + 40, 0, BILLBOARD_DES_POS[2] - HTML_ASPECT]
+export const QUIT_ORIGIN_POS = [BILLBOARD_DES_POS[0] + 60, 0, BILLBOARD_DES_POS[2] - HTML_ASPECT]
 
 export const CHARACTERS_GAP = HTML_ASPECT * 1.6
 

@@ -32,7 +32,6 @@ export const Scene = () => {
   const prevRealtimeVisitors = usePrevious(realtimeVisitors, 0)
 
   const {
-    showPerf,
     distance,
     sunPosition,
     inclination,
@@ -42,7 +41,6 @@ export const Scene = () => {
     rayleigh,
     turbidity,
   } = useControls({
-    showPerf: {value: false, label: 'Show Performance'},
     distance: {value: 450, label: 'distance'},
     sunPosition: {value: [0, 450, 0], label: 'sunPosition'},
     inclination: {value: 0, label: 'inclination'},
@@ -96,7 +94,7 @@ export const Scene = () => {
 
   return (
     <Canvas>
-      {showPerf && <Perf position="top-left"/>}
+      <Perf position="bottom-left"/>
 
       <OrbitControls makeDefault/>
 
@@ -113,10 +111,7 @@ export const Scene = () => {
       {/* <axesHelper args={[AXIS_SIZE]}/> */}
 
       <Suspense>
-        <Physics
-          colliders="hull"
-          gravity={[0, -GRAVITY, 0]}
-        >
+        <Physics gravity={[0, -GRAVITY, 0]}>
           <Sky
             distance={distance}
             sunPosition={sunPosition}
