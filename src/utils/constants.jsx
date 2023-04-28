@@ -11,6 +11,8 @@ export const MAX_CHARACTER_CNT = 20
 
 export const REALTIME_DURATION = 10000
 
+console.log('test: ', process.env.NODE_ENV)
+
 
 /* Static */
 
