@@ -14,7 +14,7 @@ export const BillboardHtml = () => {
   } = useZustand()
 
   const halfHeight = billboardDimensions.height * 0.545
-  const htmlPos = [billboardDesPos[0], billboardDesPos[1] + halfHeight, billboardDesPos[2] - 0.1]
+  const htmlPos = [billboardDesPos[0], billboardDesPos[1] + halfHeight, billboardDesPos[2] - 0.2]
   const billboardDomain = menuArr[selMenuIndex]?.domain
 
   return (

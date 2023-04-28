@@ -73,11 +73,11 @@ export const Scene = () => {
 
   return (
     <Canvas>
-      <Perf position="bottom-left"/>
+      {/* <Perf position="bottom-left"/> */}
 
       <OrbitControls
         makeDefault
-        maxDistance={distance * 0.7}
+        maxDistance={220}
         maxPolarAngle={Math.PI * 0.49}
       />
 
