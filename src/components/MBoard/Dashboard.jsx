@@ -35,7 +35,7 @@ export const Dashboard = () => {
       if (IS_DEV_MODE) {
         setTimeout(() => {
           const newRealtimeVisitors = parseInt(Math.random() * (MAX_CHARACTER_CNT / 3)) + 1
-          // customDebug().log('Dashboard#loadDashboardData: newRealtimeVisitors: ', newRealtimeVisitors)
+          customDebug().log('Dashboard#loadDashboardData: newRealtimeVisitors: ', newRealtimeVisitors)
           setRealtimeVisitors(newRealtimeVisitors)
         }, 1000)
       } else {
@@ -69,13 +69,12 @@ export const Dashboard = () => {
   }, [isBackgroundLoading, isSeeingApp, selMenuIndex, menuArr])
 
   useEffect(() => {
-    loadDashboardData()
     if (intervalId) {
       clearInterval(intervalId)
     }
     intervalId = setInterval(loadDashboardData, REALTIME_DURATION)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [isBackgroundLoading, isSeeingApp, selMenuIndex])
 
   return (
     <div className={classNames({

@@ -100,12 +100,9 @@ export const Scene = () => {
       <directionalLight
         castShadow
         position={[1, 2, 3]}
-        intensity={0.1}
-        shadow-normalBias={0.04}
-      >
-        <OrthographicCamera/>
-      </directionalLight>
-      <ambientLight intensity={0.5}/>
+        intensity={0.5}
+      />
+      <ambientLight intensity={2}/>
 
       {/* <axesHelper args={[AXIS_SIZE]}/> */}
 
