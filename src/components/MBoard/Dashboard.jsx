@@ -32,9 +32,11 @@ export const Dashboard = () => {
 
     if (selMenuIndex !== null) {
       if (IS_DEV_MODE) {
-        const newRealtimeVisitors = parseInt(Math.random() * (MAX_CHARACTER_CNT / 3)) + 1
-        // customDebug().log('Dashboard#loadDashboardData: newRealtimeVisitors: ', newRealtimeVisitors)
-        setRealtimeVisitors(newRealtimeVisitors)
+        setTimeout(() => {
+          const newRealtimeVisitors = parseInt(Math.random() * (MAX_CHARACTER_CNT / 3)) + 1
+          // customDebug().log('Dashboard#loadDashboardData: newRealtimeVisitors: ', newRealtimeVisitors)
+          setRealtimeVisitors(newRealtimeVisitors)
+        }, 1000)
       } else {
         const domain = menuArr[selMenuIndex]?.domain
 
@@ -66,7 +68,7 @@ export const Dashboard = () => {
   }, [selMenuIndex, setRealtimeVisitors, menuArr, setAggregate, setPlausibleStep])
 
   useEffect(() => {
-    setTimeout(loadDashboardData, 1000)
+    loadDashboardData()
     if (intervalId) {
       clearInterval(intervalId)
     }
