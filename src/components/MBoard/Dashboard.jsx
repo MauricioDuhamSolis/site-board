@@ -34,7 +34,7 @@ export const Dashboard = () => {
     if (selMenuIndex !== null) {
       if (IS_DEV_MODE) {
         setTimeout(() => {
-          const newRealtimeVisitors = parseInt(Math.random() * (MAX_CHARACTER_CNT / 3)) + 1
+          const newRealtimeVisitors = parseInt(Math.random() * (MAX_CHARACTER_CNT / 2)) + 1
           // customDebug().log('Dashboard#loadDashboardData: newRealtimeVisitors: ', newRealtimeVisitors)
           setRealtimeVisitors(newRealtimeVisitors)
         }, 1000)
