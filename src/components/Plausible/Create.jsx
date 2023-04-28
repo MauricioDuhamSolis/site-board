@@ -73,7 +73,7 @@ export const Create = ({domain}) => {
           setIsLoading(false)
         })}
       >
-        Enter
+        Enter site URL
       </button>
     </>
   )
