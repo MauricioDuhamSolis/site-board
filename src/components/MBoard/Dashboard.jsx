@@ -74,7 +74,8 @@ export const Dashboard = () => {
       clearInterval(intervalId)
     }
     intervalId = setInterval(loadDashboardData, REALTIME_DURATION)
-  }, [loadDashboardData])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <div className={classNames({
