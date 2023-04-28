@@ -3,15 +3,13 @@ import {getCharacterUrls} from './common'
 
 /* Environment */
 
-export const IS_DEV_MODE = false
+export const IS_DEV_MODE = process.env.NODE_ENV === 'development'
 
 export const MODEL_TYPE = 'glb'
 
 export const MAX_CHARACTER_CNT = 20
 
 export const REALTIME_DURATION = 10000
-
-console.log('test: ', process.env.NODE_ENV)
 
 
 /* Static */
