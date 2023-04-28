@@ -53,15 +53,15 @@ export const Scene = () => {
 
     if (diffRealtimeVisitors > 0) {
       for (let i = 0; i < diffRealtimeVisitors; i++) {
-        const userIndex = (prevLastCharacterIndex + i + 1) % MAX_CHARACTER_CNT
-        const x = userIndex % CHARACTER_COL_CNT
-        const y = (userIndex - x) / CHARACTER_COL_CNT
-        newUsersInitPos[userIndex] = [
+        const endUserIndex = (prevLastCharacterIndex + i + 1) % MAX_CHARACTER_CNT
+        const x = endUserIndex % CHARACTER_COL_CNT
+        const y = (endUserIndex - x) / CHARACTER_COL_CNT
+        newUsersInitPos[endUserIndex] = [
           INIT_ORIGIN_POS[0] - (x * CHARACTERS_GAP),
           FLOATING_HEIGHT,
           INIT_ORIGIN_POS[2] - (y * CHARACTERS_GAP),
         ]
-        newUsersDesPos[userIndex] = [
+        newUsersDesPos[endUserIndex] = [
           VIEW_ORIGIN_POS[0] - (x * CHARACTERS_GAP),
           FLOATING_HEIGHT,
           VIEW_ORIGIN_POS[2] - (y * CHARACTERS_GAP),
@@ -75,8 +75,8 @@ export const Scene = () => {
       const absDiffRealtimeVisitors = Math.abs(diffRealtimeVisitors)
 
       for (let i = 0; i < absDiffRealtimeVisitors; i++) {
-        const userIndex = (prevFirstCharacterIndex + i) % MAX_CHARACTER_CNT
-        newUsersDesPos[userIndex] = QUIT_ORIGIN_POS
+        const startUserIndex = (prevFirstCharacterIndex + i) % MAX_CHARACTER_CNT
+        newUsersDesPos[startUserIndex] = QUIT_ORIGIN_POS
       }
     }
 
