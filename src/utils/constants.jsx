@@ -48,6 +48,11 @@ export const HTML_ASPECT = BILLBOARD_HTML_SIZE / 400
 export const GRAVITY = 980 * HTML_ASPECT
 
 
+export const LAND_SCALE = 0.06 * HTML_ASPECT
+
+export const LAND_INIT_POS = [36 / LAND_SCALE, -46.8 / LAND_SCALE, -70 / LAND_SCALE]
+
+
 export const BILLBOARD_SCALE = 0.06 * HTML_ASPECT
 
 export const BILLBOARD_INIT_POS = [0, 0, 12 * HTML_ASPECT]

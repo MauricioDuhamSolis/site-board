@@ -15,6 +15,7 @@ import {AXIS_SIZE, CHARACTERS_GAP, CHARACTER_COL_CNT, CHARACTER_URLS, INIT_ORIGI
 import {customDebug} from '../../../utils/custom.debug'
 import {usePrevious} from '../../../hooks/usePrevious'
 import {deepClone} from '../../../utils/common'
+import {Land} from './Land'
 
 
 export const Scene = () => {
@@ -113,7 +114,8 @@ export const Scene = () => {
               index={index}
             />,
           )}
-          <Ground/>
+          {/* <Ground/> */}
+          <Land/>
           {/* <Debug/> */}
         </Physics>
       </Suspense>
