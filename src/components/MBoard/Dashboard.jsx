@@ -18,6 +18,7 @@ export const Dashboard = () => {
     setRealtimeVisitors,
     isBackgroundLoading,
     setIsBackgroundLoading,
+    isSeeingApp,
   } = useZustand()
 
   const {showDashboard} = useControls({
@@ -25,7 +26,7 @@ export const Dashboard = () => {
   })
 
   const loadDashboardData = useCallback(async () => {
-    if (isBackgroundLoading) {
+    if (isBackgroundLoading || !isSeeingApp) {
       return
     }
     setIsBackgroundLoading(true)
@@ -65,7 +66,7 @@ export const Dashboard = () => {
 
     setIsBackgroundLoading(false)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selMenuIndex, setRealtimeVisitors, menuArr, setAggregate, setPlausibleStep])
+  }, [isBackgroundLoading, isSeeingApp, selMenuIndex, menuArr])
 
   useEffect(() => {
     loadDashboardData()

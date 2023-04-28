@@ -12,8 +12,31 @@ import {MBoard} from './components/MBoard/MBoard'
 
 
 const App = () => {
-  const {setIsLoading} = useZustand()
+  const {
+    setIsLoading,
+    setIsSeeingApp,
+  } = useZustand()
   const {isLoading} = useAuth0()
+
+  const onFocusFunction = () => {
+    setIsSeeingApp(true)
+  }
+
+  const onBlurFunction = () => {
+    setIsSeeingApp(false)
+  }
+
+  useEffect(() => {
+    onFocusFunction()
+    window.addEventListener('focus', onFocusFunction)
+    window.addEventListener('blur', onBlurFunction)
+    return () => {
+      onBlurFunction()
+      window.removeEventListener('focus', onFocusFunction)
+      window.removeEventListener('blur', onBlurFunction)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   useEffect(() => {
     setIsLoading(isLoading)

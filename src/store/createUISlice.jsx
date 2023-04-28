@@ -41,5 +41,8 @@ export const createUISlice = (set, get) => {
 
     isBackgroundLoading: false,
     setIsBackgroundLoading: (newIsBackgroundLoading) => set(() => ({isBackgroundLoading: newIsBackgroundLoading})),
+
+    isSeeingApp: true,
+    setIsSeeingApp: (newIsSeeingApp) => set(() => ({isSeeingApp: newIsSeeingApp})),
   }
 }
