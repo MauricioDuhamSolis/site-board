@@ -14,10 +14,10 @@ export const REALTIME_DURATION = 10000
 
 /* Static */
 
-export const AXIS_SIZE = 10
-
-
 export const PLAUSIBLE_STEP_CNT = 3
+
+
+export const AXIS_SIZE = 10
 
 
 export const GROUND_SIZE = 3000
