@@ -5,7 +5,6 @@ import {OrbitControls, OrthographicCamera, Sky, useGLTF} from '@react-three/drei
 import {Canvas} from '@react-three/fiber'
 import {Debug, Physics} from '@react-three/rapier'
 import {Perf} from 'r3f-perf'
-import {useControls} from 'leva'
 import {Character} from './Character'
 import {Ground} from './Ground'
 import {Billboard} from './Billboard'
@@ -30,26 +29,6 @@ export const Scene = () => {
     setUsersDesPos,
   } = useZustand()
   const prevRealtimeVisitors = usePrevious(realtimeVisitors, 0)
-
-  const {
-    distance,
-    sunPosition,
-    inclination,
-    azimuth,
-    mieCoefficient,
-    mieDirectionalG,
-    rayleigh,
-    turbidity,
-  } = useControls({
-    distance: {value: 450, label: 'distance'},
-    sunPosition: {value: [0, 450, 0], label: 'sunPosition'},
-    inclination: {value: 0, label: 'inclination'},
-    azimuth: {value: 0.25, label: 'azimuth'},
-    mieCoefficient: {value: 0, label: 'mieCoefficient'},
-    mieDirectionalG: {value: 0, label: 'mieDirectionalG'},
-    rayleigh: {value: 0.03, label: 'rayleigh'},
-    turbidity: {value: 0, label: 'turbidity'},
-  })
 
   useEffect(() => {
     const diffRealtimeVisitors = realtimeVisitors - prevRealtimeVisitors
@@ -144,6 +123,15 @@ export const Scene = () => {
   )
 }
 
+
+const distance = 450
+const sunPosition = [0, 450, 0]
+const inclination = 0
+const azimuth = 0.25
+const mieCoefficient = 0
+const mieDirectionalG = 0
+const rayleigh = 0.03
+const turbidity = 0
 
 CHARACTER_URLS.forEach((url) => {
   useGLTF.preload(url)
