@@ -66,7 +66,7 @@ export const Dashboard = () => {
   }, [selMenuIndex, setRealtimeVisitors, menuArr, setAggregate, setPlausibleStep])
 
   useEffect(() => {
-    loadDashboardData()
+    setTimeout(loadDashboardData, 1000)
     if (intervalId) {
       clearInterval(intervalId)
     }
