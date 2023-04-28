@@ -100,7 +100,7 @@ export const Scene = () => {
       <directionalLight
         castShadow
         position={[1, 2, 3]}
-        intensity={1.5}
+        intensity={0.1}
         shadow-normalBias={0.04}
       >
         <OrthographicCamera/>
