@@ -15,7 +15,7 @@ export const Home = () => {
       {!isAuthenticated ?
           <div>Please log in to see billboard.</div> :
           !menuArr.length ?
-            <div>There is no site registered.</div> :
+            <div>Click the &quot;+&quot; to add a site</div> :
             <div/>
       }
     </div>
