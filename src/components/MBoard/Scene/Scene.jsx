@@ -96,7 +96,11 @@ export const Scene = () => {
     <Canvas>
       <Perf position="bottom-left"/>
 
-      <OrbitControls makeDefault/>
+      <OrbitControls
+        makeDefault
+        maxDistance={distance * 0.7}
+        maxPolarAngle={Math.PI * 0.49}
+      />
 
       <directionalLight
         castShadow
