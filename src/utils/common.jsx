@@ -117,9 +117,9 @@ export const getCharacterUrls = (modelType, characterCnt) => {
 
   switch (modelType) {
     case 'glb':
-      return Array.from({length: characterCnt}).map((v, i) => `./models/glb/character (${i + 1}).glb`)
+      return Array.from({length: characterCnt}).map((v, i) => `./models/glb/characters/character (${i + 1}).glb`)
     case 'fbx':
-      return Array.from({length: characterCnt}).map((v, i) => `./models/fbx/character (${i + 1}).fbx`)
+      return Array.from({length: characterCnt}).map((v, i) => `./models/fbx/characters/character (${i + 1}).fbx`)
     default:
       return []
   }
