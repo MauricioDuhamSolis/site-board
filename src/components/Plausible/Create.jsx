@@ -35,6 +35,7 @@ export const Create = ({domain}) => {
 
           if (!user?.name) {
             setAlertMsg('Username not correct.')
+            setIsLoading(false)
             return
           }
 
@@ -44,6 +45,7 @@ export const Create = ({domain}) => {
 
           if (!urlDomain) {
             setAlertMsg('Input correct domain please.')
+            setIsLoading(false)
             return
           }
 
@@ -53,6 +55,7 @@ export const Create = ({domain}) => {
 
           if (siteData?.domain !== urlDomain) {
             setAlertMsg('This domain cannot be registered. Perhaps one of your colleagues registered it? If that\'s not the case, please contact support@plausible.io')
+            setIsLoading(false)
             return
           }
 
@@ -63,6 +66,7 @@ export const Create = ({domain}) => {
 
           if (saveDataRes?.status !== 200 || !insertedId) {
             setAlertMsg('Backend is disconnected. Check your internet connection.')
+            setIsLoading(false)
             return
           }
 
