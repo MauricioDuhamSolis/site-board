@@ -54,6 +54,8 @@ export const Character = ({index}) => {
         const desDirecLen = desDirec.length()
         const normalDesDirec = desDirec.normalize()
         normalDesDirec.setY(0)
+        const quitDirecLen = quitPosVec3.clone().sub(curPos).length()
+        const newIsQuit = quitDirecLen <= TOLERANCE_DISTANCE
 
         if (desDirecLen > TOLERANCE_DISTANCE) {
           if (isFirstMove) {
@@ -62,7 +64,11 @@ export const Character = ({index}) => {
             playWalkAnimOnly()
             setIsFirstMove(false)
             setStopped(false)
-            rigidBody.current.applyImpulse(normalDesDirec.multiplyScalar(WALKING_SPEED * 3), true)
+            if (newIsQuit) {
+              rigidBody.current.applyImpulse(normalDesDirec.multiplyScalar(WALKING_SPEED * TOLERANCE_DISTANCE * 4), true)
+            } else {
+              rigidBody.current.applyImpulse(normalDesDirec.multiplyScalar(WALKING_SPEED * 3), true)
+            }
           } else {
             rigidBody.current.applyImpulse(normalDesDirec.multiplyScalar(WALKING_SPEED), true)
           }
@@ -70,8 +76,6 @@ export const Character = ({index}) => {
           rigidBody.current.setRotation(tempObject.quaternion, true)
         } else if (!stopped) {
           customDebug().log(`Character#useFrame: character ${index + 1} stopped`)
-          const quitDirecLen = quitPosVec3.clone().sub(curPos).length()
-          const newIsQuit = quitDirecLen <= TOLERANCE_DISTANCE
           setIsQuit(newIsQuit)
           playIdleAnimOnly()
           setIsFirstMove(true)
