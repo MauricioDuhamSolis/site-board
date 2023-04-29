@@ -69,6 +69,7 @@ export const Dashboard = () => {
   }, [isBackgroundLoading, isSeeingApp, selMenuIndex, menuArr])
 
   useEffect(() => {
+    loadDashboardData()
     if (intervalId) {
       clearInterval(intervalId)
     }
