@@ -65,7 +65,7 @@ export const Character = ({index}) => {
             setIsFirstMove(false)
             setStopped(false)
             if (newIsQuit) {
-              rigidBody.current.applyImpulse(normalDesDirec.multiplyScalar(WALKING_SPEED * TOLERANCE_DISTANCE * 4), true)
+              rigidBody.current.applyImpulse(normalDesDirec.multiplyScalar(WALKING_SPEED * TOLERANCE_DISTANCE * 6), true)
             } else {
               rigidBody.current.applyImpulse(normalDesDirec.multiplyScalar(WALKING_SPEED * 3), true)
             }
