@@ -57,14 +57,14 @@ export const Scene = () => {
         const x = endUserIndex % CHARACTER_COL_CNT
         const y = (endUserIndex - x) / CHARACTER_COL_CNT
         newUsersInitPos[endUserIndex] = [
-          INIT_ORIGIN_POS[0] - (x * CHARACTERS_GAP),
+          INIT_ORIGIN_POS[0] - ((x * CHARACTERS_GAP) + Math.random()),
           FLOATING_HEIGHT,
-          INIT_ORIGIN_POS[2] - (y * CHARACTERS_GAP),
+          INIT_ORIGIN_POS[2] - ((y * CHARACTERS_GAP) + Math.random()),
         ]
         newUsersDesPos[endUserIndex] = [
-          VIEW_ORIGIN_POS[0] - (x * CHARACTERS_GAP),
+          VIEW_ORIGIN_POS[0] - ((x * CHARACTERS_GAP) + Math.random()),
           FLOATING_HEIGHT,
-          VIEW_ORIGIN_POS[2] - (y * CHARACTERS_GAP),
+          VIEW_ORIGIN_POS[2] - ((y * CHARACTERS_GAP) + Math.random()),
         ]
       }
 
