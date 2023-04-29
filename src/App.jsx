@@ -54,7 +54,7 @@ const App = () => {
 
 
 const newActivityDetector = activityDetector({
-  timeToIdle: 300000,
+  timeToIdle: 600000,
 })
 
 export default App
