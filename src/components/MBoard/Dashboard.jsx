@@ -69,13 +69,16 @@ export const Dashboard = () => {
   }, [isBackgroundLoading, isSeeingApp, selMenuIndex, menuArr])
 
   useEffect(() => {
+    if (!isSeeingApp || selMenuIndex === -1) {
+      return
+    }
     loadDashboardData()
     if (intervalId) {
       clearInterval(intervalId)
     }
     intervalId = setInterval(loadDashboardData, REALTIME_DURATION)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isBackgroundLoading, isSeeingApp, selMenuIndex])
+  }, [isSeeingApp, selMenuIndex])
 
   return (
     <div className={classNames({
