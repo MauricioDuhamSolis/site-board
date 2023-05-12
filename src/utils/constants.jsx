@@ -50,7 +50,7 @@ export const CHARACTER_COL_CNT = 10
 
 /* Dynamic */
 
-export const BACKEND_URL = IS_DEV_MODE ? 'http://127.0.0.1:4000/main' : 'https://mboard-backend.onrender.com/main'
+export const BACKEND_URL = IS_DEV_MODE ? 'http://127.0.0.1:4000/main' : 'https://mboard-backend-hu0u.onrender.com/main'
 
 export const HTML_ASPECT = BILLBOARD_HTML_SIZE / 400
 
