@@ -35,7 +35,7 @@ client.connect((connErr) => {
 
   // This help convert the id from string to ObjectId for the _id
   const objectId = require('mongodb').ObjectId
-  const mainCollection = client.db('mboard').collection('main')
+  const mainCollection = client.db('siteboard').collection('main')
 
   // This section will help you get a list of all the main
   mainRoute.route('/').get((req, res) => {
