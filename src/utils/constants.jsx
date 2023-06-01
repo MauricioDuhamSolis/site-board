@@ -5,6 +5,8 @@ import {getCharacterUrls} from './common'
 
 export const IS_DEV_MODE = process.env.NODE_ENV === 'development'
 
+export const USE_PLAUSIBLE = false
+
 export const MODEL_TYPE = 'glb'
 
 export const MAX_CHARACTER_CNT = 20

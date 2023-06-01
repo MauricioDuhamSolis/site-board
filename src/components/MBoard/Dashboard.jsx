@@ -3,7 +3,7 @@ import {useControls} from 'leva'
 import classNames from 'classnames'
 import {useZustand} from '../../store/useZustand'
 import {getAggregate, getRealtimeVisitors} from '../../utils/plausible'
-import {REALTIME_DURATION, IS_DEV_MODE, MAX_CHARACTER_CNT} from '../../utils/constants'
+import {REALTIME_DURATION, MAX_CHARACTER_CNT, USE_PLAUSIBLE} from '../../utils/constants'
 import {customDebug} from '../../utils/custom.debug'
 
 
@@ -32,13 +32,7 @@ export const Dashboard = () => {
     setIsBackgroundLoading(true)
 
     if (selMenuIndex !== null) {
-      if (IS_DEV_MODE) {
-        setTimeout(() => {
-          const newRealtimeVisitors = parseInt(Math.random() * (MAX_CHARACTER_CNT / 3)) + 1
-          customDebug().log('Dashboard#loadDashboardData: newRealtimeVisitors: ', newRealtimeVisitors)
-          setRealtimeVisitors(newRealtimeVisitors)
-        }, 1000)
-      } else {
+      if (USE_PLAUSIBLE) {
         const domain = menuArr[selMenuIndex]?.domain
 
         if (domain) {
@@ -61,6 +55,12 @@ export const Dashboard = () => {
             setRealtimeVisitors(newRealtimeVisitors)
           }
         }
+      } else {
+        setTimeout(() => {
+          const newRealtimeVisitors = parseInt(Math.random() * (MAX_CHARACTER_CNT / 3)) + 1
+          customDebug().log('Dashboard#loadDashboardData: newRealtimeVisitors: ', newRealtimeVisitors)
+          setRealtimeVisitors(newRealtimeVisitors)
+        }, 1000)
       }
     }
 
