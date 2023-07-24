@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import {useAuth0} from '@auth0/auth0-react'
+// import {useAuth0} from '@auth0/auth0-react'
 import activityDetector from 'activity-detector'
 import {Alert} from './components/Utils/Alert'
 import {Confirm} from './components/Utils/Confirm'
@@ -15,14 +15,14 @@ import {customDebug} from './utils/custom.debug'
 
 const App = () => {
   const {
-    setIsLoading,
+    // setIsLoading,
     setIsSeeingApp,
   } = useZustand()
-  const {isLoading} = useAuth0()
+  // const {isLoading} = useAuth0()
 
-  useEffect(() => {
-    setIsLoading(isLoading)
-  }, [isLoading, setIsLoading])
+  // useEffect(() => {
+  //   setIsLoading(isLoading)
+  // }, [isLoading, setIsLoading])
 
   useEffect(() => {
     newActivityDetector.on('idle', () => {

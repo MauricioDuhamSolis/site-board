@@ -13,6 +13,8 @@ export const MAX_CHARACTER_CNT = 20
 
 export const REALTIME_DURATION = 30000
 
+export const USER_NAME = 'random'
+
 
 /* Static */
 

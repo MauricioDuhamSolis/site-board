@@ -4,7 +4,8 @@ import {createSite} from '../../utils/plausible'
 import {saveData} from '../../utils/mongo.db'
 import {customDebug} from '../../utils/custom.debug'
 import {urlToDomain} from '../../utils/common'
-import {useAuth0} from '@auth0/auth0-react'
+import {USER_NAME} from '../../utils/constants'
+// import {useAuth0} from '@auth0/auth0-react'
 
 
 export const Create = ({domain}) => {
@@ -17,7 +18,7 @@ export const Create = ({domain}) => {
     onConfirm,
     setIsLoading,
   } = useZustand()
-  const {user} = useAuth0()
+  // const {user} = useAuth0()
   const inputRef = useRef(null)
 
   return (
@@ -33,11 +34,11 @@ export const Create = ({domain}) => {
         onClick={() => onConfirm(async () => {
           setIsLoading(true)
 
-          if (!user?.name) {
-            setAlertMsg('Username not correct.')
-            setIsLoading(false)
-            return
-          }
+          // if (!user?.name) {
+          //   setAlertMsg('Username not correct.')
+          //   setIsLoading(false)
+          //   return
+          // }
 
           const inputVal = inputRef.current.value
           const urlDomain = urlToDomain(inputVal)
@@ -59,7 +60,8 @@ export const Create = ({domain}) => {
             return
           }
 
-          siteData.username = user.name
+          // siteData.username = user.name
+          siteData.username = USER_NAME
           const saveDataRes = await saveData(siteData)
           customDebug().log('Create#onClick: saveDataRes: ', saveDataRes)
           const insertedId = saveDataRes?.data?.insertedId
