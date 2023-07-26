@@ -4,7 +4,7 @@ import {createSite} from '../../utils/plausible'
 import {saveData} from '../../utils/mongo.db'
 import {customDebug} from '../../utils/custom.debug'
 import {urlToDomain} from '../../utils/common'
-import {USER_NAME} from '../../utils/constants'
+import {USER_NAME, USE_PLAUSIBLE} from '../../utils/constants'
 // import {useAuth0} from '@auth0/auth0-react'
 
 
@@ -50,14 +50,20 @@ export const Create = ({domain}) => {
             return
           }
 
-          const createSiteRes = await createSite(urlDomain)
-          customDebug().log('Create#onClick: createSiteRes: ', createSiteRes)
-          const siteData = createSiteRes?.data
+          let siteData
 
-          if (siteData?.domain !== urlDomain) {
-            setAlertMsg('This domain cannot be registered. Perhaps one of your colleagues registered it? If that\'s not the case, please contact support@plausible.io')
-            setIsLoading(false)
-            return
+          if (USE_PLAUSIBLE) {
+            const createSiteRes = await createSite(urlDomain)
+            customDebug().log('Create#onClick: createSiteRes: ', createSiteRes)
+            siteData = createSiteRes?.data
+
+            if (siteData?.domain !== urlDomain) {
+              setAlertMsg('This domain cannot be registered. Perhaps one of your colleagues registered it? If that\'s not the case, please contact support@plausible.io')
+              setIsLoading(false)
+              return
+            }
+          } else {
+            siteData = {domain: urlDomain}
           }
 
           // siteData.username = user.name

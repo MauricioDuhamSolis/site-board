@@ -8,6 +8,7 @@ import CloseSvg from '../../assets/icons/close.svg'
 import {customDebug} from '../../utils/custom.debug'
 import {deleteSite} from '../../utils/plausible'
 import {removeData} from '../../utils/mongo.db'
+import {USE_PLAUSIBLE} from '../../utils/constants'
 
 
 export const MenuItem = ({index, menu}) => {
@@ -44,7 +45,7 @@ export const MenuItem = ({index, menu}) => {
           const removeDataRes = await removeData(menu._id)
           customDebug().log('MenuItem#onClick: removeDataRes: ', removeDataRes)
 
-          if (!removeDataRes || !deleteSiteRes) {
+          if (!removeDataRes || (!deleteSiteRes && USE_PLAUSIBLE)) {
             setAlertMsg('Site maybe not registered, or check your internet connection.')
             return
           }
