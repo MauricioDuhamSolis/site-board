@@ -11,7 +11,7 @@ export const Dashboard = () => {
   const {
     selMenuIndex,
     menuArr,
-    aggregate,
+    // aggregate,
     setAggregate,
     setPlausibleStep,
     realtimeVisitors,
@@ -82,15 +82,15 @@ export const Dashboard = () => {
 
   return (
     <div className={classNames({
-      'absolute z-10 p-2 bg-white border-2 border-gray-500 rounded top-3 left-2': true,
+      'absolute z-10 p-2 bg-black border-2 border-white rounded top-3 left-2 text-white': true,
       'hidden': !showDashboard || !realtimeVisitors,
     })}
     >
       <div>Current Visitors: {realtimeVisitors}</div>
-      <div>Bounce Rate: {aggregate?.bounce_rate?.value}</div>
+      {/* <div>Bounce Rate: {aggregate?.bounce_rate?.value}</div>
       <div>Page Views: {aggregate?.pageviews?.value}</div>
       <div>Visit Duration: {aggregate?.visit_duration?.value}</div>
-      <div>Visitors: {aggregate?.visitors?.value}</div>
+      <div>Visitors: {aggregate?.visitors?.value}</div> */}
     </div>
   )
 }
