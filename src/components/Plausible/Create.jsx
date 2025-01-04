@@ -1,14 +1,14 @@
-import React, {useRef} from 'react'
-import {useZustand} from '../../store/useZustand'
-import {createSite} from '../../utils/plausible'
-import {saveData} from '../../utils/mongo.db'
-import {customDebug} from '../../utils/custom.debug'
-import {urlToDomain} from '../../utils/common'
-import {USER_NAME, USE_PLAUSIBLE} from '../../utils/constants'
-// import {useAuth0} from '@auth0/auth0-react'
+import React, { useRef } from 'react'
+import { useZustand } from '../../store/useZustand'
+import { createSite } from '../../utils/plausible'
+import { saveData } from '../../utils/mongo.db'
+import { customDebug } from '../../utils/custom.debug'
+import { urlToDomain } from '../../utils/common'
+import { USER_NAME, USE_PLAUSIBLE } from '../../utils/constants'
+import { useAuth0 } from '@auth0/auth0-react'
 
 
-export const Create = ({domain}) => {
+export const Create = ({ domain }) => {
   const {
     nextPlausibleStep,
     setAlertMsg,
@@ -18,7 +18,7 @@ export const Create = ({domain}) => {
     onConfirm,
     setIsLoading,
   } = useZustand()
-  // const {user} = useAuth0()
+  const { user } = useAuth0()
   const inputRef = useRef(null)
 
   return (
@@ -34,11 +34,11 @@ export const Create = ({domain}) => {
         onClick={() => onConfirm(async () => {
           setIsLoading(true)
 
-          // if (!user?.name) {
-          //   setAlertMsg('Username not correct.')
-          //   setIsLoading(false)
-          //   return
-          // }
+          if (!user?.name) {
+            setAlertMsg('Username not correct.')
+            setIsLoading(false)
+            return
+          }
 
           const inputVal = inputRef.current.value
           const urlDomain = urlToDomain(inputVal)
@@ -63,11 +63,11 @@ export const Create = ({domain}) => {
               return
             }
           } else {
-            siteData = {domain: urlDomain}
+            siteData = { domain: urlDomain }
           }
 
-          // siteData.username = user.name
-          siteData.username = USER_NAME
+          siteData.username = user.name
+          // siteData.username = USER_NAME
           const saveDataRes = await saveData(siteData)
           customDebug().log('Create#onClick: saveDataRes: ', saveDataRes)
           const insertedId = saveDataRes?.data?.insertedId
