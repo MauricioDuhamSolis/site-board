@@ -1,14 +1,11 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-import React from 'react'
 import classNames from 'classnames'
-import {useZustand} from '../../store/useZustand'
+import React from 'react'
 import CloseSvg from '../../assets/icons/close.svg'
-import {customDebug} from '../../utils/custom.debug'
-import {deleteSite} from '../../utils/plausible'
-import {removeData} from '../../utils/mongo.db'
+import {useZustand} from '../../store/useZustand'
 import {USE_PLAUSIBLE} from '../../utils/constants'
+import {customDebug} from '../../utils/custom.debug'
+import {removeData} from '../../utils/mongo.db'
+import {deleteSite} from '../../utils/plausible'
 
 
 export const MenuItem = ({index, menu}) => {

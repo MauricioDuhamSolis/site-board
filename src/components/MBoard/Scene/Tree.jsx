@@ -1,9 +1,7 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/no-unknown-property */
-import React from 'react'
 import {RigidBody} from '@react-three/rapier'
+import React from 'react'
 import {useCloneFbx} from '../../../hooks/useCloneFbx'
-import {AXIS_SIZE, TREE_SCALE} from '../../../utils/constants'
+import {TREE_SCALE} from '../../../utils/constants'
 import {assertDefined} from '../../../utils/custom.assert'
 
 

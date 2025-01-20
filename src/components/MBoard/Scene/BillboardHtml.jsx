@@ -1,8 +1,8 @@
-import React from 'react'
 import {Html} from '@react-three/drei'
-import {BILLBOARD_HTML_SIZE} from '../../../utils/constants'
+import React from 'react'
 import {useZustand} from '../../../store/useZustand'
 import {domainToUrl} from '../../../utils/common'
+import {BILLBOARD_HTML_SIZE} from '../../../utils/constants'
 
 
 export const BillboardHtml = () => {

@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-empty-function */
 const OFF = 4
 const ERROR = 3
 const WARN = 2
@@ -40,9 +38,9 @@ export function disableCustomDebug() {
  * When debugging is turned off, use this mock log object to throw away log messages
  */
 const mockLog = {
-  log: () => { },
-  warn: () => { },
-  error: () => { },
-  time: () => { },
-  timeEnd: () => { },
+  log: () => {},
+  warn: () => {},
+  error: () => {},
+  time: () => {},
+  timeEnd: () => {},
 }

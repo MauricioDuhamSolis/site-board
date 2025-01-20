@@ -1,10 +1,8 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/no-unknown-property */
-import React, {useEffect} from 'react'
 import {useFBX} from '@react-three/drei'
+import React, {useEffect} from 'react'
 import {useZustand} from '../../../store/useZustand'
 import {getDimensions} from '../../../utils/common'
-import {AXIS_SIZE, BILLBOARD_SCALE, BILLBOARD_URL} from '../../../utils/constants'
+import {BILLBOARD_SCALE, BILLBOARD_URL} from '../../../utils/constants'
 import {customDebug} from '../../../utils/custom.debug'
 
 

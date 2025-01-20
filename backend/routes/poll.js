@@ -1,4 +1,3 @@
-// eslint-disable-next-line new-cap
 const router = require('express').Router()
 
 const handle = require('../handlers/poll')

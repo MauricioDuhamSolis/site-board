@@ -1,34 +1,28 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/no-unknown-property */
-import React, {Suspense, useEffect} from 'react'
-import {OrbitControls, OrthographicCamera, Sky, useGLTF} from '@react-three/drei'
+import {OrbitControls, Sky, useGLTF} from '@react-three/drei'
 import {Canvas} from '@react-three/fiber'
-import {Debug, Physics} from '@react-three/rapier'
-import {Perf} from 'r3f-perf'
-import {Character} from './Character'
-import {Ground} from './Ground'
-import {Billboard} from './Billboard'
-import {Camera} from './Camera'
-import {BillboardHtml} from './BillboardHtml'
+import {Physics} from '@react-three/rapier'
+import React, {Suspense, useEffect} from 'react'
+import {usePrevious} from '../../../hooks/usePrevious'
 import {useZustand} from '../../../store/useZustand'
+import {deepClone} from '../../../utils/common'
 import {
-  AXIS_SIZE,
   CHARACTERS_GAP,
   CHARACTER_COL_CNT,
   CHARACTER_URLS,
-  INIT_ORIGIN_POS,
   FLOATING_HEIGHT,
-  MAX_CHARACTER_CNT,
-  VIEW_ORIGIN_POS,
-  QUIT_ORIGIN_POS,
   GRAVITY,
-  TREE_URLS,
+  INIT_ORIGIN_POS,
   LEFT_TREES_POS,
+  MAX_CHARACTER_CNT,
+  QUIT_ORIGIN_POS,
   RIGHT_TREES_POS,
+  TREE_URLS,
+  VIEW_ORIGIN_POS
 } from '../../../utils/constants'
-import {customDebug} from '../../../utils/custom.debug'
-import {usePrevious} from '../../../hooks/usePrevious'
-import {deepClone} from '../../../utils/common'
+import {Billboard} from './Billboard'
+import {BillboardHtml} from './BillboardHtml'
+import {Camera} from './Camera'
+import {Character} from './Character'
 import {Land} from './Land'
 import {Tree} from './Tree'
 
@@ -84,7 +78,6 @@ export const Scene = () => {
     setUsersInitPos(newUsersInitPos)
     // customDebug().log('Scene#useEffect[realtimeVisitors]: newUsersDesPos: ', newUsersDesPos)
     setUsersDesPos(newUsersDesPos)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [realtimeVisitors])
 
   return (
@@ -102,7 +95,7 @@ export const Scene = () => {
         position={[1, 2, 3]}
         intensity={0.5}
       />
-      <ambientLight intensity={2}/>
+      <ambientLight intensity={2} />
 
       {/* <axesHelper args={[AXIS_SIZE]}/> */}
 
@@ -118,8 +111,8 @@ export const Scene = () => {
             rayleigh={rayleigh}
             turbidity={turbidity}
           />
-          <Billboard/>
-          {isSeeingBillboard && <BillboardHtml/>}
+          <Billboard />
+          {isSeeingBillboard && <BillboardHtml />}
           {Array.from({length: MAX_CHARACTER_CNT}).map((v, index) =>
             <Character
               key={index}
@@ -143,12 +136,12 @@ export const Scene = () => {
               rotation={[0, Math.PI / 2, 0]}
             />,
           )}
-          <Land/>
+          <Land />
           {/* <Debug/> */}
         </Physics>
       </Suspense>
 
-      <Camera/>
+      <Camera />
     </Canvas>
   )
 }

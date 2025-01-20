@@ -4,7 +4,7 @@ const db = require('../models')
 exports.showPolls = async (req, res, next) => {
   try {
     const polls = await db.Poll.find()
-        .populate('user', ['username', 'id'])
+      .populate('user', ['username', 'id'])
     res.status(200).json(polls)
   } catch (error) {
     error.status = 400
@@ -35,7 +35,8 @@ exports.createPoll = async (req, res, next) => {
 
     await user.save()
 
-    res.status(200).json({...poll._doc,
+    res.status(200).json({
+      ...poll._doc,
       user: user._id,
     })
   } catch (error) {
@@ -50,8 +51,8 @@ exports.usersPools = async (req, res, next) => {
       id,
     } = req.decoded
     const user = await db.User
-        .findById(id)
-        .populate('polls')
+      .findById(id)
+      .populate('polls')
 
     res.status(200).json(user.polls)
   } catch (error) {
@@ -66,8 +67,8 @@ exports.getPoll = async (req, res, next) => {
       id,
     } = req.params
     const poll = await db.Poll
-        .findById(id)
-        .populate('user', ['username', 'id'])
+      .findById(id)
+      .populate('user', ['username', 'id'])
 
     if (!poll) {
       throw new Error('Polls not found')
@@ -127,13 +128,13 @@ exports.vote = async (req, res, next) => {
       }
 
       const vote = poll.options.map(
-          (option) =>
-                option.title === answer ? {
-                  title: option.title,
-                  _id: option._id,
-                  votes: option.votes + 1,
-                } :
-                option,
+        (option) =>
+          option.title === answer ? {
+            title: option.title,
+            _id: option._id,
+            votes: option.votes + 1,
+          } :
+            option,
       )
 
       if (poll.voted.filter((user) => user.toString() === userId).length <= 0) {

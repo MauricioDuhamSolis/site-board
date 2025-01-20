@@ -1,5 +1,5 @@
-import React from 'react'
 import classNames from 'classnames'
+import React from 'react'
 import {useZustand} from '../../store/useZustand'
 
 
@@ -34,7 +34,7 @@ export const Confirm = () => {
           </button>
         </div>
       </div>
-      <div className=''/>
+      <div className='' />
     </div>
   )
 }

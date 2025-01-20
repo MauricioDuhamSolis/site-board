@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react'
-import { MenuItem } from './MenuItem'
-import { AddLink } from './AddLink'
-import { useZustand } from '../../store/useZustand'
-import { customDebug } from '../../utils/custom.debug'
-import { getUserData } from '../../utils/mongo.db'
-import { Profile } from './Profile'
+import React, {useEffect} from 'react'
+import {useZustand} from '../../store/useZustand'
+import {customDebug} from '../../utils/custom.debug'
+import {getUserData} from '../../utils/mongo.db'
+import {AddLink} from './AddLink'
+import {MenuItem} from './MenuItem'
+import {Profile} from './Profile'
 // import { USER_NAME } from '../../utils/constants'
-import { useAuth0 } from '@auth0/auth0-react'
+import {useAuth0} from '@auth0/auth0-react'
 
 
 export const Menu = () => {
@@ -16,7 +16,7 @@ export const Menu = () => {
     setSelMenuIndex,
     setIsLoading,
   } = useZustand()
-  const { isAuthenticated, user } = useAuth0()
+  const {isAuthenticated, user} = useAuth0()
 
   useEffect(() => {
     (async () => {
@@ -35,10 +35,7 @@ export const Menu = () => {
 
       setIsLoading(false)
     })()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    user
-  ])
+  }, [user])
 
   return (
     <div className='flex items-center justify-between w-screen h-12 bg-black border-0 border-b-2 border-white'>

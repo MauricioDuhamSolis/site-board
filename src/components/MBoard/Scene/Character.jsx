@@ -1,15 +1,12 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/no-unknown-property */
-import React, {useCallback, useEffect, useRef, useState} from 'react'
-import * as THREE from 'three'
 import {useFrame} from '@react-three/fiber'
 import {RigidBody, vec3} from '@react-three/rapier'
+import React, {useCallback, useEffect, useRef, useState} from 'react'
+import * as THREE from 'three'
+import {useCloneGltf} from '../../../hooks/useCloneGltf'
 import {useZustand} from '../../../store/useZustand'
 import {CHARACTER_SCALE, CHARACTER_URLS, DEFAULT_ANGULAR_DAMPING, DEFAULT_LINEAR_DAMPING, QUIT_ORIGIN_POS, TOLERANCE_DISTANCE, WALKING_SPEED} from '../../../utils/constants'
 import {assertDefined} from '../../../utils/custom.assert'
 import {customDebug} from '../../../utils/custom.debug'
-import {useCloneFbx} from '../../../hooks/useCloneFbx'
-import {useCloneGltf} from '../../../hooks/useCloneGltf'
 
 
 export const Character = ({index}) => {
@@ -37,7 +34,6 @@ export const Character = ({index}) => {
     activateAllActions()
     setAllWeight(0)
     playIdleAnimOnly()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mixer, modelScene])
 
   // Move model to destination position

@@ -1,7 +1,7 @@
-import * as THREE from 'three'
-import {clone} from 'three/examples/jsm/utils/SkeletonUtils'
 import {useGLTF} from '@react-three/drei'
 import {useEffect, useState} from 'react'
+import * as THREE from 'three'
+import {clone} from 'three/examples/jsm/utils/SkeletonUtils'
 
 
 export const useCloneGltf = (url) => {

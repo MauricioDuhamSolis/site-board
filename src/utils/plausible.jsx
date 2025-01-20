@@ -1,6 +1,6 @@
 import axios from 'axios'
-import {customDebug} from './custom.debug'
 import {assertDefined} from './custom.assert'
+import {customDebug} from './custom.debug'
 
 
 export const getRealtimeVisitors = async (siteId) => {
@@ -74,12 +74,12 @@ const getPlausible = async (path, paramObj = {}) => {
     const paramArr = Object.keys(paramObj).map((paramKey) => `${paramKey}=${paramObj[paramKey]}`)
     const params = paramArr.join('&')
     const res = await axios.get(
-        `https://plausible.io/api/v1/${path}?${params}`,
-        {
-          headers: {
-            Authorization: `Bearer ${bearerToken}`,
-          },
+      `https://plausible.io/api/v1/${path}?${params}`,
+      {
+        headers: {
+          Authorization: `Bearer ${bearerToken}`,
         },
+      },
     )
     // customDebug().log('plausible#getPlausible: res: ', res)
     return res
@@ -98,14 +98,14 @@ const postPlausible = async (path, paramObj) => {
       data.append(paramKey, paramObj[paramKey])
     })
     const res = await axios.post(
-        `https://plausible.io/api/v1/${path}`,
-        data,
-        {
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Authorization': `Bearer ${bearerToken}`,
-          },
+      `https://plausible.io/api/v1/${path}`,
+      data,
+      {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': `Bearer ${bearerToken}`,
         },
+      },
     )
     customDebug().log('plausible#postPlausible: res: ', res)
     return res
@@ -120,12 +120,12 @@ const deletePlausible = async (path) => {
 
   try {
     const res = await axios.delete(
-        `https://plausible.io/api/v1/${path}`,
-        {
-          headers: {
-            Authorization: `Bearer ${bearerToken}`,
-          },
+      `https://plausible.io/api/v1/${path}`,
+      {
+        headers: {
+          Authorization: `Bearer ${bearerToken}`,
         },
+      },
     )
     customDebug().log('plausible#deletePlausible: res: ', res)
     return res

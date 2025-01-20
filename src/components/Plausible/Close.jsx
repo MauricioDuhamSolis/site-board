@@ -1,8 +1,6 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React from 'react'
-import {useZustand} from '../../store/useZustand'
 import CloseSvg from '../../assets/icons/close.svg'
+import {useZustand} from '../../store/useZustand'
 
 
 export const Close = () => {

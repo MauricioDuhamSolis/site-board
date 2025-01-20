@@ -11,7 +11,6 @@ const client = new MongoClient(process.env.MONGO_URI, {
   },
 })
 
-// eslint-disable-next-line new-cap
 const router = express.Router()
 module.exports.router = router
 

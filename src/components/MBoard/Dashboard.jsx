@@ -1,10 +1,10 @@
-import React, {useCallback, useEffect} from 'react'
-import {useControls} from 'leva'
 import classNames from 'classnames'
+import {useControls} from 'leva'
+import React, {useCallback, useEffect} from 'react'
 import {useZustand} from '../../store/useZustand'
-import {getAggregate, getRealtimeVisitors} from '../../utils/plausible'
-import {REALTIME_DURATION, MAX_CHARACTER_CNT, USE_PLAUSIBLE} from '../../utils/constants'
+import {MAX_CHARACTER_CNT, REALTIME_DURATION, USE_PLAUSIBLE} from '../../utils/constants'
 import {customDebug} from '../../utils/custom.debug'
+import {getAggregate, getRealtimeVisitors} from '../../utils/plausible'
 
 
 export const Dashboard = () => {
@@ -65,7 +65,6 @@ export const Dashboard = () => {
     }
 
     setIsBackgroundLoading(false)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isBackgroundLoading, isSeeingApp, selMenuIndex, menuArr])
 
   useEffect(() => {
@@ -77,7 +76,6 @@ export const Dashboard = () => {
       clearInterval(intervalId)
     }
     intervalId = setInterval(loadDashboardData, REALTIME_DURATION)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSeeingApp, selMenuIndex])
 
   return (

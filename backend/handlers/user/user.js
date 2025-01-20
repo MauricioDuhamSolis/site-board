@@ -3,7 +3,6 @@ const {ObjectId} = require('mongodb')
 
 
 module.exports.initRouter = (client) => {
-  // eslint-disable-next-line new-cap
   const router = express.Router()
 
   // This help convert the id from string to ObjectId for the _id

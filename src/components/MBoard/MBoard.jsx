@@ -6,8 +6,8 @@ import {Scene} from './Scene/Scene'
 export const MBoard = () => {
   return (
     <div className='absolute w-full h-full'>
-      <Dashboard/>
-      <Scene/>
+      <Dashboard />
+      <Scene />
     </div>
   )
 }

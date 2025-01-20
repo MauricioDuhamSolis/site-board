@@ -1,7 +1,7 @@
-import * as THREE from 'three'
-import {clone} from 'three/examples/jsm/utils/SkeletonUtils'
 import {useFBX} from '@react-three/drei'
 import {useEffect, useState} from 'react'
+import * as THREE from 'three'
+import {clone} from 'three/examples/jsm/utils/SkeletonUtils'
 
 
 export const useCloneFbx = (url) => {

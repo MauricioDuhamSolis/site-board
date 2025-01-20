@@ -32,7 +32,6 @@ export const TREE_URLS = [
   './models/fbx/trees/Tree5.fbx',
 ]
 
-
 export const BILLBOARD_URL = './models/fbx/billboard.fbx'
 
 export const BILLBOARD_HTML_SIZE = 1200

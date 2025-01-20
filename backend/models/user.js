@@ -1,10 +1,8 @@
-/* eslint-disable no-invalid-this */
 const mongoose = require('mongoose')
+const bcrypt = require('bcryptjs')
 
 
 const Schema = mongoose.Schema
-const bcrypt = require('bcryptjs')
-
 
 const userSchema = new Schema({
   username: {
@@ -26,7 +24,7 @@ const userSchema = new Schema({
   },
 })
 
-userSchema.pre('save', async function(next) {
+userSchema.pre('save', async function (next) {
   try {
     if (!this.isModified('password')) {
       return next()
@@ -39,7 +37,7 @@ userSchema.pre('save', async function(next) {
   }
 })
 
-userSchema.methods.comparePassword = async function(attempt, next) {
+userSchema.methods.comparePassword = async function (attempt, next) {
   try {
     return await bcrypt.compare(attempt, this.password)
   } catch (error) {
